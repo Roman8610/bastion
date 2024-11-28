@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <title>Статья — Bastion</title>
+  <link rel="stylesheet" href="assets/styles/main.min.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="storage/app/media/favicon.svg">
+</head>
+
+<body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0">
+  <header class="header bg-white drop-shadow-lg md:drop-shadow-none fixed top-0 left-0 z-30 w-full md:relative"
+    id="header">
+    <div class="top bg-gray-200 hidden md:block">
+      <nav class="container mx-auto">
+        <ul class="flex gap-8 h-10 items-center">
+          <li><a href="articles" class="hover:text-sky-500">Новости</a></li>
+          <li><a href="info/about" class="hover:text-sky-500">О нас</a></li>
+          <li><a href="info/kak-my-rabotaem" class="hover:text-sky-500">Как мы работаем</a></li>
+          <li><a href="contacts" class="hover:text-sky-500">Контакты</a></li>
+          <li><a href="bastion-ek" class="hover:text-sky-500">Бастион ЭК</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="border-b py-2 lg:py-0">
+      <div class="container mx-auto flex gap-4 items-center justify-between py-4">
+        <a href="/">
+          <img src="assets/images/logo/logo.svg" alt="">
+        </a>
+        <div class="hidden lg:flex gap-8 items-center">
+          <div>
+            <div class="text-lg">с 08:00 до 22:00</div>
+            <div class="text-sm font-light text-gray-500">без выходных</div>
+          </div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
+            <div class="text-sm font-light text-gray-500">многоканальный</div>
+          </div>
+          <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+          <a href="mailto:info@bastionit.ru" class="font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+        </div>
+
+        <div class="flex lg:hidden gap-4">
+          <button class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+            <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M23.3156 17.4592L18.0655 15.2092C17.8412 15.1136 17.5919 15.0935 17.3552 15.1518C17.1185 15.2102 16.9071 15.3438 16.753 15.5327L14.4279 18.3733C10.779 16.6529 7.84242 13.7163 6.12198 10.0674L8.96266 7.74236C9.15189 7.58846 9.28582 7.37709 9.34418 7.14026C9.40254 6.90344 9.38215 6.65404 9.2861 6.42984L7.03606 1.17974C6.93064 0.938055 6.7442 0.740726 6.50887 0.62178C6.27355 0.502834 6.0041 0.469727 5.74698 0.528169L0.87189 1.65319C0.623997 1.71043 0.402825 1.85001 0.244474 2.04914C0.0861227 2.24827 -5.71046e-05 2.4952 2.8389e-08 2.74961C2.8389e-08 14.7733 9.74549 24.5 21.7504 24.5C22.0049 24.5002 22.2519 24.414 22.4511 24.2557C22.6504 24.0973 22.79 23.8761 22.8473 23.6281L23.9723 18.753C24.0304 18.4947 23.9966 18.2241 23.8767 17.988C23.7568 17.7519 23.5584 17.5649 23.3156 17.4592Z"
+                fill="currentColor"></path>
+            </svg>
+          </button>
+          <button x-data @click.prevent="$store.modals.open('nav')"
+            class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15 84.125C15 71.3534 25.3534 61 38.125 61H361.875C374.647 61 385 71.3534 385 84.125C385 96.8966 374.647 107.25 361.875 107.25H38.125C25.3534 107.25 15 96.8966 15 84.125ZM15 199.75C15 186.978 25.3534 176.625 38.125 176.625H361.875C374.647 176.625 385 186.978 385 199.75C385 212.522 374.647 222.875 361.875 222.875H38.125C25.3534 222.875 15 212.522 15 199.75ZM176.875 315.375C176.875 302.603 187.228 292.25 200 292.25H361.875C374.647 292.25 385 302.603 385 315.375C385 328.147 374.647 338.5 361.875 338.5H200C187.228 338.5 176.875 328.147 176.875 315.375Z"
+                fill="currentColor"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="header-fixed block w-full fixed top-0 left-0 z-30 bg-white drop-shadow-lg" x-data
+    x-show="$store.headerFixed.scrolled" x-cloak x-transition>
+    <div class="container mx-auto">
+      <div class="py-2 flex justify-between">
+        <div>
+          <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+        </div>
+        <div class="flex items-center gap-8">
+          <div>
+            <a href="mailto:info@bastionit.ru" class="text-md hover:text-sky-500">info@bastionit.ru</a>
+          </div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="pt-8 pb-16">
+    <div class="container mx-auto">
+      <div class="flex flex-col-reverse lg:flex-row">
+        <aside class="basis-full lg:basis-1/4 relative mt-8 lg:mt-0">
+          <a href="#" class="btn-outline w-full" x-data="modalTrigger('request')" x-bind="trigger"
+            data-info='{"modalTitle":"Заказать компонент"}'>Заказать компонент</a>
+
+          <nav class="categories mt-4 lg:mt-8 sticky top-4" x-data="{catalogExpanded:window.innerWidth >= 768}">
+            <div
+              class="h-[50px] lg:h-auto bg-sky-500 px-4 py-2 text-white text-md font-semibold flex justify-between items-center rounded-t-md"
+              :class="catalogExpanded ? '' : 'rounded-b-md'" @click.prevent="catalogExpanded = !catalogExpanded">
+              <span>Каталог товаров</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M15 84.125C15 71.3534 25.3534 61 38.125 61H361.875C374.647 61 385 71.3534 385 84.125C385 96.8966 374.647 107.25 361.875 107.25H38.125C25.3534 107.25 15 96.8966 15 84.125ZM15 199.75C15 186.978 25.3534 176.625 38.125 176.625H361.875C374.647 176.625 385 186.978 385 199.75C385 212.522 374.647 222.875 361.875 222.875H38.125C25.3534 222.875 15 212.522 15 199.75ZM176.875 315.375C176.875 302.603 187.228 292.25 200 292.25H361.875C374.647 292.25 385 302.603 385 315.375C385 328.147 374.647 338.5 361.875 338.5H200C187.228 338.5 176.875 328.147 176.875 315.375Z"
+                  fill="currentColor"></path>
+              </svg>
+            </div>
+
+            <ul class="bg-gray-100" x-show="catalogExpanded" x-collapse>
+              <li>
+                <a href="elektronnye-komponenty/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 ">
+                  Электронные компоненты
+                </a>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="processory/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Процессоры</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="processory/amd">
+                      AMD
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="processory/intel">
+                      INTEL
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="materinskie-platy/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Материнские платы</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="materinskie-platy/dlya-amd">
+                      для AMD
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="materinskie-platy/dlya-intel">
+                      для INTEL
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="operativnaya-pamyat/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Оперативная память</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="operativnaya-pamyat/operativnaya-pamyat-dimm">
+                      Оперативная память DIMM
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="operativnaya-pamyat/operativnaya-pamyat-so-dimm">
+                      Оперативная память SO-DIMM
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="nakopiteli/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Накопители</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="nakopiteli/ssd-nakopiteli">
+                      SSD накопители
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="nakopiteli/ssd-m2-nakopiteli">
+                      SSD M.2 накопители
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="videokarty/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Видеокарты</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="videokarty/gigabyte">
+                      Gigabyte
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="videokarty/nvidia">
+                      nVidia
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="videokarty/asus">
+                      ASUS
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="kompyutery/obedinenie-datchikov-pozvolyaet-amr-effektivno-manevrirovat-po-zavodskim-pomeshcheniyam"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Компьютеры</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="kompyutery/dlya-igr">
+                      Игровые компьютеры
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="kompyutery/dlya-ofisa">
+                      Офисные компьютеры
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="kompyutery/monobloki">
+                      Моноблоки
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+
+        </aside>
+        <div class="basis-full lg:basis-3/4 pl-0 lg:pl-8">
+          <h1 class="font-bold text-2xl text-gray-700">Статья</h1>
+          <nav aria-label="Breadcrumb" class="mt-4">
+            <ol class="flex items-center gap-1 text-sm text-gray-600">
+              <li>
+                <a href="#" class="block transition hover:text-sky-500">
+                  <span class="sr-only"> Главная </span>
+
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </a>
+              </li>
+
+              <li class="rtl:rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd" />
+                </svg>
+              </li>
+
+              <li>
+                <a href="articles" class="block transition hover:text-sky-500"> Статьи </a>
+              </li>
+
+            </ol>
+          </nav>
+
+          <article class="mt-8">
+            <p style="text-align: justify;"><strong>Объединение датчиков
+                позволяет&nbsp;</strong><strong>AMR</strong><strong>&nbsp;эффективно маневрировать по заводским
+                помещениям</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">С увеличением количества людей и автономных мобильных роботов (AMR), также
+              называемых промышленными мобильными роботами (IMR), работающих на одной территории, необходимо учитывать
+              множество рисков, присущих безопасности. Безопасная и эффективная работа AMR слишком важна, чтобы
+              полагаться только на одну сенсорную технологию.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Слияние нескольких датчиков, или просто "слияние датчиков", объединяет такие
+              технологии, как лазерный дальномер (LIDAR), камеры, ультразвуковые датчики, лазерные датчики препятствий и
+              радиочастотная идентификация (RFID) для поддержки ряда функций AMR, включая навигацию, планирование пути,
+              предотвращение столкновений, управление запасами и логистическую поддержку. Слияние сенсоров также
+              включает в себя оповещение близлежащих людей о присутствии AMR.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Для решения проблемы безопасной и эффективной работы AMR Американский
+              национальный институт стандартов (ANSI) и Ассоциация по развитию автоматизации (A3), бывшая Ассоциация
+              робототехнической промышленности (RIA), разрабатывают серию стандартов ANSI/A3 R15.08. Уже выпущены
+              R15.08-1 и R15.08-2, посвященные основным требованиям безопасности и интеграции AMR на объекте. В
+              настоящее время разрабатывается стандарт R15.08-3, который расширит требования безопасности для AMR,
+              включая более подробные рекомендации по использованию слияния датчиков.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">В преддверии выхода R15.08-3 в данной статье рассматриваются некоторые из
+              современных передовых практик, связанных с безопасностью и объединением датчиков в AMR, начиная с краткого
+              обзора требований функциональной безопасности, используемых в настоящее время в AMR, включая общие
+              стандарты промышленной безопасности, такие как IEC 61508, ISO 13849 и IEC 62061, а также требования
+              безопасности для обнаружения присутствия человека, такие как IEC 61496 и IEC 62998. Затем приводится
+              типичная конструкция AMR с подробным описанием многочисленных сенсорных технологий, представлены
+              репрезентативные устройства и рассмотрено, как они поддерживают такие функции, как навигация, планирование
+              пути, локализация, предотвращение столкновений и управление запасами/логистическая поддержка.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><strong>Хорошо, лучше, лучше</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Разработчикам AMR необходимо учитывать целый ряд стандартов безопасности,
+              начиная со стандартов функциональной безопасности общего назначения, таких как IEC 61508, ISO 13849 и IEC
+              62061. Существуют также более конкретные стандарты безопасности, связанные с обнаружением присутствия
+              человека, такие как IEC 61496, IEC 62998 и серия стандартов ANSI/A3 R15.08.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">МЭК 61496 предлагает руководство для нескольких типов датчиков. Он ссылается
+              на стандарт IEC 62061, который устанавливает требования и дает рекомендации по разработке, интеграции и
+              проверке электрочувствительного защитного оборудования (ESPE) для машин, включая уровни целостности
+              безопасности (SIL), и стандарт ISO 13849, который охватывает безопасность машин и связанных с
+              безопасностью частей систем управления, включая уровни эффективности безопасности (PLs) (Таблица 1).</p>
+            <table style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td style="width: 10.5747%;"><br></td>
+                  <td style="width: 75.558%;"><img
+                      src="storage/app/media/uploaded-files/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-25%20%D0%B2%2009.48.39.png"
+                      style="width: 807px;" class="fr-fic fr-dib" data-result="success"></td>
+                  <td style="width: 13.7954%;"><br></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><em>Таблица 1: Требования безопасности
+                для&nbsp;</em><em>ESPE</em><em>&nbsp;по типам, указанным в&nbsp;</em><em>IEC</em><em>&nbsp;61496.</em>
+            </p>
+            <p style="text-align: justify;"><em>&nbsp;</em></p>
+            <p style="text-align: justify;">Стандарт IEC 62998 является более новым и часто может быть лучшим выбором,
+              поскольку он включает в себя руководство по реализации слияния датчиков, использованию искусственного
+              интеллекта (ИИ) в системах безопасности и использованию датчиков, установленных на движущихся платформах,
+              не входящих в сферу действия стандарта IEC 61496.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Часть 3 стандарта R15.08, когда он будет выпущен, может сделать серию R15.08
+              лучшей, поскольку в ней будут добавлены требования безопасности для пользователей систем AMR и приложений
+              AMR. Вероятные темы могут включать слияние датчиков и более обширные испытания и валидацию стабильности
+              AMR.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><strong>Функции слияния датчиков.</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Составление карты объекта - важный аспект ввода в эксплуатацию АМР. Но это
+              не одноразовое мероприятие. Это также часть непрерывного процесса, называемого одновременной локализацией
+              и картографированием (SLAM), иногда называемого синхронизированной локализацией и картографированием. Это
+              процесс непрерывного обновления карты местности с учетом любых изменений при одновременном отслеживании
+              местоположения робота.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Для поддержки SLAM и обеспечения безопасной работы AMR необходимо
+              объединение датчиков. Не все датчики работают одинаково хорошо при любых условиях эксплуатации, а
+              различные сенсорные технологии производят различные типы данных. ИИ может использоваться в системах
+              слияния датчиков для объединения информации о местных условиях работы (туманно или дымно, влажно ли,
+              насколько яркий окружающий свет и т. д.) и получения более значимого результата путем объединения данных,
+              полученных от различных сенсорных технологий.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Сенсорные элементы можно классифицировать как по функциям, так и по
+              технологиям. Примеры функций слияния датчиков в AMR включают (рис. 1):</p>
+            <ul type="disc">
+              <li style="text-align: justify;">- Датчики расстояния, такие как энкодеры на колесах и инерционные
+                измерительные блоки с гироскопами и акселерометрами, помогают измерить перемещение и определить
+                расстояние между опорными позициями.</li>
+              <li style="text-align: justify;">- Датчики изображения, такие как трехмерные (3D) камеры и 3D LiDAR,
+                используются для идентификации и отслеживания близлежащих объектов.</li>
+              <li style="text-align: justify;">- Коммуникационные каналы, вычислительные процессоры и логистические
+                датчики, такие как сканеры штрих-кодов и устройства радиочастотной идентификации (RFID), связывают AMR с
+                системами управления объектом и интегрируют информацию от внешних датчиков в систему объединения
+                датчиков AMR для повышения производительности.</li>
+              <li style="text-align: justify;">- Датчики приближения, такие как лазерные сканеры и двухмерные (2D)
+                LiDAR, обнаруживают и отслеживают объекты вблизи AMR, включая передвижение людей.</li>
+            </ul>
+            <table style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td style="width: 9.1188%;"><br></td>
+                  <td style="width: 82.4545%;"><img
+                      src="storage/app/media/uploaded-files/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-25%20%D0%B2%2009.49.36.png"
+                      style="width: 780px;" class="fr-fic fr-dib" data-result="success"></td>
+                  <td style="width: 8.3537%;"><br></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><em>Рисунок 1. Примеры распространенных типов датчиков и связанных с ними
+                элементов системы, используемых в проектах слияния датчиков&nbsp;</em><em>AMR</em><em>.</em></p>
+            <p style="text-align: justify;"><em>&nbsp;</em></p>
+            <p style="text-align: justify;">
+              <strong>2</strong><strong>D</strong><strong>&nbsp;</strong><strong>LiDAR</strong><strong>,
+                3</strong><strong>D</strong><strong>&nbsp;</strong><strong>LiDAR</strong><strong>&nbsp;и
+                ультразвук</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">2D и 3D LiDAR и ультразвук - распространенные сенсорные технологии, которые
+              поддерживают SLAM и безопасность в AMR. Различия между этими технологиями позволяют одним датчикам
+              компенсировать недостатки других для повышения производительности и надежности.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">2D LiDAR использует одну плоскость лазерной подсветки для идентификации
+              объектов по координатам X и Y. 3D LiDARиспользует несколько лазерных лучей для создания
+              высокодетализированного 3D-изображения окружающей среды, называемого облаком точек. Оба типа LiDAR
+              относительно невосприимчивы к условиям внешней освещенности, но требуют, чтобы объекты для обнаружения
+              имели минимальный порог отражения длины волны, излучаемой лазером. В целом, 3D LiDAR может обнаруживать
+              объекты с низкой отражательной способностью с большей надежностью, чем 2D LiDAR.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Датчик HPS-3D160 3D LiDAR от Seeed Technology объединяет мощные инфракрасные
+              излучатели вертикально-полостного лазера (VCSEL) с длиной волны 850 нм и высокофоточувствительный КМОП.
+              Встроенный высокопроизводительный процессор включает алгоритмы фильтрации и компенсации и может
+              поддерживать несколько одновременных операций LiDAR. Дальность действия устройства составляет до 12 метров
+              с сантиметровой точностью.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Если требуется 2D LiDAR-решение, разработчики могут обратиться к
+              TIM781S-2174104 от SICK. Он имеет угол апертуры 270 градусов с угловым разрешением 0,33 градуса и частотой
+              сканирования 15 Гц. Рабочий диапазон по технике безопасности составляет 5 метров (рис. 2).</p>
+            <table style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td style="width: 10.0383%;"><br></td>
+                  <td style="width: 78.6997%;"><img
+                      src="storage/app/media/uploaded-files/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-25%20%D0%B2%2009.50.44.png"
+                      style="width: 823px;" class="fr-fic fr-dib" data-result="success"></td>
+                  <td style="width: 11.1889%;"><br></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><em>Рисунок 2. Угол апертуры этого
+                2</em><em>D</em><em>&nbsp;</em><em>LiDAR</em><em>-датчика составляет 270 градусов.</em></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Ультразвуковые датчики могут точно обнаруживать светопропускающие объекты,
+              такие как стекло, и светопоглощающие материалы, которые LiDAR не всегда может увидеть. Ультразвуковые
+              датчики также менее восприимчивы к помехам от высокой запыленности, дыма, влажности и других условий,
+              которые могут нарушить работу LiDAR. Однако ультразвуковые датчики чувствительны к помехам от окружающего
+              шума, и их дальность обнаружения может быть более ограниченной, чем у LiDAR.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Ультразвуковые датчики, такие как TSPC-30S1-232 от Senix, могут дополнить
+              LiDAR и другие датчики для AMR SLAM и обеспечения безопасности. Оптимальная дальность действия датчика
+              составляет 3 метра, по сравнению с 5 метрами для 2D LiDARи 12 метрами для 3D LiDAR, о которых говорилось
+              выше. Этот ультразвуковой датчик с температурной компенсацией имеет класс защиты IP68 и выполнен в
+              герметичном корпусе из нержавеющей стали (рис. 3).</p>
+            <table style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td style="width: 11.2644%;"><br></td>
+                  <td style="width: 77.0151%;"><img
+                      src="storage/app/media/uploaded-files/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-25%20%D0%B2%2009.51.51.png"
+                      style="width: 668px;" class="fr-fic fr-dib" data-result="success"></td>
+                  <td style="width: 11.6487%;"><br></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><em>Рисунок 3. Герметичный ультразвуковой датчик с оптимальной дальностью
+                действия 3 метра.</em></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Слияние датчиков обычно подразумевает использование нескольких отдельных
+              датчиков. Но в некоторых случаях несколько датчиков объединяются в единое устройство.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><strong>Три датчика в одном</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Визуальное восприятие с помощью пары камер для получения стереоскопических
+              изображений, а также обработка изображений на основе ИИ и ML позволяют AMR видеть фон, а также
+              идентифицировать близлежащие объекты. Существуют датчики, включающие стереокамеры глубины, отдельную
+              цветную камеру и IMU в одном устройстве.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Стереокамеры глубины, такие как Intel RealSense D455 RealSense Depth
+              Cameras, используют две камеры, разделенные известной базовой линией, для определения глубины и расчета
+              расстояния до объекта. Ключом к точности является использование прочного стального каркаса, который
+              обеспечивает точное расстояние между камерами даже в сложных промышленных условиях. Точность алгоритма
+              восприятия глубины зависит от точного расстояния между двумя камерами.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Например, камера глубины модели 82635DSD455MP была оптимизирована для AMR и
+              аналогичных платформ и позволяет увеличить расстояние между камерами до 95 мм (рис. 4). Это позволяет
+              алгоритму расчета глубины уменьшить ошибку оценки до менее чем 2 % на расстоянии 4 м.</p>
+            <table style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td style="width: 10.9579%;"><br></td>
+                  <td style="width: 76.6307%;"><img
+                      src="storage/app/media/uploaded-files/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-25%20%D0%B2%2009.52.25.png"
+                      style="width: 884px;" class="fr-fic fr-dib" data-result="success"></td>
+                  <td style="width: 12.3384%;"><br></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><em>Рисунок 4: Этот модуль включает стереокамеры глубины, разнесенные на 95
+                мм, отдельную цветную камеру и&nbsp;</em><em>IMU</em><em>.</em></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Камеры глубины D455 также оснащены отдельной цветной (RGB) камерой.
+              Глобальный затвор с частотой до 90 кадров в секунду на RGB-камере, согласованный с полем зрения (FOV)
+              глубиномера, улучшает соответствие между цветными и глубинными изображениями, повышая способность понимать
+              окружающую обстановку. В камеры глубины D455 интегрирован IMU с шестью степенями свободы, что позволяет
+              алгоритму расчета глубины учитывать скорость движения AMR и получать динамические оценки глубины.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><strong>Освещение и озвучивание пути</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Мигающие огни и звуковые сигналы для людей, находящихся рядом с AMR, важны
+              для безопасности AMR. Огни обычно имеют вид световых башен или световых полос по бокам AMR. Они помогают
+              роботу сообщать людям о своих действиях. Они также могут указывать на такие состояния, как зарядка
+              батареи, погрузка или разгрузка, намерение повернуть в новом направлении (как сигналы поворота на
+              автомобиле), аварийные ситуации и так далее.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Не существует стандартов на цвета огней, скорость мигания и звуковые
+              сигналы. Они могут отличаться у разных производителей AMR и часто разрабатываются с учетом специфики
+              деятельности на объекте, где работает AMR. Световые полосы выпускаются со встроенными механизмами
+              звукового оповещения и без них. Например, модель TLF100PDLBGYRAQP от Banner Engineeringвключает в себя
+              герметичный звуковой элемент с 14 выбираемыми тонами и регулятором громкости (рис. 5).</p>
+            <table style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td style="width: 9.3487%;"><br></td>
+                  <td style="width: 77.9322%;"><img
+                      src="storage/app/media/uploaded-files/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-25%20%D0%B2%2009.52.33.png"
+                      style="width: 718px;" class="fr-fic fr-dib" data-result="success"></td>
+                  <td style="width: 12.6461%;"><br></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><em>Рисунок 5: Этот световой оповещатель включает в себя герметичный
+                звуковой элемент (верхний черный круг).&nbsp;</em></p>
+            <p style="text-align: justify;"><em>&nbsp;</em></p>
+            <p style="text-align: justify;"><strong>Логистическая поддержка</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">AMR работают в составе крупных предприятий и часто должны быть интегрированы
+              с системами планирования ресурсов предприятия (ERP), производственными системами (MES) или системами
+              управления складом (WMS). Коммуникационный модуль AMR в сочетании с датчиками, такими как считыватели
+              штрих-кодов и RFID, позволяют тесно интегрировать AMR в корпоративные системы.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Если требуется считыватель штрих-кодов, разработчики могут обратиться к
+              модели V430-F000W12M-SRP от Omron, которая может декодировать 1D и 2D штрих-коды на этикетках или
+              штрих-коды Direct Part Mark (DPM). Камера оснащена автофокусом с переменным расстоянием, объективом с
+              широким углом обзора, 1,2-мегапиксельной матрицей, встроенной подсветкой и высокоскоростной обработкой.
+            </p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">DLP-RFID2 от DLP Design - это недорогой компактный модуль для считывания и
+              записи на высокочастотные (HF) метки-транспондеры RFID. Он также может считывать уникальные идентификаторы
+              (UDI) до 15 меток одновременно и может быть настроен на использование внутренней или внешней антенны.
+              Диапазон рабочих температур составляет от 0°C до +70°C, что делает его пригодным для использования на
+              производственных и логистических объектах в рамках Индустрии 4.0.</p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;"><strong>Заключение</strong></p>
+            <p style="text-align: justify;"><br></p>
+            <p style="text-align: justify;">Объединение датчиков является важным инструментом для поддержки SLAM и
+              безопасности в AMR. В преддверии выхода стандарта R15.08-3, который может содержать ссылки на слияние
+              датчиков и более обширные испытания и валидацию устойчивости AMR, в этой статье рассматриваются некоторые
+              современные стандарты и передовые методы внедрения слияния датчиков в AMR. Это вторая статья из серии,
+              состоящей из двух частей. В первой части рассматривалась безопасная и эффективная интеграция AMR в
+              операции Индустрии 4.0 для получения максимальной выгоды.</p>
+          </article>
+
+          <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 items-center mt-8">
+            <a href="storage/app/uploads/public/665/18b/064/66518b064e336943209930.jpg" data-fslightbox>
+              <img src="storage/app/uploads/public/665/18b/064/thumb_81591_600_600_0_0_crop.jpg" alt=""
+                class="rounded-md">
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="py-8 lg:py-16 bg-stone-700">
+      <div class="container mx-auto flex flex-wrap gap-4 justify-between">
+        <div class="basis-full lg:basis-auto">
+          <a href="/">
+            <img src="assets/images/logo/logo-light.svg" alt="">
+          </a>
+          <div class="mt-4 text-gray-200 text-sm">Контакты</div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg text-gray-200">8 (812) 920 8520</a>
+            <div class="mt-2">
+              <a href="mailto:info@bastionit.ru" class="font-bold text-sm text-gray-200">info@bastionit.ru</a>
+            </div>
+          </div>
+
+
+          <div class="mt-8 text-gray-200 text-sm">Мы в соцсетях</div>
+          <div class="flex mt-4">
+            <a target="_blank" href="" title="Телеграм"
+              class="mr-2 w-[40px] h-[40px] rounded-full bg-stone-600 flex items-center justify-center text-white hover:bg-sky-500">
+              <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20.7906 1.59144L17.6441 16.43C17.4066 17.4771 16.7877 17.7378 15.9082 17.2448L11.1137 13.7118L8.80056 15.937C8.54437 16.1932 8.33064 16.4069 7.83688 16.4069L8.18169 11.5245L17.067 3.4957C17.4535 3.15163 16.9828 2.96024 16.4667 3.30505L5.48207 10.222L0.753091 8.74152C-0.27537 8.42054 -0.293988 7.71306 0.967571 7.21931L19.4642 0.0930619C20.3207 -0.227913 21.0698 0.282966 20.7906 1.59144Z"
+                  fill="white"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div class="gap-16 basis-full lg:basis-auto hidden lg:flex">
+          <div>
+            <div class="font-bold text-gray-200 text-lg">Каталог</div>
+            <ul class="mt-4">
+              <li><a href="processory" class="text-sm text-gray-200 hover:text-sky-500">Процессоры</a></li>
+              <li><a href="materinskie-platy" class="text-sm text-gray-200 hover:text-sky-500">Материнские платы</a>
+              </li>
+              <li><a href="operativnaya-pamyat" class="text-sm text-gray-200 hover:text-sky-500">Оперативная память</a>
+              </li>
+              <li><a href="nakopiteli" class="text-sm text-gray-200 hover:text-sky-500">Накопители</a></li>
+              <li><a href="" class="text-sm text-gray-200 hover:text-sky-500">Видеокарты</a></li>
+              <li><a href="kompyutery" class="text-sm text-gray-200 hover:text-sky-500">Компьютеры</a></li>
+              <li><a href="elektronnye-komponenty" class="text-sm text-gray-200 hover:text-sky-500">Электронные
+                  компоненты</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-gray-200 text-lg">Информация</div>
+            <ul class="mt-4">
+              <li><a href="contacts" class="text-sm text-gray-200 hover:text-sky-500">Контакты</a></li>
+              <li><a href="info/dostavka" class="text-sm text-gray-200 hover:text-sky-500">Доставка</a></li>
+              <li><a href="info/sposoby-oplaty" class="text-sm text-gray-200 hover:text-sky-500">Способы оплаты</a></li>
+              <li><a href="info/vozvrat-i-obmen-tovara" class="text-sm text-gray-200 hover:text-sky-500">Возврат и
+                  обмен</a></li>
+              <li><a href="info/kak-my-rabotaem" class="text-sm text-gray-200 hover:text-sky-500">Как мы работаем</a>
+              </li>
+              <li><a href="info/postavka-elektroniki-za-granicej"
+                  class="text-sm text-gray-200 hover:text-sky-500">Поставка электроники за границей</a></li>
+              <li><a href="info/pravovaya-informaciya" class="text-sm text-gray-200 hover:text-sky-500">Правовая
+                  информация</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hidden lg:block">
+          <div class="font-bold text-gray-200 text-lg">Принимаем к оплате</div>
+          <div class="mt-8 grid grid-cols-3 gap-4">
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="14" viewBox="0 0 38 14" width="38">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-visa"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 28 18" width="28">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-mc"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 29 18" width="29">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-maestro"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="14" viewBox="0 0 52 14" width="52">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-mir"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="24" viewBox="0 0 210 120" width="42">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-sbp"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 68 14" width="87">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-sb"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="11" viewBox="0 0 109 20" width="60">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-halva"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="py-4 bg-stone-900">
+      <div class="container mx-auto flex flex-col lg:flex-row justify-between">
+        <div class="text-sm text-stone-500">
+          &copy; BastionIT 2024
+        </div>
+
+        <ul class="flex flex-col lg:flex-row gap-4 mt-4 lg:mt-0">
+          <li><a href="info/privacy" target="_blank" class="text-sm text-stone-500 hover:text-sky-500">Политика
+              конфиденциальности</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div x-data x-cloak data-modal="nav" x-show="$store.modals.find('nav').active" x-transition.opacity
+    class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-end">
+    <div class="h-screen overflow-y-auto w-[90%] md:w-2/4 xl:w-1/4 bg-white relative pt-4" x-data
+      @click.outside="$store.modals.nav = false">
+      <button x-data @click="$store.modals.close('nav')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <nav>
+        <div class="font-bold text-2xl b-4 border-b p-4">Навигация</div>
+        <ul class="mt-4">
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="articles">Новости</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="info/about">О нас</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="info/kak-my-rabotaem">Как мы
+              работаем</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="contacts">Контакты</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="bastion-ek">Бастион ЭК</a></li>
+        </ul>
+      </nav>
+      <div class="mt-8 pb-4">
+        <div class="font-bold text-2xl b-4 border-b p-4">Контакты</div>
+
+        <div class="px-4">
+          <div class="mt-4">
+            <div class="text-lg">с 8:00 до 22:00</div>
+            <div class="text-sm font-light text-gray-500">без выходных</div>
+          </div>
+          <div class="mt-4">
+            <a href="tel:88129208520" class="font-bold text-lg">8 (812) 920-85-20</a>
+            <div class="text-sm font-light text-gray-500">многоканальный</div>
+          </div>
+
+          <a href="mailto:Info@bastionit.ru"
+            class="block mt-4 font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+
+          <a href="#" class="btn flex w-full mt-4" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"
+    data-modal="request" x-cloak x-data x-transition.opacity x-show="$store.modals.find('request').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('request')">
+      <button x-data="" @click="$store.modals.close('request')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold" x-text="$store.modals.find('request').data.modalTitle || 'Заказ в один клик'">Заказ
+        в один клик</h3>
+      <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
+
+      <div class="flex items-center mt-4"
+        x-show="$store.modals.find('request').data.image || $store.modals.find('request').data.title">
+        <div class="basis-1/4">
+          <img src="" class="w-32 h-32 object-contain rounded-md p-2 border bg-white drop-shadow-md" alt=""
+            :src="$store.modals.find('request').data.image">
+        </div>
+        <div class="basis-3/4 pl-4 ">
+          <div class="font-bold text-lg" x-text="$store.modals.find('request').data.title"></div>
+          <div class="mt-2 text-sm" x-text="$store.modals.find('request').data.price"></div>
+        </div>
+      </div>
+
+      <form action="" class="mt-8" data-request="onLeadFormSubmit" data-request-success="this.reset()"
+        data-request-flash data-modal-form>
+        <input type="hidden" name="product" :value="$store.modals.find('request').data.title">
+
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="name" placeholder="Имя *"
+            required>
+        </label>
+
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="lastname" placeholder="Фамилия *"
+            required>
+        </label>
+        <label for="phone_number" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="phone_number"
+            placeholder="Номер вашего телефона *" required>
+        </label>
+        <label class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="email" placeholder="E-mail *"
+            required>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="comment"
+            placeholder="Комментарий к заказу"></textarea>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"
+    data-modal="callback" x-cloak x-data x-transition.opacity x-show="$store.modals.find('callback').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('callback')">
+      <button x-data="" @click="$store.modals.close('callback')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold" x-text="$store.modals.find('callback').data.modalTitle || 'Заказать звонок'">
+        Заказать звонок</h3>
+      <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
+
+      <form action="" class="mt-8" data-request="onLeadFormSubmit" data-request-success="this.reset()"
+        data-request-flash data-modal-form>
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="name"
+            placeholder="Как вас зовут? *" required>
+        </label>
+        <label for="phone_number" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="phone_number"
+            placeholder="Номер вашего телефона *" required>
+        </label>
+        <button class="btn" type="submit">Заказать звонок</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="fixed w-full h-full z-50 overflow-y-auto top-0 left-0 bg-black bg-opacity-70 flex items-start justify-center"
+    data-modal="review" x-cloak x-data x-transition.opacity x-show="$store.modals.find('review').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('review')">
+      <button x-data="" @click="$store.modals.close('review')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold">Оставить отзыв о товаре</h3>
+      <p class="mt-4 text-xs text-gray-500"></p>
+
+      <form action="" class="mt-8" data-request="onReviewSubmit" data-request-success="this.reset()" data-request-flash
+        data-modal-form>
+        <input type="hidden" name="product_id" value="">
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="customer_name"
+            placeholder="Как вас зовут? *" required>
+        </label>
+        <label class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="email" placeholder="E-mail *"
+            required>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="text" placeholder="Ваш отзыв о товаре "
+            required></textarea>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="pros" placeholder="Плюсы"></textarea>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="cons" placeholder="Минусы"></textarea>
+        </label>
+        <label class="block mb-4">
+          <label for="rate">Ваша оценка:</label>
+          <select id="rate" class="block w-full border-gray-400 rounded-lg p-4" name="rate">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="assets/js/manifest.js"></script>
+  <script src="assets/js/vendor.min.js"></script>
+  <script src="assets/js/main.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <title>Внутренняя контентная страница — Bastion</title>
+  <link rel="stylesheet" href="assets/styles/main.min.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="storage/app/media/favicon.svg">
+</head>
+
+<body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0">
+  <header class="header bg-white drop-shadow-lg md:drop-shadow-none fixed top-0 left-0 z-30 w-full md:relative"
+    id="header">
+    <div class="top bg-gray-200 hidden md:block">
+      <nav class="container mx-auto">
+        <ul class="flex gap-8 h-10 items-center">
+          <li><a href="articles" class="hover:text-sky-500">Новости</a></li>
+          <li><a href="info/about" class="hover:text-sky-500">О нас</a></li>
+          <li><a href="info/kak-my-rabotaem" class="hover:text-sky-500">Как мы работаем</a></li>
+          <li><a href="contacts" class="hover:text-sky-500">Контакты</a></li>
+          <li><a href="bastion-ek" class="hover:text-sky-500">Бастион ЭК</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="border-b py-2 lg:py-0">
+      <div class="container mx-auto flex gap-4 items-center justify-between py-4">
+        <a href="/">
+          <img src="assets/images/logo/logo.svg" alt="">
+        </a>
+        <div class="hidden lg:flex gap-8 items-center">
+          <div>
+            <div class="text-lg">с 08:00 до 22:00</div>
+            <div class="text-sm font-light text-gray-500">без выходных</div>
+          </div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
+            <div class="text-sm font-light text-gray-500">многоканальный</div>
+          </div>
+          <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+          <a href="mailto:info@bastionit.ru" class="font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+        </div>
+
+        <div class="flex lg:hidden gap-4">
+          <button class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+            <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M23.3156 17.4592L18.0655 15.2092C17.8412 15.1136 17.5919 15.0935 17.3552 15.1518C17.1185 15.2102 16.9071 15.3438 16.753 15.5327L14.4279 18.3733C10.779 16.6529 7.84242 13.7163 6.12198 10.0674L8.96266 7.74236C9.15189 7.58846 9.28582 7.37709 9.34418 7.14026C9.40254 6.90344 9.38215 6.65404 9.2861 6.42984L7.03606 1.17974C6.93064 0.938055 6.7442 0.740726 6.50887 0.62178C6.27355 0.502834 6.0041 0.469727 5.74698 0.528169L0.87189 1.65319C0.623997 1.71043 0.402825 1.85001 0.244474 2.04914C0.0861227 2.24827 -5.71046e-05 2.4952 2.8389e-08 2.74961C2.8389e-08 14.7733 9.74549 24.5 21.7504 24.5C22.0049 24.5002 22.2519 24.414 22.4511 24.2557C22.6504 24.0973 22.79 23.8761 22.8473 23.6281L23.9723 18.753C24.0304 18.4947 23.9966 18.2241 23.8767 17.988C23.7568 17.7519 23.5584 17.5649 23.3156 17.4592Z"
+                fill="currentColor"></path>
+            </svg>
+          </button>
+          <button x-data @click.prevent="$store.modals.open('nav')"
+            class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15 84.125C15 71.3534 25.3534 61 38.125 61H361.875C374.647 61 385 71.3534 385 84.125C385 96.8966 374.647 107.25 361.875 107.25H38.125C25.3534 107.25 15 96.8966 15 84.125ZM15 199.75C15 186.978 25.3534 176.625 38.125 176.625H361.875C374.647 176.625 385 186.978 385 199.75C385 212.522 374.647 222.875 361.875 222.875H38.125C25.3534 222.875 15 212.522 15 199.75ZM176.875 315.375C176.875 302.603 187.228 292.25 200 292.25H361.875C374.647 292.25 385 302.603 385 315.375C385 328.147 374.647 338.5 361.875 338.5H200C187.228 338.5 176.875 328.147 176.875 315.375Z"
+                fill="currentColor"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="header-fixed block w-full fixed top-0 left-0 z-30 bg-white drop-shadow-lg" x-data
+    x-show="$store.headerFixed.scrolled" x-cloak x-transition>
+    <div class="container mx-auto">
+      <div class="py-2 flex justify-between">
+        <div>
+          <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+        </div>
+        <div class="flex items-center gap-8">
+          <div>
+            <a href="mailto:info@bastionit.ru" class="text-md hover:text-sky-500">info@bastionit.ru</a>
+          </div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-16">
+    <div class="container mx-auto">
+      <h1 class="font-bold text-3xl text-gray-700 text-center">Как мы работаем</h1>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 gap-16">
+      <section>
+        <div class="container mx-auto flex flex-col items-center">
+          <div class="lg:prose-xl">
+            <p style="text-align: justify;">Вы можете оформить заказ продукции в нашем интернет-магазине или отправить
+              нам список всех интересующих вас позиций. Запрос может быть выполнен в любой форме: звонок по телефону,
+              отправка письма на e-mail или заполнение специальной формы на сайте. У нас есть широкий ассортимент
+              электронных комплектующих со стоков из России, Европы, США и Азии, а также возможность заказать
+              электронику со складов наших зарубежных партнеров. Обрабатываем список комплектующих до 300 позиций и
+              создаем коммерческое предложение и счета на оплату в режиме онлайн.</p>
+            <h4><strong>Проверяем техническую спецификацию и заносим данные в CRM</strong></h4>
+            <p>Перед тем, как принять в работу ваш запрос, мы тщательно проверим партномер по каждому товару, указанному
+              в запросе, с помощью datasheet (технической спецификации).</p>
+            <p>В нашей работе все данные заносятся в удобную, надежную CRM-систему, что позволяет более быстро и просто
+              обрабатывать заказы и минимизировать возможные ошибки.</p>
+            <h4><strong>Подготавливаем коммерческое предложение и оговариваем все условия</strong></h4>
+            <p style="text-align: justify;">Наш сотрудник подготовит для вас коммерческое предложение на специальном
+              бланке в формате XLS (Excel). Если вы будете делать заказ через интернет-магазин, коммерческое предложение
+              автоматически сформируется, и вы сможете экспортировать его в формате Excel.</p>
+            <p style="text-align: justify;">1. В беседе с нашим менеджером у вас будет возможность задать все
+              интересующие вопросы по условиям оплаты, срокам и гарантии, чтобы оговорить все условия поставки.</p>
+            <p style="text-align: justify;">2. Мы отправляем вам счет в формате PDF на ваш e-mail, выставляя счет на
+              оплату. Соответственно, в нашем интернет-магазине счет на оплату создается автоматически.</p>
+            <p style="text-align: justify;">3. После того, как счет будем вами оплачен, сотрудники отдела закупок
+              разместят заказ у зарубежных партнеров.</p>
+            <p style="text-align: justify;">4. Отсчет времени доставки продукции стартует с того момента, когда деньги
+              поступят на счет.</p>
+            <p style="text-align: justify;">При размещении заказа в режиме онлайн вы имеете возможность отслеживать
+              статус выполнения и прочую информацию. Например, платежи по счетам, перемещение комплектующих в процессе
+              поставки и прохождение входного контроля. Заказ поступает на консолидационный склад, где производится
+              первая приёмка комплектующих нашими сотрудниками за границей. Если при проверке выявятся дефекты, менеджер
+              свяжется с вами для принятия решений. Затем оформляется на таможне, где мы уплачиваем все таможенные
+              пошлины, налоги и можем оформить сертификат на ввезенный товар.</p>
+            <h4><strong>Входной контроль</strong></h4>
+            <p style="text-align: justify;">Проводим стопроцентный контроль ввозимых из-за рубежа электронных
+              комплектующих по внешним признакам. Благодаря такому подходу заказчик может быть уверен в том, что получит
+              необходимый ему товар с учетом года выпуска, одной партии (при договоренности) и других условий.</p>
+            <h4><strong>Упаковываем и отправляем заказчику</strong></h4>
+            <p style="text-align: justify;">Всегда тщательным образом уделяем внимание упаковке товара и используем в
+              наших складских помещениях антистатические покрытия. Это крайне важно, так как непосредственно оказывает
+              влияние на работоспособность электронных изделий. Повреждение статическим электричеством может вызвать
+              сбои при дальнейшей эксплуатации электроники или полную потерю работоспособности.</p>
+            <p style="text-align: justify;">Продукция, зарекомендовавшая себя на рынке услуг, отправляется заказчику с
+              наших складов. Она упаковывается в специальные металлизированные пакеты с антистатическими свойствами и
+              поглотителями влаги. Для доставки мы используем услуги курьерской компании. Если у вас есть особые
+              требования относительно доставки, просим сообщить нам.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer>
+    <div class="py-8 lg:py-16 bg-stone-700">
+      <div class="container mx-auto flex flex-wrap gap-4 justify-between">
+        <div class="basis-full lg:basis-auto">
+          <a href="/">
+            <img src="assets/images/logo/logo-light.svg" alt="">
+          </a>
+          <div class="mt-4 text-gray-200 text-sm">Контакты</div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg text-gray-200">8 (812) 920 8520</a>
+            <div class="mt-2">
+              <a href="mailto:info@bastionit.ru" class="font-bold text-sm text-gray-200">info@bastionit.ru</a>
+            </div>
+          </div>
+
+
+          <div class="mt-8 text-gray-200 text-sm">Мы в соцсетях</div>
+          <div class="flex mt-4">
+            <a target="_blank" href="" title="Телеграм"
+              class="mr-2 w-[40px] h-[40px] rounded-full bg-stone-600 flex items-center justify-center text-white hover:bg-sky-500">
+              <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20.7906 1.59144L17.6441 16.43C17.4066 17.4771 16.7877 17.7378 15.9082 17.2448L11.1137 13.7118L8.80056 15.937C8.54437 16.1932 8.33064 16.4069 7.83688 16.4069L8.18169 11.5245L17.067 3.4957C17.4535 3.15163 16.9828 2.96024 16.4667 3.30505L5.48207 10.222L0.753091 8.74152C-0.27537 8.42054 -0.293988 7.71306 0.967571 7.21931L19.4642 0.0930619C20.3207 -0.227913 21.0698 0.282966 20.7906 1.59144Z"
+                  fill="white"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div class="gap-16 basis-full lg:basis-auto hidden lg:flex">
+          <div>
+            <div class="font-bold text-gray-200 text-lg">Каталог</div>
+            <ul class="mt-4">
+              <li><a href="processory" class="text-sm text-gray-200 hover:text-sky-500">Процессоры</a></li>
+              <li><a href="materinskie-platy" class="text-sm text-gray-200 hover:text-sky-500">Материнские платы</a>
+              </li>
+              <li><a href="operativnaya-pamyat" class="text-sm text-gray-200 hover:text-sky-500">Оперативная память</a>
+              </li>
+              <li><a href="nakopiteli" class="text-sm text-gray-200 hover:text-sky-500">Накопители</a></li>
+              <li><a href="" class="text-sm text-gray-200 hover:text-sky-500">Видеокарты</a></li>
+              <li><a href="kompyutery" class="text-sm text-gray-200 hover:text-sky-500">Компьютеры</a></li>
+              <li><a href="elektronnye-komponenty" class="text-sm text-gray-200 hover:text-sky-500">Электронные
+                  компоненты</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-gray-200 text-lg">Информация</div>
+            <ul class="mt-4">
+              <li><a href="contacts" class="text-sm text-gray-200 hover:text-sky-500">Контакты</a></li>
+              <li><a href="info/dostavka" class="text-sm text-gray-200 hover:text-sky-500">Доставка</a></li>
+              <li><a href="info/sposoby-oplaty" class="text-sm text-gray-200 hover:text-sky-500">Способы оплаты</a></li>
+              <li><a href="info/vozvrat-i-obmen-tovara" class="text-sm text-gray-200 hover:text-sky-500">Возврат и
+                  обмен</a></li>
+              <li><a href="info/kak-my-rabotaem" class="text-sm text-gray-200 hover:text-sky-500">Как мы работаем</a>
+              </li>
+              <li><a href="info/postavka-elektroniki-za-granicej"
+                  class="text-sm text-gray-200 hover:text-sky-500">Поставка электроники за границей</a></li>
+              <li><a href="info/pravovaya-informaciya" class="text-sm text-gray-200 hover:text-sky-500">Правовая
+                  информация</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hidden lg:block">
+          <div class="font-bold text-gray-200 text-lg">Принимаем к оплате</div>
+          <div class="mt-8 grid grid-cols-3 gap-4">
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="14" viewBox="0 0 38 14" width="38">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-visa"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 28 18" width="28">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-mc"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 29 18" width="29">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-maestro"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="14" viewBox="0 0 52 14" width="52">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-mir"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="24" viewBox="0 0 210 120" width="42">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-sbp"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 68 14" width="87">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-sb"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="11" viewBox="0 0 109 20" width="60">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-halva"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="py-4 bg-stone-900">
+      <div class="container mx-auto flex flex-col lg:flex-row justify-between">
+        <div class="text-sm text-stone-500">
+          &copy; BastionIT 2024
+        </div>
+
+        <ul class="flex flex-col lg:flex-row gap-4 mt-4 lg:mt-0">
+          <li><a href="info/privacy" target="_blank" class="text-sm text-stone-500 hover:text-sky-500">Политика
+              конфиденциальности</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div x-data x-cloak data-modal="nav" x-show="$store.modals.find('nav').active" x-transition.opacity
+    class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-end">
+    <div class="h-screen overflow-y-auto w-[90%] md:w-2/4 xl:w-1/4 bg-white relative pt-4" x-data
+      @click.outside="$store.modals.nav = false">
+      <button x-data @click="$store.modals.close('nav')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <nav>
+        <div class="font-bold text-2xl b-4 border-b p-4">Навигация</div>
+        <ul class="mt-4">
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="articles">Новости</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="info/about">О нас</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="info/kak-my-rabotaem">Как мы
+              работаем</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="contacts">Контакты</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="bastion-ek">Бастион ЭК</a></li>
+        </ul>
+      </nav>
+      <div class="mt-8 pb-4">
+        <div class="font-bold text-2xl b-4 border-b p-4">Контакты</div>
+
+        <div class="px-4">
+          <div class="mt-4">
+            <div class="text-lg">с 8:00 до 22:00</div>
+            <div class="text-sm font-light text-gray-500">без выходных</div>
+          </div>
+          <div class="mt-4">
+            <a href="tel:88129208520" class="font-bold text-lg">8 (812) 920-85-20</a>
+            <div class="text-sm font-light text-gray-500">многоканальный</div>
+          </div>
+
+          <a href="mailto:Info@bastionit.ru"
+            class="block mt-4 font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+
+          <a href="#" class="btn flex w-full mt-4" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"
+    data-modal="request" x-cloak x-data x-transition.opacity x-show="$store.modals.find('request').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('request')">
+      <button x-data="" @click="$store.modals.close('request')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold" x-text="$store.modals.find('request').data.modalTitle || 'Заказ в один клик'">Заказ
+        в один клик</h3>
+      <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
+
+      <div class="flex items-center mt-4"
+        x-show="$store.modals.find('request').data.image || $store.modals.find('request').data.title">
+        <div class="basis-1/4">
+          <img src="" class="w-32 h-32 object-contain rounded-md p-2 border bg-white drop-shadow-md" alt=""
+            :src="$store.modals.find('request').data.image">
+        </div>
+        <div class="basis-3/4 pl-4 ">
+          <div class="font-bold text-lg" x-text="$store.modals.find('request').data.title"></div>
+          <div class="mt-2 text-sm" x-text="$store.modals.find('request').data.price"></div>
+        </div>
+      </div>
+
+      <form action="" class="mt-8" data-request="onLeadFormSubmit" data-request-success="this.reset()"
+        data-request-flash data-modal-form>
+        <input type="hidden" name="product" :value="$store.modals.find('request').data.title">
+
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="name" placeholder="Имя *"
+            required>
+        </label>
+
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="lastname" placeholder="Фамилия *"
+            required>
+        </label>
+        <label for="phone_number" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="phone_number"
+            placeholder="Номер вашего телефона *" required>
+        </label>
+        <label class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="email" placeholder="E-mail *"
+            required>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="comment"
+            placeholder="Комментарий к заказу"></textarea>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"
+    data-modal="callback" x-cloak x-data x-transition.opacity x-show="$store.modals.find('callback').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('callback')">
+      <button x-data="" @click="$store.modals.close('callback')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold" x-text="$store.modals.find('callback').data.modalTitle || 'Заказать звонок'">
+        Заказать звонок</h3>
+      <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
+
+      <form action="" class="mt-8" data-request="onLeadFormSubmit" data-request-success="this.reset()"
+        data-request-flash data-modal-form>
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="name"
+            placeholder="Как вас зовут? *" required>
+        </label>
+        <label for="phone_number" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="phone_number"
+            placeholder="Номер вашего телефона *" required>
+        </label>
+        <button class="btn" type="submit">Заказать звонок</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="fixed w-full h-full z-50 overflow-y-auto top-0 left-0 bg-black bg-opacity-70 flex items-start justify-center"
+    data-modal="review" x-cloak x-data x-transition.opacity x-show="$store.modals.find('review').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('review')">
+      <button x-data="" @click="$store.modals.close('review')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold">Оставить отзыв о товаре</h3>
+      <p class="mt-4 text-xs text-gray-500"></p>
+
+      <form action="" class="mt-8" data-request="onReviewSubmit" data-request-success="this.reset()" data-request-flash
+        data-modal-form>
+        <input type="hidden" name="product_id" value="">
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="customer_name"
+            placeholder="Как вас зовут? *" required>
+        </label>
+        <label class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="email" placeholder="E-mail *"
+            required>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="text" placeholder="Ваш отзыв о товаре "
+            required></textarea>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="pros" placeholder="Плюсы"></textarea>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="cons" placeholder="Минусы"></textarea>
+        </label>
+        <label class="block mb-4">
+          <label for="rate">Ваша оценка:</label>
+          <select id="rate" class="block w-full border-gray-400 rounded-lg p-4" name="rate">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="assets/js/manifest.js"></script>
+  <script src="assets/js/vendor.min.js"></script>
+  <script src="assets/js/main.min.js"></script>
+</body>
+
+</html>

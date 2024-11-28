@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <title>Страница результатов поиска — Bastion</title>
+  <link rel="stylesheet" href="assets/styles/main.min.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="storage/app/media/favicon.svg">
+</head>
+
+<body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0">
+  <header class="header bg-white drop-shadow-lg md:drop-shadow-none fixed top-0 left-0 z-30 w-full md:relative"
+    id="header">
+    <div class="top bg-gray-200 hidden md:block">
+      <nav class="container mx-auto">
+        <ul class="flex gap-8 h-10 items-center">
+          <li><a href="articles" class="hover:text-sky-500">Новости</a></li>
+          <li><a href="info/about" class="hover:text-sky-500">О нас</a></li>
+          <li><a href="info/kak-my-rabotaem" class="hover:text-sky-500">Как мы работаем</a></li>
+          <li><a href="contacts" class="hover:text-sky-500">Контакты</a></li>
+          <li><a href="bastion-ek" class="hover:text-sky-500">Бастион ЭК</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="border-b py-2 lg:py-0">
+      <div class="container mx-auto flex gap-4 items-center justify-between py-4">
+        <a href="/">
+          <img src="assets/images/logo/logo.svg" alt="">
+        </a>
+        <div class="hidden lg:flex gap-8 items-center">
+          <div>
+            <div class="text-lg">с 08:00 до 22:00</div>
+            <div class="text-sm font-light text-gray-500">без выходных</div>
+          </div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
+            <div class="text-sm font-light text-gray-500">многоканальный</div>
+          </div>
+          <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+          <a href="mailto:info@bastionit.ru" class="font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+        </div>
+
+        <div class="flex lg:hidden gap-4">
+          <button class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+            <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M23.3156 17.4592L18.0655 15.2092C17.8412 15.1136 17.5919 15.0935 17.3552 15.1518C17.1185 15.2102 16.9071 15.3438 16.753 15.5327L14.4279 18.3733C10.779 16.6529 7.84242 13.7163 6.12198 10.0674L8.96266 7.74236C9.15189 7.58846 9.28582 7.37709 9.34418 7.14026C9.40254 6.90344 9.38215 6.65404 9.2861 6.42984L7.03606 1.17974C6.93064 0.938055 6.7442 0.740726 6.50887 0.62178C6.27355 0.502834 6.0041 0.469727 5.74698 0.528169L0.87189 1.65319C0.623997 1.71043 0.402825 1.85001 0.244474 2.04914C0.0861227 2.24827 -5.71046e-05 2.4952 2.8389e-08 2.74961C2.8389e-08 14.7733 9.74549 24.5 21.7504 24.5C22.0049 24.5002 22.2519 24.414 22.4511 24.2557C22.6504 24.0973 22.79 23.8761 22.8473 23.6281L23.9723 18.753C24.0304 18.4947 23.9966 18.2241 23.8767 17.988C23.7568 17.7519 23.5584 17.5649 23.3156 17.4592Z"
+                fill="currentColor"></path>
+            </svg>
+          </button>
+          <button x-data @click.prevent="$store.modals.open('nav')"
+            class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15 84.125C15 71.3534 25.3534 61 38.125 61H361.875C374.647 61 385 71.3534 385 84.125C385 96.8966 374.647 107.25 361.875 107.25H38.125C25.3534 107.25 15 96.8966 15 84.125ZM15 199.75C15 186.978 25.3534 176.625 38.125 176.625H361.875C374.647 176.625 385 186.978 385 199.75C385 212.522 374.647 222.875 361.875 222.875H38.125C25.3534 222.875 15 212.522 15 199.75ZM176.875 315.375C176.875 302.603 187.228 292.25 200 292.25H361.875C374.647 292.25 385 302.603 385 315.375C385 328.147 374.647 338.5 361.875 338.5H200C187.228 338.5 176.875 328.147 176.875 315.375Z"
+                fill="currentColor"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="header-fixed block w-full fixed top-0 left-0 z-30 bg-white drop-shadow-lg" x-data
+    x-show="$store.headerFixed.scrolled" x-cloak x-transition>
+    <div class="container mx-auto">
+      <div class="py-2 flex justify-between">
+        <div>
+          <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+        </div>
+        <div class="flex items-center gap-8">
+          <div>
+            <a href="mailto:info@bastionit.ru" class="text-md hover:text-sky-500">info@bastionit.ru</a>
+          </div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="pt-8 pb-16">
+    <div class="container mx-auto">
+      <div class="flex flex-col-reverse lg:flex-row">
+        <aside class="basis-full lg:basis-1/4 relative mt-8 lg:mt-0">
+          <a href="#" class="btn-outline w-full" x-data="modalTrigger('request')" x-bind="trigger"
+            data-info='{"modalTitle":"Заказать компонент"}'>Заказать компонент</a>
+
+          <nav class="categories mt-4 lg:mt-8 sticky top-4" x-data="{catalogExpanded:window.innerWidth >= 768}">
+            <div
+              class="h-[50px] lg:h-auto bg-sky-500 px-4 py-2 text-white text-md font-semibold flex justify-between items-center rounded-t-md"
+              :class="catalogExpanded ? '' : 'rounded-b-md'" @click.prevent="catalogExpanded = !catalogExpanded">
+              <span>Каталог товаров</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M15 84.125C15 71.3534 25.3534 61 38.125 61H361.875C374.647 61 385 71.3534 385 84.125C385 96.8966 374.647 107.25 361.875 107.25H38.125C25.3534 107.25 15 96.8966 15 84.125ZM15 199.75C15 186.978 25.3534 176.625 38.125 176.625H361.875C374.647 176.625 385 186.978 385 199.75C385 212.522 374.647 222.875 361.875 222.875H38.125C25.3534 222.875 15 212.522 15 199.75ZM176.875 315.375C176.875 302.603 187.228 292.25 200 292.25H361.875C374.647 292.25 385 302.603 385 315.375C385 328.147 374.647 338.5 361.875 338.5H200C187.228 338.5 176.875 328.147 176.875 315.375Z"
+                  fill="currentColor"></path>
+              </svg>
+            </div>
+
+            <ul class="bg-gray-100" x-show="catalogExpanded" x-collapse>
+              <li>
+                <a href="elektronnye-komponenty" class="block py-2 px-4 text-sm hover:text-sky-500 ">
+                  Электронные компоненты
+                </a>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="processory"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Процессоры</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="processory/amd">
+                      AMD
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="processory/intel">
+                      INTEL
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="materinskie-platy"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Материнские платы</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="materinskie-platy/dlya-amd">
+                      для AMD
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="materinskie-platy/dlya-intel">
+                      для INTEL
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="operativnaya-pamyat"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Оперативная память</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="operativnaya-pamyat/operativnaya-pamyat-dimm">
+                      Оперативная память DIMM
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="operativnaya-pamyat/operativnaya-pamyat-so-dimm">
+                      Оперативная память SO-DIMM
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="nakopiteli"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Накопители</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="nakopiteli/ssd-nakopiteli">
+                      SSD накопители
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 "
+                      href="nakopiteli/ssd-m2-nakopiteli">
+                      SSD M.2 накопители
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="videokarty"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Видеокарты</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="videokarty/gigabyte">
+                      Gigabyte
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="videokarty/nvidia">
+                      nVidia
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="videokarty/asus">
+                      ASUS
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li x-data="{expanded:false}">
+                <a href="kompyutery"
+                  class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
+                  @click.prevent="expanded = !expanded">
+                  <span>Компьютеры</span>
+                  <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
+                    <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
+                      name="chevron">
+                      <path
+                        d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </span>
+                </a>
+                <ul class="bg-gray-200" x-show="expanded" x-collapse>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="kompyutery/dlya-igr">
+                      Игровые компьютеры
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="kompyutery/dlya-ofisa">
+                      Офисные компьютеры
+                    </a>
+                  </li>
+                  <li>
+                    <a class="block py-2 px-4 pl-8 font-bold text-sm hover:text-sky-500 " href="kompyutery/monobloki">
+                      Моноблоки
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+
+        </aside>
+        <div class="basis-full lg:basis-3/4 pl-0 lg:pl-8">
+
+          <section class="search">
+            <form action="search?q=1" method="get" role="search">
+              <div class="flex">
+                <input name="q" type="text" placeholder="Введите название товара"
+                  class="input-text border-r-0 rounded-tr-none rounded-br-none" value="1">
+                <button type="submit"
+                  class="text-white bg-sky-500 border-none w-[48px] h-[48px] rounded-tr-md rounded-br-md flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M65.0346 177.621C65.0346 147.761 76.8964 119.124 98.0104 98.0104C119.124 76.8963 147.761 65.0346 177.621 65.0346C207.481 65.0346 236.118 76.8963 257.232 98.0104C278.346 119.124 290.207 147.761 290.207 177.621C290.207 207.481 278.346 236.118 257.232 257.232C236.118 278.346 207.481 290.208 177.621 290.208C147.761 290.208 119.124 278.346 98.0104 257.232C76.8964 236.118 65.0346 207.481 65.0346 177.621ZM177.621 20C152.646 20 128.028 25.9349 105.796 37.3157C83.5646 48.6965 64.3556 65.1973 49.7522 85.4584C35.1489 105.719 25.5692 129.161 21.8027 153.85C18.0362 178.54 20.1907 203.772 28.0886 227.465C35.9865 251.159 49.4017 272.637 67.2288 290.129C85.0558 307.62 106.784 320.626 130.624 328.072C154.463 335.519 179.731 337.195 204.344 332.96C228.958 328.726 252.213 318.703 272.194 303.718C272.834 304.57 273.534 305.375 274.288 306.127L341.84 373.679C346.086 377.781 351.774 380.05 357.678 379.999C363.582 379.948 369.23 377.58 373.405 373.405C377.58 369.23 379.948 363.582 379.999 357.678C380.05 351.774 377.781 346.086 373.679 341.84L306.127 274.288C305.375 273.534 304.57 272.834 303.718 272.194C321.281 248.776 331.976 220.93 334.605 191.776C337.234 162.622 331.692 133.313 318.602 107.131C305.511 80.949 285.388 58.9298 260.487 43.5406C235.587 28.1513 206.893 20 177.621 20Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </section>
+          <nav aria-label="Breadcrumb" class="mt-4">
+            <ol class="flex items-center gap-1 text-sm text-gray-600">
+              <li>
+                <a href="#" class="block transition hover:text-sky-500">
+                  <span class="sr-only"> Главная </span>
+
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </a>
+              </li>
+
+              <li class="rtl:rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd" />
+                </svg>
+              </li>
+
+              <li>
+                <span class="block transition hover:text-sky-500"> Результаты поиска </span>
+              </li>
+
+            </ol>
+          </nav>
+
+          <h1 class="mt-8 font-bold text-2xl text-gray-700">
+            Поиск по запросу "1"
+          </h1>
+
+          <div class="mt-8">
+
+            <section class="listing mt-8">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100272"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100272"
+                      class="text-sm text-gray-500">PR<mark>1</mark>00272</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100272", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100298"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100298"
+                      class="text-sm text-gray-500">PR<mark>1</mark>00298</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100298", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100300"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100300"
+                      class="text-sm text-gray-500">PR<mark>1</mark>00300</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100300", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100257"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100257"
+                      class="text-sm text-gray-500">PR<mark>1</mark>00257</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100257", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100330"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100330"
+                      class="text-sm text-gray-500">PR<mark>1</mark>00330</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100330", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100299"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100299"
+                      class="text-sm text-gray-500">PR<mark>1</mark>00299</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100299", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100301"
+                    class="block text-center lg:text-left">
+                    <img src="" alt="" class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/sredstva-avtomatizacii-i-upravleniya-processami/promyshlennye-kompyutery/pr100301"
+                      class="text-sm text-gray-500">PR<mark>1</mark>0030<mark>1</mark></a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"PR100301", "price":"Цена по запросу", "image":"" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/mikroshemy/ad8314armz-reel7-logarifmicheskiy-detektorkontroller-100-mgts-27-ggts-45-db-msop-8"
+                    class="block text-center lg:text-left">
+                    <img src="storage/app/uploads/public/62c/d63/248/62cd63248e6a0860930572.jpg" alt=""
+                      class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/mikroshemy/ad8314armz-reel7-logarifmicheskiy-detektorkontroller-100-mgts-27-ggts-45-db-msop-8"
+                      class="text-sm text-gray-500">AD83<mark>1</mark>4ARMZ-REEL7, Логарифмический детектор/контроллер,
+                      <mark>1</mark>00 МГц - 2.7 ГГц, 45 дБ [MSOP-8]</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"AD8314ARMZ-REEL7, Логарифмический детектор/контроллер, 100 МГц - 2.7 ГГц, 45 дБ [MSOP-8]", "price":"Цена по запросу", "image":"storage/app/uploads/public/62c/d63/248/62cd63248e6a0860930572.jpg" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/mikroshemy/ad8361artz-rl7-detektor-trupwr-25-ggts-sot-23-6"
+                    class="block text-center lg:text-left">
+                    <img src="storage/app/uploads/public/62c/d63/24b/62cd6324b0e63359445174.jpg" alt=""
+                      class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/mikroshemy/ad8361artz-rl7-detektor-trupwr-25-ggts-sot-23-6"
+                      class="text-sm text-gray-500">AD836<mark>1</mark>ARTZ-RL7, Детектор TruPwr, 2.5 ГГц [SOT-23-6]</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"AD8361ARTZ-RL7, Детектор TruPwr, 2.5 ГГц [SOT-23-6]", "price":"Цена по запросу", "image":"storage/app/uploads/public/62c/d63/24b/62cd6324b0e63359445174.jpg" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+                <div class="rounded-md bg-white drop-shadow-lg p-4 text-center lg:text-left mb-4 lg:mb-0">
+                  <a href="/elektronnye-komponenty/mikroshemy/ad8361armz-reel7-mikroskhema"
+                    class="block text-center lg:text-left">
+                    <img src="storage/app/uploads/public/62c/d63/24e/62cd6324e2459493531254.jpg" alt=""
+                      class="inline-block rounded-md">
+                  </a>
+                  <div class="mt-2">
+                    <a href="" class="text-sm font-light text-gray-300"></a>
+                  </div>
+                  <div class="mt-2">
+                    <a href="/elektronnye-komponenty/mikroshemy/ad8361armz-reel7-mikroskhema"
+                      class="text-sm text-gray-500">AD836<mark>1</mark>ARMZ-REEL7, Микросхема</a>
+                  </div>
+                  <div class="mt-2 text-sm text-gray-500 font-light">
+                    Цена по запросу
+                  </div>
+                  <div class="mt-4">
+                    <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
+                      data-info='{"modalTitle":"Заказать в 1 клик","title":"AD8361ARMZ-REEL7, Микросхема", "price":"Цена по запросу", "image":"storage/app/uploads/public/62c/d63/24e/62cd6324e2459493531254.jpg" }'>Купить
+                      в 1 клик</a>
+                  </div>
+
+                </div>
+              </div>
+
+            </section>
+
+            <div class="mt-8">
+              <ul class="pagination">
+                <li class="page-item first disabled" aria-disabled="true" aria-label="Назад">
+                  <span class="page-link" aria-hidden="true">&larr;</span>
+                </li>
+                <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=2">2</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=3">3</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=4">4</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=5">5</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=6">6</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=7">7</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=8">8</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=9">9</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=10">10</a></li>
+                <li class="page-item middle disabled" aria-disabled="true"><span class="page-link">...</span></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=167">167</a></li>
+                <li class="page-item"><a class="page-link" href="search?q=1&amp;page=168">168</a></li>
+                <li class="page-item last">
+                  <a class="page-link" href="search?q=1&amp;page=2" rel="next" aria-label="Вперед">&rarr;</a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="py-8 lg:py-16 bg-stone-700">
+      <div class="container mx-auto flex flex-wrap gap-4 justify-between">
+        <div class="basis-full lg:basis-auto">
+          <a href="/">
+            <img src="assets/images/logo/logo-light.svg" alt="">
+          </a>
+          <div class="mt-4 text-gray-200 text-sm">Контакты</div>
+          <div>
+            <a href="tel:88129208520" class="font-bold text-lg text-gray-200">8 (812) 920 8520</a>
+            <div class="mt-2">
+              <a href="mailto:info@bastionit.ru" class="font-bold text-sm text-gray-200">info@bastionit.ru</a>
+            </div>
+          </div>
+
+
+          <div class="mt-8 text-gray-200 text-sm">Мы в соцсетях</div>
+          <div class="flex mt-4">
+            <a target="_blank" href="" title="Телеграм"
+              class="mr-2 w-[40px] h-[40px] rounded-full bg-stone-600 flex items-center justify-center text-white hover:bg-sky-500">
+              <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20.7906 1.59144L17.6441 16.43C17.4066 17.4771 16.7877 17.7378 15.9082 17.2448L11.1137 13.7118L8.80056 15.937C8.54437 16.1932 8.33064 16.4069 7.83688 16.4069L8.18169 11.5245L17.067 3.4957C17.4535 3.15163 16.9828 2.96024 16.4667 3.30505L5.48207 10.222L0.753091 8.74152C-0.27537 8.42054 -0.293988 7.71306 0.967571 7.21931L19.4642 0.0930619C20.3207 -0.227913 21.0698 0.282966 20.7906 1.59144Z"
+                  fill="white"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div class="gap-16 basis-full lg:basis-auto hidden lg:flex">
+          <div>
+            <div class="font-bold text-gray-200 text-lg">Каталог</div>
+            <ul class="mt-4">
+              <li><a href="processory" class="text-sm text-gray-200 hover:text-sky-500">Процессоры</a></li>
+              <li><a href="materinskie-platy" class="text-sm text-gray-200 hover:text-sky-500">Материнские платы</a>
+              </li>
+              <li><a href="operativnaya-pamyat" class="text-sm text-gray-200 hover:text-sky-500">Оперативная память</a>
+              </li>
+              <li><a href="nakopiteli" class="text-sm text-gray-200 hover:text-sky-500">Накопители</a></li>
+              <li><a href="" class="text-sm text-gray-200 hover:text-sky-500">Видеокарты</a></li>
+              <li><a href="kompyutery" class="text-sm text-gray-200 hover:text-sky-500">Компьютеры</a></li>
+              <li><a href="elektronnye-komponenty" class="text-sm text-gray-200 hover:text-sky-500">Электронные
+                  компоненты</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-gray-200 text-lg">Информация</div>
+            <ul class="mt-4">
+              <li><a href="contacts" class="text-sm text-gray-200 hover:text-sky-500">Контакты</a></li>
+              <li><a href="info/dostavka" class="text-sm text-gray-200 hover:text-sky-500">Доставка</a></li>
+              <li><a href="info/sposoby-oplaty" class="text-sm text-gray-200 hover:text-sky-500">Способы оплаты</a></li>
+              <li><a href="info/vozvrat-i-obmen-tovara" class="text-sm text-gray-200 hover:text-sky-500">Возврат и
+                  обмен</a></li>
+              <li><a href="info/kak-my-rabotaem" class="text-sm text-gray-200 hover:text-sky-500">Как мы работаем</a>
+              </li>
+              <li><a href="info/postavka-elektroniki-za-granicej"
+                  class="text-sm text-gray-200 hover:text-sky-500">Поставка электроники за границей</a></li>
+              <li><a href="info/pravovaya-informaciya" class="text-sm text-gray-200 hover:text-sky-500">Правовая
+                  информация</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hidden lg:block">
+          <div class="font-bold text-gray-200 text-lg">Принимаем к оплате</div>
+          <div class="mt-8 grid grid-cols-3 gap-4">
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="14" viewBox="0 0 38 14" width="38">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-visa"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 28 18" width="28">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-mc"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 29 18" width="29">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-maestro"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="14" viewBox="0 0 52 14" width="52">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-mir"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="24" viewBox="0 0 210 120" width="42">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-sbp"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="18" viewBox="0 0 68 14" width="87">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-sb"></use>
+              </svg>
+            </div>
+            <div class="footer__top-payment-item">
+              <svg fill="none" height="11" viewBox="0 0 109 20" width="60">
+                <use xlink:href="assets/images/svg/sprite.svg#payment-item-halva"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="py-4 bg-stone-900">
+      <div class="container mx-auto flex flex-col lg:flex-row justify-between">
+        <div class="text-sm text-stone-500">
+          &copy; BastionIT 2024
+        </div>
+
+        <ul class="flex flex-col lg:flex-row gap-4 mt-4 lg:mt-0">
+          <li><a href="info/privacy" target="_blank" class="text-sm text-stone-500 hover:text-sky-500">Политика
+              конфиденциальности</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div x-data x-cloak data-modal="nav" x-show="$store.modals.find('nav').active" x-transition.opacity
+    class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-end">
+    <div class="h-screen overflow-y-auto w-[90%] md:w-2/4 xl:w-1/4 bg-white relative pt-4" x-data
+      @click.outside="$store.modals.nav = false">
+      <button x-data @click="$store.modals.close('nav')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <nav>
+        <div class="font-bold text-2xl b-4 border-b p-4">Навигация</div>
+        <ul class="mt-4">
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="articles">Новости</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="info/about">О нас</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="info/kak-my-rabotaem">Как мы
+              работаем</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="contacts">Контакты</a></li>
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="bastion-ek">Бастион ЭК</a></li>
+        </ul>
+      </nav>
+      <div class="mt-8 pb-4">
+        <div class="font-bold text-2xl b-4 border-b p-4">Контакты</div>
+
+        <div class="px-4">
+          <div class="mt-4">
+            <div class="text-lg">с 8:00 до 22:00</div>
+            <div class="text-sm font-light text-gray-500">без выходных</div>
+          </div>
+          <div class="mt-4">
+            <a href="tel:88129208520" class="font-bold text-lg">8 (812) 920-85-20</a>
+            <div class="text-sm font-light text-gray-500">многоканальный</div>
+          </div>
+
+          <a href="mailto:Info@bastionit.ru"
+            class="block mt-4 font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+
+          <a href="#" class="btn flex w-full mt-4" x-data @click.prevent="$store.modals.open('callback')">
+            Заказать звонок
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"
+    data-modal="request" x-cloak x-data x-transition.opacity x-show="$store.modals.find('request').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('request')">
+      <button x-data="" @click="$store.modals.close('request')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold" x-text="$store.modals.find('request').data.modalTitle || 'Заказ в один клик'">Заказ
+        в один клик</h3>
+      <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
+
+      <div class="flex items-center mt-4"
+        x-show="$store.modals.find('request').data.image || $store.modals.find('request').data.title">
+        <div class="basis-1/4">
+          <img src="" class="w-32 h-32 object-contain rounded-md p-2 border bg-white drop-shadow-md" alt=""
+            :src="$store.modals.find('request').data.image">
+        </div>
+        <div class="basis-3/4 pl-4 ">
+          <div class="font-bold text-lg" x-text="$store.modals.find('request').data.title"></div>
+          <div class="mt-2 text-sm" x-text="$store.modals.find('request').data.price"></div>
+        </div>
+      </div>
+
+      <form action="" class="mt-8" data-request="onLeadFormSubmit" data-request-success="this.reset()"
+        data-request-flash data-modal-form>
+        <input type="hidden" name="product" :value="$store.modals.find('request').data.title">
+
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="name" placeholder="Имя *"
+            required>
+        </label>
+
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="lastname" placeholder="Фамилия *"
+            required>
+        </label>
+        <label for="phone_number" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="phone_number"
+            placeholder="Номер вашего телефона *" required>
+        </label>
+        <label class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="email" placeholder="E-mail *"
+            required>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="comment"
+            placeholder="Комментарий к заказу"></textarea>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"
+    data-modal="callback" x-cloak x-data x-transition.opacity x-show="$store.modals.find('callback').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('callback')">
+      <button x-data="" @click="$store.modals.close('callback')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold" x-text="$store.modals.find('callback').data.modalTitle || 'Заказать звонок'">
+        Заказать звонок</h3>
+      <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
+
+      <form action="" class="mt-8" data-request="onLeadFormSubmit" data-request-success="this.reset()"
+        data-request-flash data-modal-form>
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="name"
+            placeholder="Как вас зовут? *" required>
+        </label>
+        <label for="phone_number" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="phone_number"
+            placeholder="Номер вашего телефона *" required>
+        </label>
+        <button class="btn" type="submit">Заказать звонок</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="fixed w-full h-full z-50 overflow-y-auto top-0 left-0 bg-black bg-opacity-70 flex items-start justify-center"
+    data-modal="review" x-cloak x-data x-transition.opacity x-show="$store.modals.find('review').active">
+    <div class="p-8 bg-white rounded-lg w-[500px] relative" x-data @click.outside="$store.modals.close('review')">
+      <button x-data="" @click="$store.modals.close('review')" aria-label="Close"
+        class="absolute top-8 right-4 z-10 border-0 bg-transparent text-black" x-transition>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <h3 class="text-3xl font-bold">Оставить отзыв о товаре</h3>
+      <p class="mt-4 text-xs text-gray-500"></p>
+
+      <form action="" class="mt-8" data-request="onReviewSubmit" data-request-success="this.reset()" data-request-flash
+        data-modal-form>
+        <input type="hidden" name="product_id" value="">
+        <label for="name" class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="customer_name"
+            placeholder="Как вас зовут? *" required>
+        </label>
+        <label class="block mb-4">
+          <input type="text" class="block w-full border-gray-400 rounded-lg p-4" name="email" placeholder="E-mail *"
+            required>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="text" placeholder="Ваш отзыв о товаре "
+            required></textarea>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="pros" placeholder="Плюсы"></textarea>
+        </label>
+        <label class="block mb-4">
+          <textarea class="block w-full border-gray-400 rounded-lg p-4" name="cons" placeholder="Минусы"></textarea>
+        </label>
+        <label class="block mb-4">
+          <label for="rate">Ваша оценка:</label>
+          <select id="rate" class="block w-full border-gray-400 rounded-lg p-4" name="rate">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Отправить заявку</button>
+
+        <div class="mt-4 flex items-center">
+          <input type="checkbox" name="privacy" id="privacy" required>
+          <label class="block ml-2 text-sm text-gray-500" for="privacy">Соглашаюсь с <a class="text-sky-500"
+              href="info/privacy" target="_blank">политикой конфиденциальности</a></label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="assets/js/manifest.js"></script>
+  <script src="assets/js/vendor.min.js"></script>
+  <script src="assets/js/main.min.js"></script>
+
+</body>
+
+</html>
