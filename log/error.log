@@ -370,3 +370,8 @@ AH00016: Configuration Failed
 [Thu Nov 28 12:58:21.218496 2024] [core:error] [pid 691:tid 691] [client 47.237.94.12:45864] AH10244: invalid URI path (/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh)
 [Thu Nov 28 12:58:21.674782 2024] [core:error] [pid 681:tid 681] [client 47.237.94.12:45878] AH10244: invalid URI path (/cgi-bin/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/bin/sh)
 [Thu Nov 28 16:15:54.800148 2024] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Thu Nov 28 18:29:41.293049 2024] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.61 (Debian) PHP/8.3.10 OpenSSL/1.1.1w configured -- resuming normal operations
+[Thu Nov 28 18:29:41.293148 2024] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Nov 28 20:05:26.677127 2024] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Thu Nov 28 20:06:53.421456 2024] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.61 (Debian) PHP/8.3.10 OpenSSL/1.1.1w configured -- resuming normal operations
+[Thu Nov 28 20:06:53.422935 2024] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
