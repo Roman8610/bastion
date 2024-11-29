@@ -57,7 +57,7 @@ use yii\helpers\Url;
           <section class="content mt-8">
             <div class="flex flex-wrap">
               <div class="basis-full mt-4 lg:mt-0">
-                <h2 class="font-bold text-2xl">Наши производители</h2>
+                <h2 class="font-bold text-2xl">Производители</h2>
                 <div class="mt-4 mb-4 grid lg:grid-cols-8 grid-cols-4 gap-4">
                   <img src="images/65bcbf16f0bf4070174536.jpeg" alt="">
                   <img src="images/65bcbf171596f230957053.jpeg" alt="">
