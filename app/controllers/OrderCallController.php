@@ -17,7 +17,7 @@ class OrderCallController extends AppController{
         if($orderModel->load(\Yii::$app->request->post()) && $orderModel->validate() && $orderModel->save()){  
             
             Yii::$app->mailer->compose()
-            ->setFrom('zakazbastionit@yandex.ru')
+            ->setFrom('bastionit@rambler.ru')
             ->setTo('drom24@inbox.ru')
             ->setSubject('Обратный звонок')
             ->setHtmlBody('<b>ФИО: </b>'.$name.'<br><b>Телефон: </b>'.$phone)
