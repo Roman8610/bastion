@@ -31,7 +31,7 @@ class AuthAsset extends AssetBundle
         "adminlte/dist/js/adminlte.min.js",
     ];
     public $depends = [
-        //'yii\web\YiiAsset',
+        'yii\web\YiiAsset',
         //'yii\bootstrap5\BootstrapAsset'
     ];
 }
