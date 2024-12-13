@@ -9,6 +9,15 @@ use yii\web\Controller;
 class AppAdminController extends Controller
 {
 
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'delete') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
     public function behaviors()
     {
         return [

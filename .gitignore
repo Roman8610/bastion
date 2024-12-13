@@ -1,0 +1,8 @@
+archive.tar.gz
+dumpbd/
+app/web/importfiles/
+app/config/
+log/
+html/
+docker/
+docker-compose.yml
