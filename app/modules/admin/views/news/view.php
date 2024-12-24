@@ -35,7 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
                     'short_text',
                     'text:ntext',
-                    'img',
+                   // 'img',
+                    [
+                        'attribute'=>'img',
+                        'value' => function($data) { return '/'.$data->img; },
+                        'format' => ['image', ['width'=>'150px']],
+                    ],
                     'date',
                 ],
             ]) ?>

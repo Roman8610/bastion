@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "news".
@@ -16,9 +17,11 @@ use Yii;
  */
 class News extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    public $imageFile;
+
+    public $current_img = null;
+
     public static function tableName()
     {
         return 'news';
@@ -30,11 +33,13 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'short_text', 'text', 'date'], 'required'],
+            [['title', 'short_text', 'text'], 'required'],
             [['text'], 'string'],
-            [['date'], 'safe'],
+          //  [['date'], 'safe'],
             [['title', 'img'], 'string', 'max' => 255],
             [['short_text'], 'string', 'max' => 500],
+            // ['imageFile', 'image'],
+            [['imageFile'], 'file'],
         ];
     }
 
@@ -49,7 +54,57 @@ class News extends \yii\db\ActiveRecord
             'short_text' => 'Анонс',
             'text' => 'Новость',
             'img' => 'Изображение',
-            'date' => 'Дата',
+          //  'date' => 'Дата',
+            'imageFile' => 'Изображение'
         ];
+    }
+
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+      //  var_dump($this->current_img); die;
+
+        if ($this->imageFile instanceof UploadedFile) {
+            if ($this->validate()) {
+                $path = $this->uniqImageName($this->imageFile);
+                if($this->imageFile->saveAs($path))
+                {
+                    $this->img = $path;
+                }
+            }
+
+        }
+        else
+        {
+            if(!$this->current_img)
+            {
+                $this->img = 'images/news/default-new.webp';
+            }
+            else
+            {
+                $this->img = $this->current_img;
+            }
+
+        }
+    
+        
+        return true;
+    }
+
+    public function uniqImageName($imageFile, $i=0)
+    {
+        $name = $i == 0 ? $this->imageFile->baseName : $this->imageFile->baseName . '-' . $i;
+        $path = 'images/news/' . $name . '.' . $this->imageFile->extension;
+        if(file_exists($path))
+        {
+            $i++;
+            $this->uniqImageName($imageFile, $i);
+        }
+
+        return $path;
     }
 }

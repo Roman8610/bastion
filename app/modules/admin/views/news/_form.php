@@ -27,9 +27,16 @@ mihaildev\elfinder\Assets::noConflict($this);
 
 ]); ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    <?php if($model->img):?>
+        <?=Html::img('@web/'.$model->img, ['style' => 'height: 150px; margin-bottom: 20px;'])?>
+    <?php endif;?>
+
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
+
+
+    <?//= $form->field($model, 'date')->textInput() ?>
 
 
 

@@ -14,11 +14,11 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="content">
         <div class="orders-update">
 
-            <h1><?= Html::encode($this->title) ?></h1>
+        <h1>Изменить статус заявки №<?=$model->id?><?//= Html::encode($this->title) ?></h1>
 
-            <?= $this->render('_form', [
-                'model' => $model,
-            ]) ?>
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
 
         </div>
     </div>

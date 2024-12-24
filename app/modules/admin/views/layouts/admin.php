@@ -238,7 +238,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Заявки
-                <span class="right badge badge-danger">1</span>
+                <?php if(Yii::$app->view->params['countNewOrders']):?>
+                <span class="right badge badge-danger">+<?=Yii::$app->view->params['countNewOrders']?></span>
+                <?php endif;?>
               </p>
             </a>
           </li>

@@ -48,14 +48,14 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'last_name' => 'Last Name',
-            'phone' => 'Phone',
+            'name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'phone' => 'Телефон',
             'email' => 'Email',
-            'message' => 'Message',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'message' => 'Сообщение',
+            'status' => 'Статус',
+            'created_at' => 'Создана',
+            'updated_at' => 'Обновлена',
         ];
     }
 }

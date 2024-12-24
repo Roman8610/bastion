@@ -28,15 +28,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    'id',
+                   // 'id',
                     'name',
                     'last_name',
                     'phone',
                     'email:email',
-                    //'message',
-                    //'status',
-                    //'created_at',
-                    //'updated_at',
+                    'message',
+                  //  'status',
+                    [
+                        'attribute' => 'status',
+                        'value' => function ($data){
+                                switch ($data->status) {
+                                        case 0:
+                                            return '<span class="text-danger">Новая</span>';                                                
+                                        case 1:
+                                            return '<span class="text-success">Обработана</span>';
+                                            }
+                                            
+
+                        },
+                        'format' => 'html',
+                    ],
+                    'created_at',
+                    'updated_at',
                     [
                         'class' => ActionColumn::className(),
                         'urlCreator' => function ($action, Orders $model, $key, $index, $column) {

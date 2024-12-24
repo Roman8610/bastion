@@ -19,7 +19,7 @@ use yii\helpers\Url;
 
                         <?php foreach($news as $new):?>
                         <article class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
-                            <img alt="" src="<?=$new->img ? $new->img : '/images/logo/logo.svg'?>" class="h-56 w-full object-cover">
+                            <img alt="" src="<?='/'.$new->img?>" class="h-56 w-full object-cover">
                             
                             <div class="p-4 sm:p-6">
                                 <a href="<?=Url::to(['news/view', 'id'=>$new->id])?>">

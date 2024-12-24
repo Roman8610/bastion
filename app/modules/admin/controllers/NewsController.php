@@ -7,10 +7,9 @@ use yii\data\ActiveDataProvider;
 use app\modules\admin\controllers\AppAdminController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
-/**
- * NewsController implements the CRUD actions for News model.
- */
+
 class NewsController extends AppAdminController
 {
     /**
@@ -31,11 +30,7 @@ class NewsController extends AppAdminController
         );
     }
 
-    /**
-     * Lists all News models.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -57,12 +52,7 @@ class NewsController extends AppAdminController
         ]);
     }
 
-    /**
-     * Displays a single News model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -70,18 +60,23 @@ class NewsController extends AppAdminController
         ]);
     }
 
-    /**
-     * Creates a new News model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+
     public function actionCreate()
     {
+
         $model = new News();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+
+            if ($model->load($this->request->post())) {
+
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+                if($model->save())
+                {                   
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
             }
         } else {
             $model->loadDefaultValues();
@@ -92,19 +87,21 @@ class NewsController extends AppAdminController
         ]);
     }
 
-    /**
-     * Updates an existing News model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->current_img = $model->img;
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            if($model->save())
+            {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
         return $this->render('update', [

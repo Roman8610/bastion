@@ -9,6 +9,11 @@ use yii\web\Controller;
 class AppAdminController extends Controller
 {
 
+    public function __construct($id, $module, $config = []) {
+        parent::__construct($id, $module, $config);
+        $this->view->params['countNewOrders'] = \app\modules\admin\models\Orders::find()->where(['status' => '0'])->count();
+    }
+
     public function beforeAction($action)
     {            
         if ($action->id == 'delete') {
