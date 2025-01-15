@@ -47,10 +47,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
     <div class="top bg-gray-200 hidden md:block">
       <nav class="container mx-auto">
         <ul class="menu flex gap-8 h-10">
-          <li class="menu__li"><a href="<?=Url::to('/news/index')?>" class="menu__a hover:text-sky-500">Новости</a></li>
           <li class="menu__li"><a href="<?=Url::to('/pages/about')?>" class="menu__a hover:text-sky-500">О нас</a></li>
-          <li class="menu__li"><a href="<?=Url::to('/pages/how-we-work')?>" class="menu__a hover:text-sky-500">Как мы работаем</a></li>
-          <li class="menu__li"><a href="<?=Url::to('/pages/contact')?>" class="menu__a hover:text-sky-500">Контакты</a></li>
           <li class="menu__li">
             <!-- <a href="< ?=Url::to('/pages/bastion-ek')?>" class="menu__a hover:text-sky-500">Бастион ЭК</a> -->
             <div class="menu__a hover:text-sky-500">Услуги</div>
@@ -60,6 +57,9 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
               <li class="menu-child__li"><a href="<?=Url::to('/pages/laboratory-monitoring')?>" class="menu-child__a hover:text-sky-500">Лабораторный контроль</a></li>
             </ul>
           </li>
+          <li class="menu__li"><a href="<?=Url::to('/news/index')?>" class="menu__a hover:text-sky-500">Новости</a></li>
+          <li class="menu__li"><a href="<?=Url::to('/pages/contact')?>" class="menu__a hover:text-sky-500">Контакты</a></li>
+          <!-- <li class="menu__li"><a href="< ?=Url::to('/pages/how-we-work')?>" class="menu__a hover:text-sky-500">Как мы работаем</a></li> -->
         </ul>
       </nav>
     </div>
@@ -153,10 +153,10 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       </div>
     </div>
   </main>
-  <footer>
-    <div class="py-8 lg:py-16 bg-stone-700">
+  <footer class="footer">
+    <div class="px-4 py-8 lg:py-16 bg-stone-700">
       <div class="container mx-auto flex flex-wrap gap-4 justify-between">
-        <div class="basis-full lg:basis-auto">
+        <div class="footer__col">
           <a href="/">
             <img src="images/logo/logo-light.svg" alt="">
           </a>
@@ -182,14 +182,12 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
           </div>
         </div>
 
-
-        <div class="gap-16 basis-full lg:basis-auto hidden lg:flex">
-
-         <?=MenuFooterWidget::widget([
-          
-         ])?>
-
-          <div>
+        <div class="footer__col">
+          <?=MenuFooterWidget::widget([
+            
+          ])?>
+        </div>
+        <div class="footer__col">
             <div class="font-bold text-gray-200 text-lg">Информация</div>
             <ul class="mt-4">
               <li><a href="<?=Url::to('/pages/contact')?>" class="text-sm text-gray-200 hover:text-sky-500">Контакты</a></li>
@@ -205,9 +203,8 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
                   информация</a></li>
             </ul>
           </div>
-        </div>
 
-        <div class="hidden lg:block">
+        <!-- <div class="hidden lg:block">
           <div class="font-bold text-gray-200 text-lg">Принимаем к оплате</div>
           <div class="mt-8 grid grid-cols-3 gap-4">
             <div class="footer__top-payment-item">
@@ -246,7 +243,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
               </svg>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
     </div>
@@ -278,12 +275,8 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       <nav>
         <div class="font-bold text-2xl b-4 border-b p-4">Навигация</div>
         <ul class="menu-mobile mt-4">
-          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/news/index">Новости</a></li>
           <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/about">О нас</a></li>
-          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/how-we-work">Как мы
-              работаем</a></li>
-          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/contact">Контакты</a></li>
-          <!-- <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/bastion-ek">Бастион ЭК</a></li> -->
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/news/index">Новости</a></li>
           <li>
             <div class="block hover:bg-sky-500 hover:text-white px-4 py-2">Услуги</div>
             <ul class="menu-child">
@@ -292,6 +285,10 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
               <li class="menu-child__li"><a href="<?=Url::to('/pages/laboratory-monitoring')?>" class="hover:bg-sky-500 hover:text-white menu-child__a hover:text-sky-500">Лабораторный контроль</a></li>
             </ul>
           </li>
+          <!-- <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/how-we-work">Как мы работаем</a></li> -->
+          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/contact">Контакты</a></li>
+          <!-- <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/bastion-ek">Бастион ЭК</a></li> -->
+          
         </ul>
       </nav>
       <div class="mt-8 pb-4">

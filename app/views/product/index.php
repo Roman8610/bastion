@@ -59,14 +59,14 @@ use yii\helpers\Url;
                     <?php endif;?>
                   </div>
 
-                  <div class="mt-4 basis-full sm:basis-auto">
+                  <div class="product-card__btn-area mt-4 basis-full sm:basis-auto">
                     <div class="price font-bold text-2xl text-sky-500 text-left lg:text-center">
                       Цена по запросу
                     </div>
                     <div class="mt-4 text-left lg:text-center">
                       <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
-                        data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$product->title?>", "price":"Цена по запросу", "image":"/images/placeholder.jpg" }'>Купить
-                        в 1 клик</a>
+                        data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$product->title?>", "price":"Цена по запросу", "image":"/images/placeholder.jpg" }'>Заказать
+                        в&nbsp;1&nbsp;клик</a>
                     </div>
                   </div>
                 </div>
@@ -292,13 +292,12 @@ use yii\helpers\Url;
                         <a href="<?=Url::to(['product/index', 'alias' => $similar_product->alias])?>"
                         class="text-sm font-bold text-gray-500"><?=$similar_product->title?></a>
                     </div>
-                    <div class="mt-2 text-sm text-gray-500 font-light">
+                    <div class="product-card__btn-area mt-2 text-sm text-gray-500 font-light">
                         Цена по запросу
                     </div>
                     <div class="mt-4">
                         <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
-                        data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$similar_product->title?>", "price":"Цена по запросу", "image":"/images/placeholder.jpg" }'>Заказать
-                        в 1 клик</a>
+                        data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$similar_product->title?>", "price":"Цена по запросу", "image":"/images/placeholder.jpg" }'>Заказать в&nbsp;1&nbsp;клик</a>
                     </div>
 
                     </div>

@@ -71,7 +71,7 @@ use yii\helpers\Url;
                 <!-- <a href="/manufactures" style="text-decoration:underline" class="mt-4"> Все производители </a> -->
               </div>
 
-              <div class="basis-full mt-8">
+              <!-- <div class="basis-full mt-8">
                 <div x-data="{ expanded: false }">
                   <article class="prose relative" :class="expanded ? '':'white-overlay'" x-show="expanded"
                     x-collapse.min.400px>
@@ -133,7 +133,7 @@ use yii\helpers\Url;
                       class="text-sky-500 underline decoration-dotted"
                       x-text="expanded ? 'Свернуть':'Показать всё'">Показать всё</a></div>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </section>

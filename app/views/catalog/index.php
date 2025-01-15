@@ -79,13 +79,13 @@ use yii\helpers\Url;
                             <a href="<?=Url::to(['product/index', 'alias' => $product->alias])?>"
                               class="text-sm font-bold text-gray-500"><?=$product->title?></a>
                           </div>
-                          <div class="mt-2 text-sm text-gray-500 font-light">
+                          <div class="product-card__btn-area mt-2 text-sm text-gray-500 font-light">
                             Цена по запросу
                           </div>
                           <div class="mt-4">
                             <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
                               data-info='{"modalTitle":"Заказать в 1 клик","title":"Процессор AMD Threadripper PRO 3995WX 100-000000087", "price":"Цена по запросу", "image":"storage/app/uploads/public/644/805/9a8/thumb_49929_224_224_0_0_exact.webp" }'>Заказать
-                              в 1 клик</a>
+                              в&nbsp;1&nbsp;клик</a>
                           </div>
 
                         </div>
