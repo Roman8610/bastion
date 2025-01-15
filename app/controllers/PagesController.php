@@ -29,6 +29,21 @@ class PagesController extends AppController
         return $this->render('bastion-ek');
     }
 
+    public function actionLaboratoryMonitoring()
+    {
+        return $this->render('laboratory-monitoring');
+    }
+    
+    public function actionProduction()
+    {
+        return $this->render('production');
+    }
+
+    public function actionReversEngineering()
+    {
+        return $this->render('revers-engineering');
+    }
+
     public function actionDelivery()
     {
         return $this->render('delivery');

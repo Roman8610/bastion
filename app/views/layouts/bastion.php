@@ -46,12 +46,20 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
     id="header">
     <div class="top bg-gray-200 hidden md:block">
       <nav class="container mx-auto">
-        <ul class="flex gap-8 h-10 items-center">
-          <li><a href="<?=Url::to('/news/index')?>" class="hover:text-sky-500">Новости</a></li>
-          <li><a href="<?=Url::to('/pages/about')?>" class="hover:text-sky-500">О нас</a></li>
-          <li><a href="<?=Url::to('/pages/how-we-work')?>" class="hover:text-sky-500">Как мы работаем</a></li>
-          <li><a href="<?=Url::to('/pages/contact')?>" class="hover:text-sky-500">Контакты</a></li>
-          <li><a href="<?=Url::to('/pages/bastion-ek')?>" class="hover:text-sky-500">Бастион ЭК</a></li>
+        <ul class="menu flex gap-8 h-10">
+          <li class="menu__li"><a href="<?=Url::to('/news/index')?>" class="menu__a hover:text-sky-500">Новости</a></li>
+          <li class="menu__li"><a href="<?=Url::to('/pages/about')?>" class="menu__a hover:text-sky-500">О нас</a></li>
+          <li class="menu__li"><a href="<?=Url::to('/pages/how-we-work')?>" class="menu__a hover:text-sky-500">Как мы работаем</a></li>
+          <li class="menu__li"><a href="<?=Url::to('/pages/contact')?>" class="menu__a hover:text-sky-500">Контакты</a></li>
+          <li class="menu__li">
+            <!-- <a href="< ?=Url::to('/pages/bastion-ek')?>" class="menu__a hover:text-sky-500">Бастион ЭК</a> -->
+            <div class="menu__a hover:text-sky-500">Услуги</div>
+            <ul class="menu-child">
+              <li class="menu-child__li"><a href="<?=Url::to('/pages/production')?>" class="menu-child__a hover:text-sky-500">Производство</a></li>
+              <li class="menu-child__li"><a href="<?=Url::to('/pages/revers-engineering')?>" class="menu-child__a hover:text-sky-500">Реверс-инжиниринг</a></li>
+              <li class="menu-child__li"><a href="<?=Url::to('/pages/laboratory-monitoring')?>" class="menu-child__a hover:text-sky-500">Лабораторный контроль</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
@@ -269,13 +277,21 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       </button>
       <nav>
         <div class="font-bold text-2xl b-4 border-b p-4">Навигация</div>
-        <ul class="mt-4">
+        <ul class="menu-mobile mt-4">
           <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/news/index">Новости</a></li>
           <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/about">О нас</a></li>
           <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/how-we-work">Как мы
               работаем</a></li>
           <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/contact">Контакты</a></li>
-          <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/bastion-ek">Бастион ЭК</a></li>
+          <!-- <li><a class="block hover:bg-sky-500 hover:text-white px-4 py-2" href="/pages/bastion-ek">Бастион ЭК</a></li> -->
+          <li>
+            <div class="block hover:bg-sky-500 hover:text-white px-4 py-2">Услуги</div>
+            <ul class="menu-child">
+              <li class="menu-child__li"><a href="<?=Url::to('/pages/production')?>" class="hover:bg-sky-500 hover:text-white menu-child__a hover:text-sky-500">Производство</a></li>
+              <li class="menu-child__li"><a href="<?=Url::to('/pages/revers-engineering')?>" class="hover:bg-sky-500 hover:text-white menu-child__a hover:text-sky-500">Реверс-инжиниринг</a></li>
+              <li class="menu-child__li"><a href="<?=Url::to('/pages/laboratory-monitoring')?>" class="hover:bg-sky-500 hover:text-white menu-child__a hover:text-sky-500">Лабораторный контроль</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <div class="mt-8 pb-4">

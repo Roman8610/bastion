@@ -236,3 +236,56 @@ main {
 		column-count: 3;
 	}
 }
+
+
+
+.menu__li {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+div.menu__a {
+	cursor: pointer;
+}
+.menu-child {
+	position: absolute;
+	padding: 13px 20px;
+	left: -20px;
+	top: 100%;
+	background: rgb(229 231 235/var(--tw-bg-opacity));
+	width: max-content;
+	opacity: 0;
+	visibility: hidden;
+	margin-top: -20px;
+	transition: opacity .3s ease-in-out, margin-top .3s ease-in-out;
+}
+.menu-mobile .menu-child,
+.menu__li:hover .menu-child {
+	opacity: 1;
+	visibility: visible;
+	margin-top: 0;
+}
+
+.menu-mobile .menu-child {
+	position: static;
+	width: 100%;
+	background: 0;
+	padding: 0;
+
+}
+
+.menu-mobile .menu-child__a {
+	display: block;
+	padding: 0.1rem 1.5rem; 
+}
+
+.menu-child__li:not(:last-child) {
+	margin-bottom: 5px;
+}
+
+.h-screen {
+	height: var(--app-height, 100vh);
+}
+
+/* .prose__section {} */
