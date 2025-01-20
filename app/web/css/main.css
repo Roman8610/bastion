@@ -368,6 +368,9 @@ div.menu__a {
 		font-size: 1rem;
     line-height: 1.3rem;
 	}
+	.popup__body input, .popup__body textarea {
+    padding: .5rem 1rem;
+	}
 }
 
 

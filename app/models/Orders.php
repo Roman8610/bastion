@@ -4,6 +4,8 @@ namespace app\models;
 
 class Orders extends \yii\db\ActiveRecord{
     
+    public $file;
+
     public static function tableName(): string {
         return 'orders';
     }
@@ -26,10 +28,11 @@ class Orders extends \yii\db\ActiveRecord{
     public function rules()
     {
         return [
-            [['name', 'last_name', 'phone', 'email'], 'required'],
+            [['name', 'phone', 'email'], 'required'],
             [['name', 'last_name', 'phone', 'email'], 'string', 'max' => 255],
             [['message'], 'string', 'max' => 500],
             [['created_at', 'updated_at'], 'safe'],
+            [['file'], 'file'],
         ];
     }
 
@@ -43,6 +46,7 @@ class Orders extends \yii\db\ActiveRecord{
             'phone' => 'Телефон',
             'email' => 'Телефон',
             'message' => 'Комментарий к заказу',
+            'file' => '',
         ];
     }
     

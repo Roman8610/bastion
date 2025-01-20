@@ -34,6 +34,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     'phone',
                     'email:email',
                     'message',
+                  //  'file_path',
+                    [
+                        'attribute' => 'file_path',
+                        'value' => function($data) { 
+
+                            if($data->file_path)
+                            {
+                                return '<a href=/'.$data->file_path.'>Скачать файл</a>'; 
+                            }
+                            else
+                            {
+                                return ''; 
+                            }
+
+                            
+                        
+                        },
+                        'format' => 'html',
+                    ],
                   //  'status',
                     [
                         'attribute' => 'status',

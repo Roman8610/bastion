@@ -74,7 +74,7 @@
                       <?=$form->field($order, 'name', ['template' => "{input}"])->textInput([
                     'class' => 'block w-full border-gray-400 rounded-lg',
                   // 'tabindex' => '1',
-                    'placeholder' => 'Имя',
+                    'placeholder' => 'Как Вас зовут?',
                           ])?>
   
         </label>
@@ -102,6 +102,10 @@
                   //  'tabindex' => '2',
                     'placeholder' => 'Email',
                           ])?>
+        </label>
+
+        <label class="block mb-4">
+          <?= $form->field($order, 'file')->fileInput() ?>
         </label>
   
         <label class="block">         

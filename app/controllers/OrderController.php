@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\web\UploadedFile;
 
 class OrderController extends AppController{
     
@@ -10,24 +11,60 @@ class OrderController extends AppController{
  
         $orderModel = new \app\models\Orders();
 
-        $name = $_POST['Orders']['name'];
-        $last_name = $_POST['Orders']['last_name'];
-        $phone = $_POST['Orders']['phone'];
-        $email = $_POST['Orders']['email'];
-        $message = $_POST['Orders']['message'];
-        
-        if($orderModel->load(\Yii::$app->request->post()) && $orderModel->validate() && $orderModel->save()){   
-                
-            Yii::$app->mailer->compose()
-            ->setFrom('bastionit@rambler.ru')
-            ->setTo('cxae@ya.ru')
-            ->setSubject('Заказ товара')
-            ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Фамилия: </b>'.$last_name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message)
-            ->send();
+        // $name = $_POST['Orders']['name'];
+        // $last_name = $_POST['Orders']['last_name'];
+        // $phone = $_POST['Orders']['phone'];
+        // $email = $_POST['Orders']['email'];
+        // $message = $_POST['Orders']['message'];
 
-            return \Yii::$app->response->redirect(['message/index']);
+        
+        
+        if($orderModel->load(\Yii::$app->request->post()) && $orderModel->validate()){  
+            
+            $orderModel->file = UploadedFile::getInstance($orderModel, 'file');
+            
+            
+            if($orderModel->file instanceof UploadedFile)
+            {
+                    $path = $this->uniqFileName($orderModel->file);
+                   // var_dump($path); die;
+                    if($orderModel->file->saveAs($path))
+                    {
+                        $orderModel->file_path = $path;
+                    }
+            }
+
+            if($orderModel->save())
+            {
+                return \Yii::$app->response->redirect(['message/index']);
+            }
+
+           
+                
+            // Yii::$app->mailer->compose()
+            // ->setFrom('bastionit@rambler.ru')
+            // ->setTo('cxae@ya.ru')
+            // ->setSubject('Заказ товара')
+            // ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Фамилия: </b>'.$last_name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message)
+            // ->send();
+
+            
         }
         
 
     }   
+
+    public function uniqFileName($file, $i=0)
+    {
+        $name = $i == 0 ? $file->baseName : $file->baseName . '-' . $i;
+        $path = 'docs_order/' . $name . '.' . $file->extension;
+        if(file_exists($path))
+        {
+            $i++;
+            $path = $this->uniqFileName($file, $i);
+        }
+       
+        return $path;
+    }
+
 }

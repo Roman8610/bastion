@@ -102,7 +102,7 @@ class News extends \yii\db\ActiveRecord
         if(file_exists($path))
         {
             $i++;
-            $this->uniqImageName($imageFile, $i);
+            $path = $this->uniqImageName($imageFile, $i);
         }
 
         return $path;

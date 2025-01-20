@@ -56,6 +56,7 @@ class Orders extends \yii\db\ActiveRecord
             'status' => 'Статус',
             'created_at' => 'Создана',
             'updated_at' => 'Обновлена',
+            'file_path' => 'Файл',
         ];
     }
 }
