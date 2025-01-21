@@ -11,11 +11,12 @@ class OrderController extends AppController{
  
         $orderModel = new \app\models\Orders();
 
-        // $name = $_POST['Orders']['name'];
+         $name = $_POST['Orders']['name'];
         // $last_name = $_POST['Orders']['last_name'];
-        // $phone = $_POST['Orders']['phone'];
-        // $email = $_POST['Orders']['email'];
-        // $message = $_POST['Orders']['message'];
+         $phone = $_POST['Orders']['phone'];
+         $email = $_POST['Orders']['email'];
+         $message = $_POST['Orders']['message'];
+         
 
         
         
@@ -36,16 +37,24 @@ class OrderController extends AppController{
 
             if($orderModel->save())
             {
+
+                Yii::$app->mailer->compose()
+                ->setFrom('zakazbastionit@yandex.ru')
+                ->setTo('roman8610@gmail.com')
+                ->setSubject('Заказ товара')
+                ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message.'<br>')
+                ->send();
+
                 return \Yii::$app->response->redirect(['message/index']);
             }
 
            
                 
             // Yii::$app->mailer->compose()
-            // ->setFrom('bastionit@rambler.ru')
-            // ->setTo('cxae@ya.ru')
+            // ->setFrom('zakazbastionit@yandex.ru')
+            // ->setTo('roman8610@gmail.com')
             // ->setSubject('Заказ товара')
-            // ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Фамилия: </b>'.$last_name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message)
+            // ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message)
             // ->send();
 
             

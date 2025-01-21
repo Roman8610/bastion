@@ -102,11 +102,14 @@ class OrdersController extends AppAdminController
     {
         if (($model = Orders::findOne(['id' => $id])) !== null) {
 
-            if(is_file($model->file_path) && $del === true)
+            if($model->file_path)
             {
-                unlink($model->file_path);
+                if(is_file($model->file_path) && $del === true)
+                {
+                    unlink($model->file_path);
+                }
             }
-
+            
             return $model;
         }
 

@@ -122,9 +122,14 @@ class NewsController extends AppAdminController
     {
         if (($model = News::findOne(['id' => $id])) !== null) {
 
-            if(is_file($model->img) && $del === true)
+            if($model->img && $model->img != 'images/news/default-new.webp')
             {
-                unlink($model->img);
+
+                if(is_file($model->img) && $del === true)
+                {
+                    unlink($model->img);
+                }
+
             }
 
             return $model;

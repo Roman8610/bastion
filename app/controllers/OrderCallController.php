@@ -17,10 +17,10 @@ class OrderCallController extends AppController{
         if($orderModel->load(\Yii::$app->request->post()) && $orderModel->validate() && $orderModel->save()){  
             
             Yii::$app->mailer->compose()
-            ->setFrom('bastionit@rambler.ru')
-            ->setTo('drom24@inbox.ru')
+            ->setFrom('zakazbastionit@yandex.ru')
+            ->setTo('roman8610@gmail.com')
             ->setSubject('Обратный звонок')
-            ->setHtmlBody('<b>ФИО: </b>'.$name.'<br><b>Телефон: </b>'.$phone)
+            ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone)
             ->send();
 
 
