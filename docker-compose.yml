@@ -18,10 +18,11 @@ services:
   mysql:
     image: mysql:5.7
     volumes:
-      - mysql-data:/var/lib/mysql
+      # - mysql-data:/var/lib/mysql
+      - mysql-data-1:/var/lib/mysql
       - ./dumpbd:/dumpbd
     environment:
-      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: 6b_ecXVu3Z
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
   phpmyadmin:
@@ -36,4 +37,5 @@ services:
     depends_on:
       - mysql
 volumes:
-  mysql-data:
+  # mysql-data:
+  mysql-data-1:

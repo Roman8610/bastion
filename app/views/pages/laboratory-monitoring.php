@@ -1,6 +1,6 @@
-<div class="basis-full mt-4 lg:mt-8 ">
+<div class="basis-full mt-4 lg:mt-8">
   <article class="prose relative">
-    <h2>Что даёт лабораторный контроль качества</h2>
+    <h1 class="h2">Что даёт лабораторный контроль качества</h1>
     <div style="text-align: justify;">
       <ol>
         <li>

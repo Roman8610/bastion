@@ -36,7 +36,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?= Html::encode($this->title) ?></title>
   <!-- <link rel="stylesheet" href="assets/styles/main.min.css" /> -->
-  <link rel="shortcut icon" type="image/x-icon" href="storage/app/media/favicon.svg">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.svg">
   <?php $this->head() ?>
 </head>
 
