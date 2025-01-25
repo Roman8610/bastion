@@ -3,6 +3,8 @@
 namespace app\models;
 
 class OrdersCall extends \yii\db\ActiveRecord{
+
+    public $reCaptcha;
     
     public static function tableName(): string {
         return 'orders';
@@ -43,6 +45,12 @@ class OrdersCall extends \yii\db\ActiveRecord{
             'email' => 'Телефон',
             'message' => 'Комментарий к заказу',
         ];
+    }
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['OrderCallScenario'] = ['name', 'phone']; // укажите все поля, которые нужно валидировать
+        return $scenarios;
     }
     
 }

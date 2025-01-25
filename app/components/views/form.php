@@ -111,6 +111,9 @@
         <label class="block">         
                     <?=$form->field($order, 'message', ['template' => "{input}"])->textarea(['rows' => 3, 'class' => 'block w-full border-gray-400 rounded-lg', 'placeholder'=>"Комментарий к заказу", 'tabindex'=>"3"])?>
         </label>
+
+        <?= $form->field($order, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>                
+
       </div>
       <footer class="popup__footer">
         <div class="mb-20">Нажимая кнопку, я даю согласие на <b>обработку персональных данных</b></div>

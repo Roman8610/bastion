@@ -11,6 +11,8 @@ class OrderCallController extends AppController{
  
         $orderModel = new OrdersCall();
 
+        $orderModel->setScenario('OrderCallScenario');
+
         $name = $_POST['OrdersCall']['name'];
         $phone = $_POST['OrdersCall']['phone'];
 
