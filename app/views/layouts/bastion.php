@@ -70,7 +70,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
         </a>
         <div class="hidden lg:flex gap-8 items-center">
           <div>
-            <div class="text-lg">с 08:00 до 22:00</div>
+            <div class="text-lg">с 09:00 до 21:00</div>
             <div class="text-sm font-light text-gray-500">без выходных</div>
           </div>
           <div>

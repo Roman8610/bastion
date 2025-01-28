@@ -17,7 +17,7 @@
       </div>
       <div class="mb-4 pb-4 border-b">
         <div class="text-xs text-gray-400">режим работы</div>
-        <div class="text-xl">с 08:00 до 22:00 </div>
+        <div class="text-xl">с 09:00 до 19:00 </div>
       </div>
       <div class="mb-4">
         <div class="text-xs text-gray-400">соцсети и мессенджеры</div>
