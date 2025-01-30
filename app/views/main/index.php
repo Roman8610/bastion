@@ -24,27 +24,27 @@ use yii\helpers\Url;
             <section>
               <div class="container mx-auto">
                 <div class="grid grid-cols-6 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                  <a href="<?=Url::to('/pages/search-ec')?>"
+                  <a href="<?//=Url::to('/pages/search-ec')?>"
                     class="base_featured_menu flex flex-col gap-4 rounded-md bg-gray-100 hover:drop-shadow-lg text-center justify-center items-center">
                     <img src="images/65bf45c8079a1467343691.png" alt="">
                     <span class="font-light text-sm">Поиск дефицитных ЭК</span>
                   </a>
-                  <a href="<?=Url::to('/pages/laboratory-control')?>"
+                  <a href="<?//=Url::to('/pages/laboratory-control')?>"
                     class="base_featured_menu flex flex-col gap-4 rounded-md bg-gray-100 hover:drop-shadow-lg text-center justify-center items-center">
                     <img src="images/65bf45a50c688705700463.png" alt="">
                     <span class="font-light text-sm">Лабораторный контроль</span>
                   </a>
-                  <a href="<?=Url::to('/pages/express-delivery')?>"
+                  <a href="<?//=Url::to('/pages/express-delivery')?>"
                     class="base_featured_menu flex flex-col gap-4 rounded-md bg-gray-100 hover:drop-shadow-lg text-center justify-center items-center">
                     <img src="images/65bcfb58d575e844366850.png" alt="">
                     <span class="font-light text-sm">Экспресс-доставка ЭК</span>
                   </a>
-                  <a href="<?=Url::to('/pages/purchase-ec')?>"
+                  <a href="<?//=Url::to('/pages/purchase-ec')?>"
                     class="base_featured_menu flex flex-col gap-4 rounded-md bg-gray-100 hover:drop-shadow-lg text-center justify-center items-center">
                     <img src="images/65bf5b7719e9d621891152.png" alt="">
                     <span class="font-light text-sm">Выкуп ЭК с мировых стоков</span>
                   </a>
-                  <a href="<?=Url::to('/pages/warehouse-services')?>"
+                  <a href="<?//=Url::to('/pages/warehouse-services')?>"
                     class="base_featured_menu flex flex-col gap-4 rounded-md bg-gray-100 hover:drop-shadow-lg text-center justify-center items-center">
                     <img src="images/65bcfb8e63072572166706.png" alt="">
                     <span class="font-light text-sm">Складские услуги ЭК</span>
