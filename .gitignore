@@ -6,3 +6,4 @@ log/
 html/
 docker/
 docker-compose.yml
+app/web/index.php
