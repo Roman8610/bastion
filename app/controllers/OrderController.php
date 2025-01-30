@@ -42,7 +42,7 @@ class OrderController extends AppController{
 
                 Yii::$app->mailer->compose()
                 ->setFrom('zakazbastionit@yandex.ru')
-                ->setTo('roman8610@gmail.com')
+                ->setTo(['roman8610@gmail.com', 'info@bastionit.ru'])
                 ->setSubject('Заказ товара')
                 ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message.'<br>')
                 ->send();
