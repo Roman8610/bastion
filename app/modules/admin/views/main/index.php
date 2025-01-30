@@ -20,7 +20,7 @@
 
     <!-- Main content -->
     <div class="content">
-      
+    <?//=Yii::$app->security->generatePasswordHash('ztTfD2dYUw')?>
     </div>
     <!-- /.content -->
   </div>

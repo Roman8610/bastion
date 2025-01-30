@@ -90,6 +90,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     ],
 
+                    [
+                        'attribute' => 'show_footer_1',
+                        'value' => function($data) { 
+                            if($data->show_footer_1 == '1')
+                            {
+                                return '<p class="text-success">Да</p>';
+                            } 
+                            if($data->show_footer_1 == '0')
+                            {
+                                return '<p class="text-danger">Нет</p>';
+                            } 
+                        },
+                    'format' => 'raw',
+                    ],
+
                 ],
             ]) ?>
 

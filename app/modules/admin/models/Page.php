@@ -39,7 +39,7 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'title_seo', 'title_menu', 'description_seo', 'text', 'priority', 'status', 'show_main', 'show_footer', 'parent_id'], 'required'],
+            [['title', 'title_seo', 'title_menu', 'description_seo', 'text', 'priority', 'status', 'show_main', 'show_footer', 'show_footer_1', 'parent_id'], 'required'],
             [['priority'], 'integer'],
             [['text', 'status', 'show_main', 'show_footer'], 'string'],
             [['title', 'title_seo', 'title_menu'], 'string', 'max' => 255],
@@ -63,6 +63,7 @@ class Page extends \yii\db\ActiveRecord
             'status' => 'Статус',
             'show_main' => 'Показывать в шапке',
             'show_footer' => 'Показывать в футере',
+            'show_footer_1' => 'Показывать в нижней части футера',
         ];
     }
 }

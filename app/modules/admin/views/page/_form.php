@@ -44,6 +44,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'show_footer')->dropDownList([ '0'=>'Нет', '1' => 'Да', ]) ?>
 
+    <?= $form->field($model, 'show_footer_1')->dropDownList([ '0'=>'Нет', '1' => 'Да', ]) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
