@@ -37,6 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',                  
                     'title_menu',                
                     'text:html',
+                    [
+                        'attribute'=>'img',
+                        'value' => function($data) { return '/'.$data->img; },
+                        'format' => ['image', ['width'=>'150px']],
+                    ],
                     // [
                     //     'attribute' => 'text',
                     //     'format' => 'html',
@@ -98,6 +103,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return '<p class="text-success">Да</p>';
                             } 
                             if($data->show_footer_1 == '0')
+                            {
+                                return '<p class="text-danger">Нет</p>';
+                            } 
+                        },
+                    'format' => 'raw',
+                    ],
+
+                    [
+                        'attribute' => 'show_icons_block',
+                        'value' => function($data) { 
+                            if($data->show_icons_block == '1')
+                            {
+                                return '<p class="text-success">Да</p>';
+                            } 
+                            if($data->show_icons_block == '0')
                             {
                                 return '<p class="text-danger">Нет</p>';
                             } 

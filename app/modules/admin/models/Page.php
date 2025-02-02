@@ -3,7 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
-
+use yii\web\UploadedFile;
 /**
  * This is the model class for table "pages".
  *
@@ -20,6 +20,11 @@ use Yii;
  */
 class Page extends \yii\db\ActiveRecord
 {
+
+    public $imageFile;
+
+    public $current_img = null;
+
     /**
      * {@inheritdoc}
      */
@@ -41,8 +46,9 @@ class Page extends \yii\db\ActiveRecord
         return [
             [['title', 'title_seo', 'title_menu', 'description_seo', 'text', 'priority', 'status', 'show_main', 'show_footer', 'show_footer_1', 'parent_id'], 'required'],
             [['priority'], 'integer'],
-            [['text', 'status', 'show_main', 'show_footer'], 'string'],
+            [['text', 'status', 'show_main', 'show_footer', 'show_icons_block'], 'string'],
             [['title', 'title_seo', 'title_menu'], 'string', 'max' => 255],
+            [['imageFile'], 'file'],
         ];
     }
 
@@ -64,6 +70,58 @@ class Page extends \yii\db\ActiveRecord
             'show_main' => 'Показывать в шапке',
             'show_footer' => 'Показывать в футере',
             'show_footer_1' => 'Показывать в нижней части футера',
+            'show_icons_block' => 'Показывать на главной странице',
+            'imageFile' => 'Иконка',
+            'img' => 'Иконка',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+      //  var_dump($this->current_img); die;
+
+        if ($this->imageFile instanceof UploadedFile) {
+            if ($this->validate()) {
+                $path = $this->uniqImageName($this->imageFile);
+                if($this->imageFile->saveAs($path))
+                {
+                    $this->img = $path;
+                }
+            }
+
+        }
+        else
+        {
+            if(!$this->current_img)
+            {
+                $this->img = null;
+            }
+            else
+            {
+                $this->img = $this->current_img;
+            }
+
+        }
+    
+        
+        return true;
+    }
+
+    public function uniqImageName($imageFile, $i=0)
+    {
+        $name = $i == 0 ? $this->imageFile->baseName : $this->imageFile->baseName . '-' . $i;
+        $path = 'images/icons/' . $name . '.' . $this->imageFile->extension;
+        if(file_exists($path))
+        {
+            $i++;
+            $path = $this->uniqImageName($imageFile, $i);
+        }
+
+        return $path;
+    }
+
 }

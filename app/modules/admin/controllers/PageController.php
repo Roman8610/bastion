@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\modules\admin\controllers\AppAdminController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * PageController implements the CRUD actions for Page model.
  */
@@ -83,8 +83,15 @@ class PageController extends AppAdminController
 
             $model->alias = $this->getAlias($_POST['Page']['title']);
 
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+                if($model->save())
+                {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+                
             }
         } else {
             $model->loadDefaultValues();
@@ -109,8 +116,17 @@ class PageController extends AppAdminController
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->current_img = $model->img;
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            if($model->save())
+            {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         }
 
         $arr_page = $this->getArr();

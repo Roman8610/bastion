@@ -112,7 +112,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     'format' => 'raw',
                 ],
-
+                // show_icons_block
+                [
+                    'attribute' => 'show_icons_block',
+                    'value' => function($data) { 
+                            if($data->show_icons_block == '1')
+                            {
+                                return '<p class="text-success">Да</p>';
+                            } 
+                            if($data->show_icons_block == '0')
+                            {
+                                return '<p class="text-danger">Нет</p>';
+                            } 
+                        },
+                    'format' => 'raw',
+                ],
                 [
                     'class' => ActionColumn::className(),
                     'urlCreator' => function ($action, Page $model, $key, $index, $column) {

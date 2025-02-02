@@ -27,6 +27,12 @@ use yii\widgets\ActiveForm;
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[/* Some CKEditor Options */]),
 
         ]); ?>
+    
+    <?php if($model->img):?>
+        <?=Html::img('@web/'.$model->img, ['style' => 'height: 150px; margin-bottom: 20px;'])?>
+    <?php endif;?>
+
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <h2 style="margin-top: 70px;">Метатеги</h2>
 
@@ -46,6 +52,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'show_footer_1')->dropDownList([ '0'=>'Нет', '1' => 'Да', ]) ?>
 
+    <?= $form->field($model, 'show_icons_block')->dropDownList([ '0'=>'Нет', '1' => 'Да', ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
