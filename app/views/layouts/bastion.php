@@ -90,13 +90,13 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
         </div>
 
         <div class="flex lg:hidden gap-4">
-          <button class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
+          <a href="tel:88129208520" class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
             <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M23.3156 17.4592L18.0655 15.2092C17.8412 15.1136 17.5919 15.0935 17.3552 15.1518C17.1185 15.2102 16.9071 15.3438 16.753 15.5327L14.4279 18.3733C10.779 16.6529 7.84242 13.7163 6.12198 10.0674L8.96266 7.74236C9.15189 7.58846 9.28582 7.37709 9.34418 7.14026C9.40254 6.90344 9.38215 6.65404 9.2861 6.42984L7.03606 1.17974C6.93064 0.938055 6.7442 0.740726 6.50887 0.62178C6.27355 0.502834 6.0041 0.469727 5.74698 0.528169L0.87189 1.65319C0.623997 1.71043 0.402825 1.85001 0.244474 2.04914C0.0861227 2.24827 -5.71046e-05 2.4952 2.8389e-08 2.74961C2.8389e-08 14.7733 9.74549 24.5 21.7504 24.5C22.0049 24.5002 22.2519 24.414 22.4511 24.2557C22.6504 24.0973 22.79 23.8761 22.8473 23.6281L23.9723 18.753C24.0304 18.4947 23.9966 18.2241 23.8767 17.988C23.7568 17.7519 23.5584 17.5649 23.3156 17.4592Z"
                 fill="currentColor"></path>
             </svg>
-          </button>
+          </a>
           <button x-data @click.prevent="$store.modals.open('nav')"
             class="border rounded-md p-4 text-sky-500 hover:border-sky-500 hover:bg-sky-500 hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">

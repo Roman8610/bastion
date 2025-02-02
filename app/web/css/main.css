@@ -460,3 +460,13 @@ div.menu__a {
 .prose-content {
 	text-align: justify;
 }
+
+.catalog-menu {
+	overflow: hidden;
+}
+@media (min-width: 1024px) {
+	.catalog-menu {
+		display: block !important; 
+		height: auto !important; 
+	}
+}

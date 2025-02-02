@@ -14,7 +14,7 @@ use yii\helpers\Url;
 <a href="#" class="btn-outline w-full" x-data="modalTrigger('request')" x-bind="trigger"
   data-info='{"modalTitle":"Заказать компонент"}'>Заказать компонент</a>
 
-<nav class="categories mt-4 lg:mt-8 sticky top-4" x-data="{catalogExpanded:window.innerWidth >= 768}">
+<nav class="categories mt-4 lg:mt-8 sticky top-4" x-data="{catalogExpanded:window.innerWidth >= 1024}" x-init="window.addEventListener('resize', () => catalogExpanded = window.innerWidth >= 1024)">
   <div
     class="h-[50px] lg:h-auto bg-sky-500 px-4 py-2 text-white text-md font-semibold flex justify-between items-center rounded-t-md"
     :class="catalogExpanded ? '' : 'rounded-b-md'" @click.prevent="catalogExpanded = !catalogExpanded">
@@ -26,7 +26,7 @@ use yii\helpers\Url;
     </svg>
   </div>
 
-  <ul class="bg-gray-100" x-show="catalogExpanded" x-collapse>
+  <ul class="bg-gray-100 catalog-menu" x-show="catalogExpanded" x-collapse style="display:none">
   <?php foreach ($categories as $category):?>
 
     <?php if(!$category->children):?>
@@ -39,20 +39,15 @@ use yii\helpers\Url;
     
     <?php else:?>
       <li x-data="{expanded:false}">
-        <a href=""
+        <a href="#"
           class="block py-2 px-4 text-sm hover:text-sky-500 flex items-center justify-between"
           @click.prevent="expanded = !expanded">
           <span><?=$category->title?></span>
-          <span class="transform" :class="expanded ? 'arrow-180' : 'arrow-90'">
-            <svg role="img" aria-hidden="true" data-icon="chevron" width="12" height="12" viewBox="0 0 24 24"
-              name="chevron">
-              <path
-                d="M4.8 16.2a1 1 0 0 0 1.4 0l6.3-6.29 6.3 6.3a1 1 0 0 0 1.4-1.42l-7-7a1 1 0 0 0-1.4 0l-7 7a1 1 0 0 0 0 1.42Z"
-                fill="currentColor"></path>
-            </svg>
+          <span class="transform" :class="expanded ? 'arrow-90' : ''">
+            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 12 12"><path d="M4.1 2.1c-.2.2-.2.5 0 .7L7.2 6 4.1 9.1c-.2.2-.2.6 0 .7.2.2.5.2.7 0l3.5-3.5c.2-.2.2-.5 0-.7L4.8 2.2c-.1-.2-.5-.2-.7-.1z"/></svg>
           </span>
         </a>
-        <ul class="bg-gray-200" x-show="expanded" x-collapse>
+        <ul style="display:none;height:0;overflow:hidden" class="bg-gray-200" x-show="expanded" x-collapse>
 
         <?php foreach ($category->children as $child):?>
 
