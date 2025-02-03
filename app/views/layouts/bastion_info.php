@@ -165,7 +165,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       <div class="container mx-auto flex flex-wrap gap-4 justify-between">
         <div class="footer__col">
           <a href="/">
-            <img src="images/logo/logo-light.svg" alt="">
+            <img src="/images/logo/logo-light.svg" alt="">
           </a>
           <div class="mt-4 text-gray-200 text-sm">Контакты</div>
           <div>
