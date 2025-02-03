@@ -14,7 +14,7 @@ class IconsBlockMainWidget extends \yii\base\Widget
     
     public function run() {
         
-       $pages = Pages::find()->where(['status' => '1', 'parent_id' => '0', 'show_icons_block' => '1'])->orderBy('priority DESC')->all();
+       $pages = Pages::find()->where(['status' => '1', 'show_icons_block' => '1'])->orderBy('priority DESC')->all();
 
 
              
