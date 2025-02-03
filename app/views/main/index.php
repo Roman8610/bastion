@@ -3,6 +3,13 @@
 use app\components\IconsBlockMainWidget;
 use yii\helpers\Url;
 ?>
+<section class="mt-4 lg:mt-8">
+            <h2 class="h2">Как мы работаем</h2>
+            <div class="tr-block-list">
+              <div class="tr-block">По&nbsp;сертификату <br>"военный&nbsp;регистр"</div>
+              <div class="tr-block">Только с Юр.&nbsp;Лицами, <br>мелкий и крупный опт</div>
+            </div>
+</section>
 <section class="request mt-4 lg:mt-8">
             <div class="h-[220px] relative rounded-md">
               <img src="images/blocks/request/bg.jpg" alt=""
