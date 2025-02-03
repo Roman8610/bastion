@@ -3,6 +3,7 @@ use yii\helpers\Url;
 ?>
 <div class="mt-8">
             <section>
+            <h2 class="h2">Услуги</h2>
               <div class="container mx-auto">
                 <div class="grid grid-cols-6 md:grid-cols-4 lg:grid-cols-5 gap-8">
 

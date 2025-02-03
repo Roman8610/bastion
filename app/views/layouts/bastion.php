@@ -152,6 +152,14 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
               </div>
             </form>
           </section>
+
+          <section class="mt-4 lg:mt-8">
+            <h2 class="h2">Как мы работаем:</h2>
+            <div class="tr-block-list">
+              <div class="tr-block">По&nbsp;сертификату <br>"военный&nbsp;регистр"</div>
+              <div class="tr-block">Только с Юр.&nbsp;Лицами, <br>мелкий и крупный опт</div>
+            </div>
+          </section>
         
           <?=$content?>
 
