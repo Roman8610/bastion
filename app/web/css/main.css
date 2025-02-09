@@ -491,7 +491,6 @@ div.menu__a {
   font-size: 15px;
   line-height: 1.2;
   padding: 8px 15px;
-  text-transform: uppercase;
   border: 2px solid rgba(14,165,233, 1);
   display: flex;
   align-items: center;
@@ -516,6 +515,47 @@ div.menu__a {
 }
 @media (min-width: 1200px) {
   .tr-block {
-    font-size: 20px
+    font-size: 22px
   }
+}
+
+
+.base_featured_menu {
+	justify-content: space-between;
+	padding-bottom: 10px;
+	gap: 0.5rem;
+}
+.base_featured_menu img {
+	aspect-ratio: 200/150;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+.base_featured_menu span {
+	line-height: 1.1;
+	flex-grow: 1;
+}
+
+.link {
+	text-decoration: underline;
+}
+.link:hover {
+	text-align: none;
+}
+
+.az-nav {
+	font-size: 90%;
+}
+.az-nav .filter2 ul {
+	margin: 0 !important;
+}
+.az-nav .filter2 ul li {
+	margin: 0 !important;
+	padding-left: 0 !important;
+}
+.az-nav .filter2 ul li a {
+	text-decoration: none;
+	font-size: 90%;
+}
+.az-nav .filter2 ul li a:hover {
+	text-decoration: underline;
 }

@@ -3,13 +3,13 @@
 use app\components\IconsBlockMainWidget;
 use yii\helpers\Url;
 ?>
-<section class="mt-4 lg:mt-8">
+<!-- <section class="mt-4 lg:mt-8">
             <h2 class="h2">Как мы работаем</h2>
             <div class="tr-block-list">
               <div class="tr-block">По&nbsp;сертификату <br>"военный&nbsp;регистр"</div>
               <div class="tr-block">Только с Юр.&nbsp;Лицами, <br>мелкий и крупный опт</div>
             </div>
-</section>
+</section> -->
 <section class="request mt-4 lg:mt-8">
             <div class="h-[220px] relative rounded-md">
               <img src="images/blocks/request/bg.jpg" alt=""
@@ -44,7 +44,7 @@ use yii\helpers\Url;
                   <img src="images/65bcbf177cae3359968256.jpeg" alt="">
                   <img src="images/65bcbf17946ca246586464.jpeg" alt="">
                 </div>
-                <!-- <a href="/manufactures" style="text-decoration:underline" class="mt-4"> Все производители </a> -->
+                <a href="/pages/proizvoditeli" class="mt-4 link"> Все производители </a>
               </div>
 
               <!-- <div class="basis-full mt-8">

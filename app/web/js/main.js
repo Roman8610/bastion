@@ -12,3 +12,30 @@ document.addEventListener("DOMContentLoaded", () => {
   appHeight();
   window.addEventListener('resize', appHeight);
 });
+
+document.querySelectorAll('.ahover').forEach(anchor => {
+  if (anchor) {
+    anchor.addEventListener('click', function (e) {
+
+      e.preventDefault();
+
+      let targetId = this.getAttribute('href').substring(1);
+      let targetElement = document.getElementById(targetId);
+      if (document.getElementById(targetId)) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
+
+
+        targetElement.scroll(
+          {
+            top: 500
+          }
+        );
+
+      }
+
+    });
+  }
+});
