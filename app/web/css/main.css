@@ -559,3 +559,9 @@ div.menu__a {
 .az-nav .filter2 ul li a:hover {
 	text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+	.prose * {
+		text-align: left;
+	}
+}

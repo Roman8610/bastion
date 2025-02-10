@@ -102,11 +102,22 @@
                     'placeholder' => 'Email',
                           ])?>
         </label>
-
-        <label class="block mb-4">
-          <?= $form->field($order, 'file')->fileInput() ?>
-        </label>
         
+        <div x-data="{ fileName: 'Файл не выбран' }" class="block mb-4">
+          <?= $form->field($order, 'file')->fileInput([
+              'class' => 'hidden', 
+              '@change' => 'fileName = $event.target.files[0]?.name || "Файл не выбран"',
+              'x-ref' => 'fileInput'
+          ])->label(false); ?>
+
+          <label @click="$refs.fileInput.click()" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition btn ">
+          Загрузить BOM
+          </label>
+          <span x-text="fileName" class="ml-2 text-gray-700"></span>
+      </div>
+
+
+
         <?= $form->field($order, 'prod_id')->hiddenInput([
             'value' => '', 
             'x-bind:value' => '$store.modals.find("request").data.productId'
