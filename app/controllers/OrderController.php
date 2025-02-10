@@ -45,6 +45,8 @@ class OrderController extends AppController{
 
                 $prod = Product::find()->where(['id' => $prod_id])->one();
 
+                $link = '';
+
                 if($prod)
                 {
                     $link = Url::to(['product/index', 'alias' => $prod->alias]);
