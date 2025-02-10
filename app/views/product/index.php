@@ -64,9 +64,7 @@ use yii\helpers\Url;
                       Цена по запросу
                     </div>
                     <div class="mt-4 text-left lg:text-center">
-                      <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
-                        data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$product->title?>", "price":"Цена по запросу", "image":"/images/placeholder.jpg" }'>Заказать
-                        в&nbsp;1&nbsp;клик</a>
+                      <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger" data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$product->title?>", "price":"Цена по запросу", "image":"<?= $product->img ? '../'.$product->img : '/images/placeholder.jpg' ?>", "productId":"<?=$product->id?>" }'>Заказать в&nbsp;1&nbsp;клик</a>
                     </div>
                   </div>
                 </div>

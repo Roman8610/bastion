@@ -10,8 +10,7 @@
         </svg>
       </button>
       <header class="popup__header">
-        <h3 class="text-3xl font-bold" x-text="$store.modals.find('request').data.modalTitle || 'Заказ в один клик'">Заказ
-          в один клик</h3>
+        <h3 class="text-3xl font-bold" x-text="$store.modals.find('request').data.modalTitle || 'Заказ в один клик'">Заказ в один клик</h3>
         <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут!</p>
       </header>
       <div class="popup__body mt-4 mb-4">
@@ -107,6 +106,13 @@
         <label class="block mb-4">
           <?= $form->field($order, 'file')->fileInput() ?>
         </label>
+        
+        <?= $form->field($order, 'prod_id')->hiddenInput([
+            'value' => '', 
+            'x-bind:value' => '$store.modals.find("request").data.productId'
+        ])->label(false); ?>
+
+        
   
         <label class="block">         
                     <?=$form->field($order, 'message', ['template' => "{input}"])->textarea(['rows' => 3, 'class' => 'block w-full border-gray-400 rounded-lg', 'placeholder'=>"Комментарий к заказу", 'tabindex'=>"3"])?>

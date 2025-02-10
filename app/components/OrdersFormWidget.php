@@ -14,7 +14,9 @@ class OrdersFormWidget extends \yii\base\Widget{
         
         $order = new \app\models\Orders();
  
-        return $this->render('form', compact('order'));
+        return $this->render('form', [
+            'order' => $order,
+        ]);
         
     }
     

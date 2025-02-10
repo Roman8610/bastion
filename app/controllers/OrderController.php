@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Product;
 use Yii;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 class OrderController extends AppController{
@@ -18,6 +20,7 @@ class OrderController extends AppController{
          $phone = $_POST['Orders']['phone'];
          $email = $_POST['Orders']['email'];
          $message = $_POST['Orders']['message'];
+         $prod_id = $_POST['Orders']['prod_id'];
          
 
         
@@ -40,11 +43,18 @@ class OrderController extends AppController{
             if($orderModel->save())
             {
 
+                $prod = Product::find()->where(['id' => $prod_id])->one();
+
+                if($prod)
+                {
+                    $link = Url::to(['product/index', 'alias' => $prod->alias]);
+                }
+
                 Yii::$app->mailer->compose()
                 ->setFrom('zakazbastionit@yandex.ru')
                 ->setTo(['roman8610@gmail.com', 'info@bastionit.ru'])
                 ->setSubject('Заказ товара')
-                ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message.'<br>')
+                ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone.'<br><b>Email: </b>'.$email.'<br><b>Комментарий: </b>'.$message.'<br>'.'<br><b>Ссылка на товар: </b><a href="https://bastionit.ru'.$link.'">https://bastionit.ru/'.$link.'<br>')
                 ->send();
 
                 return \Yii::$app->response->redirect(['message/index']);

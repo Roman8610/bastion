@@ -34,8 +34,9 @@ class Orders extends \yii\db\ActiveRecord{
             [['name', 'last_name', 'phone', 'email'], 'string', 'max' => 255],
             [['message'], 'string', 'max' => 500],
             [['created_at', 'updated_at'], 'safe'],
+            [['prod_id'], 'number', 'min' => 0],
             [['file'], 'file'],
-            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 0.5]
+            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 0.7]
         ];
     }
 

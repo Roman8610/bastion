@@ -83,9 +83,7 @@ use yii\helpers\Url;
                             Цена по запросу
                           </div>
                           <div class="mt-4">
-                            <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger"
-                              data-info='{"modalTitle":"Заказать в 1 клик","title":"Процессор AMD Threadripper PRO 3995WX 100-000000087", "price":"Цена по запросу", "image":"storage/app/uploads/public/644/805/9a8/thumb_49929_224_224_0_0_exact.webp" }'>Заказать
-                              в&nbsp;1&nbsp;клик</a>
+                            <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger" data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$product->title?>", "price":"Цена по запросу", "image":"<?= $product->img ? '../'.$product->img : '/images/placeholder.jpg' ?>", "productId":"<?=$product->id?>" }'>Заказать в&nbsp;1&nbsp;клик</a>
                           </div>
 
                         </div>
