@@ -31,7 +31,7 @@ class OrdersCall extends \yii\db\ActiveRecord{
             [['name', 'phone'], 'required'],
             [['name', 'phone'], 'string', 'max' => 255],
             [['created_at', 'updated_at'], 'safe'],
-            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 0.7]
+            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
         ];
     }
 

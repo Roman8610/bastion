@@ -36,7 +36,7 @@ class Orders extends \yii\db\ActiveRecord{
             [['created_at', 'updated_at'], 'safe'],
             [['prod_id'], 'number', 'min' => 0],
             [['file'], 'file'],
-            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 0.7]
+            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
         ];
     }
 
