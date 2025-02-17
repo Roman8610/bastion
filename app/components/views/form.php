@@ -129,7 +129,18 @@
                     <?=$form->field($order, 'message', ['template' => "{input}"])->textarea(['rows' => 3, 'class' => 'block w-full border-gray-400 rounded-lg', 'placeholder'=>"Комментарий к заказу", 'tabindex'=>"3"])?>
         </label>
 
-        <?= $form->field($order, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>                
+
+        <?= $form->field($order, 'yandexSmartCaptcha')->widget(
+    \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaWidget::class,
+    [
+        'options' => [
+            'id' => 'yandex-smart-captcha', // Идентификатор элемента каптчи
+        ],
+        'hl' => 'ru', // Установите нужный язык, например, 'ru'
+    ]
+)?>
+
+        <?//= $form->field($order, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>                
 
       </div>
       <footer class="popup__footer">

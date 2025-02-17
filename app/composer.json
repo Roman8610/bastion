@@ -23,7 +23,8 @@
         "mihaildev/yii2-elfinder": "*",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "phpnt/yii2-datepicker": "^0.0.5",
-        "kekaadrenalin/yii2-module-recaptcha-v3": "*"
+        "kekaadrenalin/yii2-module-recaptcha-v3": "*",
+        "matrozov/yii2-yandex-smart-captcha": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -4,7 +4,9 @@ namespace app\models;
 
 class OrdersCall extends \yii\db\ActiveRecord{
 
-    public $reCaptcha;
+    //public $reCaptcha;
+
+    public $yandexSmartCaptcha;
     
     public static function tableName(): string {
         return 'orders';
@@ -31,7 +33,8 @@ class OrdersCall extends \yii\db\ActiveRecord{
             [['name', 'phone'], 'required'],
             [['name', 'phone'], 'string', 'max' => 255],
             [['created_at', 'updated_at'], 'safe'],
-            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
+            [['yandexSmartCaptcha'], \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaValidator::class],
+            //[['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
         ];
     }
 

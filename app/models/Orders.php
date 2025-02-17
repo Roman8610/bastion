@@ -6,7 +6,9 @@ class Orders extends \yii\db\ActiveRecord{
     
     public $file;
 
-    public $reCaptcha;
+    public $yandexSmartCaptcha;
+
+    //public $reCaptcha;
 
     public static function tableName(): string {
         return 'orders';
@@ -36,7 +38,8 @@ class Orders extends \yii\db\ActiveRecord{
             [['created_at', 'updated_at'], 'safe'],
             [['prod_id'], 'number', 'min' => 0],
             [['file'], 'file'],
-            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
+            [['yandexSmartCaptcha'], \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaValidator::class],
+//            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
         ];
     }
 
