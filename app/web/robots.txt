@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Disallow: /*?
+Host: https://bastionit.ru
+Sitemap: https://bastionit.ru/sitemap.xml
