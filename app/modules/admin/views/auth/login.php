@@ -3,7 +3,7 @@
 ?>
 <div class="login-box">
 
-<?//=Yii::$app->security->generatePasswordHash('123')?>
+<?//=Yii::$app->security->generatePasswordHash('ztTfD2dYUw')?>
 
   <div class="login-logo">
     <a href="../../index2.html"><b>Управление</b>Сайтом</a>

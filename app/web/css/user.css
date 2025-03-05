@@ -1,0 +1,30 @@
+.sitemap, .site-error {
+    margin: 20px 0;
+}
+
+.sitemap h2, .site-error h2 {
+    color: #444;
+    font-size: 1.4em;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.sitemap ul, .site-error ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.sitemap ul li, .site-error ul li {
+    margin: 5px 0;
+}
+
+
+.sitemap a, .site-error a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.sitemap a:hover, .site-error a:hover{
+    text-decoration: underline;
+    color: #0056b3;
+}

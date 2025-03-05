@@ -26,10 +26,11 @@ class AdminAsset extends AssetBundle
         "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css",
     ];
     public $js = [
-        "adminlte/plugins/jquery/jquery.min.js",
-        "adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js",
-        "adminlte/dist/js/adminlte.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js",
+    //    "adminlte/plugins/jquery/jquery.min.js",
+    //    "adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+       "adminlte/dist/js/adminlte.min.js",
+   //     "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js",
+   //     "js/import.js",
     ];
     public $depends = [
         'yii\web\YiiAsset',

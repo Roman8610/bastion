@@ -10,10 +10,10 @@ use yii\helpers\Url;
               <div class="tr-block">Только с Юр.&nbsp;Лицами, <br>мелкий и крупный опт</div>
             </div>
 </section> -->
+<h1 class="h2 mt-20">Импорт ЭКБ для российских предприятий</h1>
 <section class="request mt-4 lg:mt-8">
             <div class="h-[220px] relative rounded-md">
-              <img src="images/blocks/request/bg.jpg" alt=""
-                class="w-full h-full object-cover rounded-md">
+              <img src="images/blocks/request/bg.jpg" alt="Не нашли нужный компонент?" class="w-full h-full object-cover rounded-md">
               <div
                 class="absolute w-full h-full top-0 left-0 z-10 bg-black bg-opacity-70 flex flex-col justify-center px-8 py-8 lg:py-0 rounded-md">
                 <div class="text-white font-bold text-xl lg:text-3xl">Не нашли нужный компонент?</div>
@@ -22,8 +22,7 @@ use yii\helpers\Url;
                   <button class="btn self-start" x-data="modalTrigger('request')" x-bind="trigger"
                     data-info='{"modalTitle":"Заказать компонент"}'>Нажмите сюда</button>
                   <span class="hidden lg:inline-flex text-white font-light">или напишите</span>
-                  <a href="mailto:info@bastionit.ru"
-                    class="hidden lg:inline-flex text-white hover:text-sky-500 text-xl font-bold">info@bastionit.ru</a>
+                  <a href="mailto:info@bastionit.ru" class="hidden lg:inline-flex text-white hover:text-sky-500 text-xl font-bold">info@bastionit.ru</a>
                 </div>
               </div>
             </div>
@@ -35,14 +34,14 @@ use yii\helpers\Url;
               <div class="basis-full mt-4 lg:mt-0">
                 <h2 class="font-bold text-2xl">Производители</h2>
                 <div class="mt-4 mb-4 grid lg:grid-cols-8 grid-cols-4 gap-4">
-                  <img src="images/65bcbf16f0bf4070174536.jpeg" alt="">
-                  <img src="images/65bcbf171596f230957053.jpeg" alt="">
-                  <img src="images/65bcbf1724638208731964.jpeg" alt="">
-                  <img src="images/65bcbf1751c3e136479673.jpeg" alt="">
-                  <img src="images/65bcbf174fded912216643.jpeg" alt="">
-                  <img src="images/65bcbf1772076102867343.jpeg" alt="">
-                  <img src="images/65bcbf177cae3359968256.jpeg" alt="">
-                  <img src="images/65bcbf17946ca246586464.jpeg" alt="">
+                  <img src="images/65bcbf16f0bf4070174536.jpeg" alt="NXP">
+                  <img src="images/65bcbf171596f230957053.jpeg" alt="ALTERA">
+                  <img src="images/65bcbf1724638208731964.jpeg" alt="TRACO POWER">
+                  <img src="images/65bcbf1751c3e136479673.jpeg" alt="NVIDEA">
+                  <img src="images/65bcbf174fded912216643.jpeg" alt="TEXAS">
+                  <img src="images/65bcbf1772076102867343.jpeg" alt="VICOR">
+                  <img src="images/65bcbf177cae3359968256.jpeg" alt="HOLT">
+                  <img src="images/65bcbf17946ca246586464.jpeg" alt="AMD">
                 </div>
                 <a href="/pages/proizvoditeli" class="mt-4 link"> Все производители </a>
               </div>

@@ -67,9 +67,9 @@ use yii\helpers\Url;
                           <a href="<?=Url::to(['product/index', 'alias' => $product->alias])?>"
                             class="product-card__img-wrapper block text-center lg:text-left">
                             <?php if($product->img):?>
-                              <img src="<?='../'.$product->img?>" alt="" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
+                              <img src="<?='../'.$product->img?>" alt="<?=$categry_current->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
                             <?php else:?>
-                              <img src="/images/placeholder.jpg" alt="" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
+                              <img src="/images/placeholder.jpg" alt="<?=$categry_current->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
                             <?php endif;?>
                           </a>
                           <div class="mt-2">

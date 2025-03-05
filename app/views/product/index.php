@@ -47,33 +47,41 @@ use yii\helpers\Url;
 <?=BreadcrumbsWidget::widget(['category_id' => $category->id_import,])?>
 
 
-          <div class="product-info mt-4">
+          <div class="product-info mt-4" itemscope itemtype="https://schema.org/Product">
             <div class="flex flex-wrap">
               <div class="basis-full lg:basis-1/4">
                 <div class="product-card p-4 border rounded-md flex flex-wrap items-center gap-8 lg:block">
                   <div class="product-card__img-wrapper text-center">
                     <?php if($product->img):?>
-                      <img src="<?='../'.$product->img?>" alt="" class="product-card__img inline-block rounded-md w-36 h-36 basis-full sm:basis-auto object-contain">
+                      <img src="<?='../'.$product->img?>" alt="<?=$product->title?>" class="product-card__img inline-block rounded-md w-36 h-36 basis-full sm:basis-auto object-contain" itemprop="image">
                     <?php else:?>
-                      <img src="/images/placeholder.jpg" alt="" class="product-card__img inline-block rounded-md w-36 h-36 basis-full sm:basis-auto object-contain">
+                      <img src="/images/placeholder.jpg" alt="<?=$product->title?>" class="product-card__img inline-block rounded-md w-36 h-36 basis-full sm:basis-auto object-contain" itemprop="image">
                     <?php endif;?>
                   </div>
 
-                  <div class="product-card__btn-area mt-4 basis-full sm:basis-auto">
+                  <div class="product-card__btn-area mt-4 basis-full sm:basis-auto" itemprop="offers" itemscope="" itemtype="https://schema.org/Offer">
                     <div class="price font-bold text-2xl text-sky-500 text-left lg:text-center">
                       Цена по запросу
                     </div>
                     <div class="mt-4 text-left lg:text-center">
                       <a href="#" class="btn-outline" x-data="modalTrigger('request')" x-bind="trigger" data-info='{"modalTitle":"Заказать в 1 клик","title":"<?=$product->title?>", "price":"Цена по запросу", "image":"<?= $product->img ? '../'.$product->img : '/images/placeholder.jpg' ?>", "productId":"<?=$product->id?>" }'>Заказать в&nbsp;1&nbsp;клик</a>
                     </div>
+					<meta itemprop="price" content="0">
+					<meta itemprop="priceCurrency" content="RUB">
+					<link itemprop="availability" href="https://schema.org/InStock">
+					<meta itemprop="priceValidUntil" content="<?= date('Y-m-d', strtotime("+365 day"));?>">
                   </div>
+				  <div style="display:none" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+					  <meta itemprop="ratingValue" content="5">
+					  <meta itemprop="reviewCount" content="10">
+                  </div>
+				  <meta itemprop="brand" content="BastionIT">
                 </div>
               </div>
               <div class="basis-full lg:basis-3/4 pl-0 lg:pl-8 mt-4 lg:mt-0">
-                <h1 class="font-bold text-2xl text-gray-700"><?=$product->title?>
-                </h1>
+                <h1 class="font-bold text-2xl text-gray-700" itemprop="name"><?=$product->title?></h1>
 
-                <div class="product-info__descr mt-35 mb-40">
+                <div class="product-info__descr mt-35 mb-40" itemprop="description">
                   <?=$product->description?>
                 </div>
 
@@ -130,16 +138,16 @@ use yii\helpers\Url;
                           </tbody>
                         </table> -->
 
-                        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm" itemprop="description">
                           <tbody class="divide-y divide-gray-200">
                             <?php foreach($params as $param):?>
 
-                              <tr class="odd:bg-gray-100">
+                              <tr class="odd:bg-gray-100" itemprop="additionalProperty" itemscope="" itemtype="https://schema.org/PropertyValue">
                                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                  <?=$param->value->group->title?>
+                                  <span itemprop="name"><?=$param->value->group->title?></span>
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                  <?=$param->value->value?>
+                                  <span itemprop="value"><?=$param->value->value?></span>
                                 </td>
                               </tr>
 
@@ -257,7 +265,7 @@ use yii\helpers\Url;
                     <div class="doc-download-wrapper">
                       <?php foreach($product->docs as $doc):?>
                         <a class="doc-download" target="_blank" href="../<?=$doc->path_doc?>">
-                          <img class="doc-download__icon" src="../images/pdf.png" alt="">
+                          <img class="doc-download__icon" src="../images/pdf.png" alt="Технический паспорт">
                           <div class="doc-download__text">Технический паспорт FS7M0880YDTU (0772729313)</div>
                         </a> 
                       <?php endforeach;?>  
@@ -268,7 +276,7 @@ use yii\helpers\Url;
             </div>
 
             <div class="mt-8">
-              <h1 class="font-bold text-2xl text-gray-700">Похожие товары</h1>
+              <h2 class="font-bold text-2xl text-gray-700">Похожие товары</h2>
               
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
                 <?php foreach($similar_products as $similar_product):?>
@@ -278,9 +286,9 @@ use yii\helpers\Url;
                      <!--   <img src="/images/placeholder.jpg" alt=""
                         class="inline-block rounded-md w-[224px] h-[224px] object-contain"> -->
                       <?php if($similar_product->img):?>
-                        <img src="<?='../'.$similar_product->img?>" alt="" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
+                        <img src="<?='../'.$similar_product->img?>" alt="<?=$similar_product->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
                       <?php else:?>
-                        <img src="/images/placeholder.jpg" alt="" class="product-card__img inline-block rounded-md w-[124px] h-[124px] object-contain">
+                        <img src="/images/placeholder.jpg" alt="<?=$similar_product->title?>" class="product-card__img inline-block rounded-md w-[124px] h-[124px] object-contain">
                       <?php endif;?>
                     </a>
                     <div class="mt-2">

@@ -14,10 +14,14 @@ class CatalogController extends AppController
         $categry_current = Category::find()->where(['alias'=>$alias])->one();
 
         $child_categories = Category::find()->where(['parent_id' => $categry_current->id_import])->all();
+		
+		$description = "$categry_current->title. Огромный ассортимент ЭКБ от «Bastion». ✅ Продажа оптом и в розницу. Доставка по всей РФ. 📞 Звоните +79991112233";
 
         $this->view->title = "$categry_current->title - купить в интернет-магазине «Bastion» | Быстрая доставка в СПб";
-        $this->view->registerMetaTag(['name' => 'keywords', 'content' => "$categry_current->title. Огромный ассортимент ЭКБ от «Bastion». ✅ Продажа оптом и в розницу. Доставка по всей РФ. 📞 Звоните +79991112233"]); 
-        $this->view->registerMetaTag(['name' => 'description', 'content' => 'Каталог']);
+        $this->view->registerMetaTag(['name' => 'keywords', 'content' => ""]); 
+        $this->view->registerMetaTag(['name' => 'description', 'content' => $description]);
+		
+		$this->view->params['ogDescription'] = $description;
 
         if($child_categories)
         {

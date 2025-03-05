@@ -14,10 +14,14 @@ class ProductController extends AppController
     public function actionIndex($alias)
     {
         $product = Product::find()->where(['alias' => $alias])->one();
+		
+		$description = "$product->title 📦 Поставка электронной компонентной базы (ЭКБ). Гарантируем контроль качества. ✅ Доставка по все России. 📞 Звоните 8 (812) 920 8520";
 
         $this->view->title = "$product->title | Купить в интернет-магазине «Bastion» | Быстрая доставка в СПб";
-        $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'Ключевые слова страницы']);
-        $this->view->registerMetaTag(['name' => 'description', 'content' => "$product->title 📦 Поставка электронной компонентной базы (ЭКБ). Гарантируем контроль качества. ✅ Доставка по все России. 📞 Звоните 8 (812) 920 8520"]);
+        $this->view->registerMetaTag(['name' => 'keywords', 'content' => '']);
+        $this->view->registerMetaTag(['name' => 'description', 'content' => $description]);
+		
+		$this->view->params['ogDescription'] = $description;
 
         $params = AttrProd::find()->where(['product_id' => $product->id])->all();
 

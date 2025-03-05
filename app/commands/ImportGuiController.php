@@ -1,27 +1,48 @@
 <?php
 namespace app\commands;
 
+use app\modules\admin\models\ImportStatistics;
+use Exception;
 use PDO;
 use PDOException;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use XMLReader;
+use Yii;
 use yii\console\Controller;
 
-class ImportLcscController extends Controller
+class ImportGuiController extends Controller
 {
     public $pdo;
 
     public $dir_image = null;
 
-    public $path_file = 'web/importfiles/lcsc/test.xml';
+    public $result = [
+        'status' => 'stopped',
+        'addCat' => 0,
+        'skippedCat' => 0,
+        'addProd' => 0,
+        'skippedProd' => 0,
+    ];
+
+    public $path_file = '/web/importfiles/import1.xml';
 
     public function actionIndex()
     {
 
-        $this->importCat();
+        $this->path_file = $this->getPathFile();
 
+        $this->result['status'] = 'run';
+
+        $this->importCat();
+        
         $this->importProd();
+
+        $this->result['status'] = 'stopped';
+
+        $this->writeJson();
+
+        $this->saveResultImport();
 
     }
 
@@ -49,9 +70,6 @@ class ImportLcscController extends Controller
                 }
 
                 $title = $product->name;
-
-                var_dump($title);
-
                 $description = $product->description;
 
                 $article = $product->vendorCode;
@@ -76,10 +94,17 @@ class ImportLcscController extends Controller
                 $stmt->bindParam(':img', $img, PDO::PARAM_STR);
                 $stmt->bindParam(':brand_id', $brand_id, PDO::PARAM_INT);
 
-                $stmt->execute();
+                if($stmt->execute())
+                {
+                    $this->result['addProd']++;
+                    $this->writeJson();
+                }
 
                 $this->saveParam($this->pdo->lastInsertId(), $product->param);
 
+            }else{
+                $this->result['skippedProd']++;
+                $this->writeJson();
             }
 
             $xml->next('offer'); // Переход к следующему элементу
@@ -93,7 +118,8 @@ class ImportLcscController extends Controller
         gc_collect_cycles();
 
         // Логируем использование памяти
-        $fl = fopen('web/importfiles/temp/logs/logs.txt', 'a');
+        $pathRoot = Yii::getAlias('@app');
+        $fl = fopen($pathRoot . '/web/importfiles/temp/logs/logs.txt', 'a');
         fwrite($fl, memory_get_usage() . " байт \n");
         fclose($fl);           
     }
@@ -259,21 +285,26 @@ class ImportLcscController extends Controller
 
     public function connectDB()
     {
-        $dsn = 'mysql:host=mysql;dbname=bastion_test;charset=utf8mb4';
+        $dsn = 'mysql:host=mysql;dbname=bastion3;charset=utf8mb4';
         $user = 'root';
-        $password = '123';
+        $password = '6b_ecXVu3Z';
 
         $this->pdo = new PDO($dsn, $user, $password);
     }
 
     public function importProd()
     {
-        $output = new ConsoleOutput();
-        $progessBar = new ProgressBar($output);
-        $progessBar->setFormat('debug');
-        $progessBar->start();
 
-        $xml = XMLReader::open($this->path_file);
+        // $output = new ConsoleOutput();
+        // $progessBar = new ProgressBar($output);
+        // $progessBar->setFormat('debug');
+        // $progessBar->start();
+
+        try{
+            $xml = XMLReader::open($this->path_file);
+        }catch(\Exception $e){
+           // echo 'Ошибка: ',  $e->getMessage(), "<br>";
+        }
 
         while ($xml->read() && $xml->name !== 'offer') {
         } //jump to first `room` element;
@@ -284,8 +315,14 @@ class ImportLcscController extends Controller
 
         $currentPart = 0;
 
-        $partFilename = 'web/importfiles/temp/part' . ($currentPart + 1) . '.xml';
-        $fp = fopen($partFilename, 'w');
+        $pathRoot = Yii::getAlias('@app');
+
+        $partFilename = $pathRoot .'/web/importfiles/temp/part' . ($currentPart + 1) . '.xml';
+        try{
+            $fp = fopen($partFilename, 'w');
+        }catch(\Exception $e){
+           // echo 'Ошибка: ',  $e->getMessage(), "<br>";
+        }
 
         fwrite($fp, '<offers>');
 
@@ -300,13 +337,19 @@ class ImportLcscController extends Controller
                 fclose($fp);
 
                 $this->fillProd($partFilename);
-
               
                 $currentPart++;
 
-                $partFilename = 'web/importfiles/temp/part' . ($currentPart + 1) . '.xml';
+                $pathRoot = Yii::getAlias('@app');
 
-                $fp = fopen($partFilename, 'w');
+                $partFilename = $pathRoot .'/web/importfiles/temp/part' . ($currentPart + 1) . '.xml';
+
+                try{
+                    $fp = fopen($partFilename, 'w');
+                }catch(\Exception $e){
+                    //echo 'Ошибка: ',  $e->getMessage(), "<br>";
+                }
+
                 fwrite($fp, '<offers>');
             }
 
@@ -320,33 +363,38 @@ class ImportLcscController extends Controller
             $srt = str_replace('&', '&amp;', $str);
             fwrite($fp, $srt);
 
-            $progessBar->advance();
+        //    $progessBar->advance();
 
             $currentIndex++;
         }
 
-
-        if(!$full) {
+        if($full) {
             fwrite($fp, '</offers>');
             fclose($fp);
             $this->fillProd($partFilename);
         }
         
 
-         $progessBar->finish();
+       // $progessBar->finish();
 
-         $output->writeln('');
+      //  $output->writeln('');
     }
 
     public function importCat()
     {
-        $output = new ConsoleOutput();
-        $progessBar = new ProgressBar($output);
-        $progessBar->setFormat('debug');
-        $progessBar->start();
+        // echo "OK "; die;
+        // $output = new ConsoleOutput();
+        // $progessBar = new ProgressBar($output);
+        // $progessBar->setFormat('debug');
+        // $progessBar->start();
 
-        $xml = XMLReader::open($this->path_file);
+        try{
+            $xml = XMLReader::open($this->path_file);
+        }catch(\Exception $e){
+            echo 'Ошибка: ',  $e->getMessage(), "<br>";
+        }
 
+       
         while ($xml->read() && $xml->name !== 'category') {
         } //jump to first `room` element;
 
@@ -387,16 +435,25 @@ class ImportLcscController extends Controller
                 $stmt->bindParam(':alias', $alias, PDO::PARAM_STR);
                 $stmt->bindParam(':priority', $priority, PDO::PARAM_INT);
 
-                $stmt->execute();
+                if($stmt->execute())
+                {
+                    $this->result['addCat']++;
+                    $this->writeJson();
+                }
 
 
+            }
+            else
+            {
+                $this->result['skippedCat']++;
+                $this->writeJson();
             }
 
             $xml->next('category'); // Переход к следующему элементу
 
         }
 
-        $progessBar->advance();
+       // $progessBar->advance();
 
     }
 
@@ -487,14 +544,52 @@ class ImportLcscController extends Controller
         }
     }
 
-
-
     public function qtyDir($dir)
     {
         $files = scandir($dir);
         $count = count($files) - 2;
         return $count;
     }
+
+    public function getPathFile()
+    {
+        $root = Yii::getAlias('@app');
+        return $root . $this->path_file;
+    }
+
+    public function writeJson()
+    {
+        $jsonData = json_encode($this->result);
+
+        $filePath = 'import.json';
+
+        file_put_contents($filePath, $jsonData);
+    }
+
+    public function saveResultImport()
+    {
+        $data = $this->result;
+
+        $importStatistics = new ImportStatistics();
+
+        $importStatistics->add_cat = $data['addCat'];
+        $importStatistics->skipped_cat = $data['skippedCat'];
+        $importStatistics->add_prod = $data['addProd'];
+        $importStatistics->skipped_prod = $data['skippedProd'];
+
+        try{
+
+            $importStatistics->save();
+
+        }catch(\Exception $e){
+            $error = 'Ошибка: ' .  $e->getMessage() . "\n";
+
+            file_put_contents('import.log', $error);
+        }
+        
+
+    }
+
 
  
 

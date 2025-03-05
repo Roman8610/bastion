@@ -14,7 +14,7 @@ class ImportController extends Controller
 
     public $dir_image = null;
 
-    public $path_file = 'web/importfiles/import22.xml';
+    public $path_file = 'web/importfiles/import1.xml';
 
     public function actionIndex()
     {
@@ -258,7 +258,7 @@ class ImportController extends Controller
     {
         $dsn = 'mysql:host=mysql;dbname=bastion1;charset=utf8mb4';
         $user = 'root';
-        $password = '123';
+        $password = '6b_ecXVu3Z';
 
         $this->pdo = new PDO($dsn, $user, $password);
     }

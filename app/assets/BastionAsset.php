@@ -22,8 +22,9 @@ class BastionAsset extends AssetBundle
     public $css = [
         //'css/site.css',
         'css/main.min.css',
-        'css/main.css',
-        'css/manufacture.css',
+        //'css/main.css',
+        //'css/manufacture.css',
+		'css/user.css',
     ];
     public $js = [
         'js/main.js',

@@ -253,6 +253,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?=Url::to(['import/index'])?>" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Импорт
+                <span class="right badge badge-danger"></span>
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
 

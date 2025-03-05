@@ -8,10 +8,13 @@ class NewsController extends AppController
 {
     public function actionIndex()
     {
+		$description = "Новости и публикации";
 
         $this->view->title = "Новости и публикации";
         $this->view->registerMetaTag(['name' => 'keywords', 'content' => "Новости и публикации"]); 
-        $this->view->registerMetaTag(['name' => 'description', 'content' => 'Новости и публикации']);
+        $this->view->registerMetaTag(['name' => 'description', 'content' => $description]);
+		
+		$this->view->params['ogDescription'] = $description;
 
         $news = News::find()->all();
 
@@ -20,9 +23,14 @@ class NewsController extends AppController
 
     public function actionView($id)
     {
+		
+		$description = "Новости и публикации";
+		
         $this->view->title = "Новости и публикации";
         $this->view->registerMetaTag(['name' => 'keywords', 'content' => "Новости и публикации"]); 
         $this->view->registerMetaTag(['name' => 'description', 'content' => 'Новости и публикации']);
+		
+		$this->view->params['ogDescription'] = $description;
 
         $new = News::find()->where(['id' => $id])->one();
 

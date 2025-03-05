@@ -11,6 +11,14 @@ class SearchController extends AppController
     {
        
        // $products = Product::find()->where(['like', 'title', $q])->all();
+	   
+	    $description = "Поиск";
+	   
+	    $this->view->title = "Поиск";
+        $this->view->registerMetaTag(['name' => 'keywords', 'content' => ""]); 
+        $this->view->registerMetaTag(['name' => 'description', 'content' => $description]);
+	   
+	    $this->view->params['ogDescription'] = $description;
 
         $query = Product::find()->where(['like', 'title', $q]);
         $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 24]);

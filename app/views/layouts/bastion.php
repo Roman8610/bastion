@@ -22,10 +22,14 @@ use yii\helpers\Url;
 BastionAsset::register($this);
 
 $this->registerCsrfMetaTags();
-$this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
-$this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
-$this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
-$this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
+$this->registerMetaTag(['property' => 'og:title', 'content' => $this->title]);
+$this->registerMetaTag(['property' => 'og:description', 'content' => $this->params['ogDescription'] ?? '']);
+$this->registerMetaTag(['property' => 'og:image', 'content' => Url::to('@web/images/logo/logo-og.jpg', true)]);
+$this->registerMetaTag(['property' => 'og:url', 'content' => Url::current([], true)]);
+$this->registerMetaTag(['property' => 'og:type', 'content' => 'website']);
+
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)]);
+
 //$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
 ?>
 <?php $this->beginPage() ?>
@@ -41,9 +45,8 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
   <!-- <link rel="stylesheet" href="assets/styles/main.min.css" /> -->
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.svg">
   <?php $this->head() ?>
-  
-  <meta name="yandex-verification" content="37e3d1ea403dfa46" />
-  <meta name="google-site-verification" content="_inKbAFSpHdTfR_UIN2c_TMtqokjp1IfwUAl6Y1LTVI" />
+  <meta name="yandex-verification" content="37e3d1ea403dfa46">
+  <meta name="google-site-verification" content="_inKbAFSpHdTfR_UIN2c_TMtqokjp1IfwUAl6Y1LTVI">
 </head>
 
 <body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0">
@@ -175,7 +178,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       <div class="container mx-auto flex flex-wrap gap-4 justify-between">
         <div class="footer__col">
           <a href="/">
-            <img src="/images/logo/logo-light.svg" alt="">
+            <img src="/images/logo/logo-light.svg" alt="«Bastion» - поставка электронной компонентной базы (ЭКБ)">
           </a>
           <div class="mt-4 text-gray-200 text-sm">Контакты</div>
           <div>
@@ -266,7 +269,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
     <div class="py-4 bg-stone-900">
       <div class="container mx-auto flex flex-col lg:flex-row justify-between">
         <div class="text-sm text-stone-500">
-          &copy; BastionIT 2024
+          &copy; BastionIT 2024-<?php echo date("Y"); ?>
         </div>
 
         <?=InfoFooterBottomWidget::widget([])?>
@@ -384,11 +387,11 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       </form>
     </div>
   </div> -->
-
+  <!--noindex-->
   <?=OrdersFormCallWidget::widget([
     
   ])?>
-
+  
   <div
     class="fixed w-full h-full z-50 overflow-y-auto top-0 left-0 bg-black bg-opacity-70 flex items-start justify-center"
     data-modal="review" x-cloak x-data x-transition.opacity x-show="$store.modals.find('review').active">
@@ -446,11 +449,75 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
       </form>
     </div>
   </div>
+  <!--/noindex-->
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "BastionIT",
+		"url": "<?php echo $_SERVER['SERVER_NAME']; ?>/",
+		"sameAs": [
+			"https://wa.me/79119208520"
+		],
+		"logo": "<?php echo Url::to('@web/images/logo/logo-og.jpg'); ?>",
+		"contactPoint": [
+			{
+				"@type": "ContactPoint",
+				"telephone": "+78129208520",
+				"contactType": "sales",
+				"email": "info@bastionit.ru",
+				"areaServed": [
+					"RU"
+				],
+				"availableLanguage": [
+					"Russian"
+				]
+			}
+		]
+	}
+</script>
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "BastionIT",
+		"alternateName": "Продажа и установка пластиковых окон Veka, Rehau, KBE",
+		"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>/"
+	}
+</script>
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "LocalBusiness",
+		"name": "BastionIT",
+		"image": "<?php echo Url::to('@web/images/logo/logo-og.jpg'); ?>",
+		"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>",
+		"telephone": "+78129208520",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "наб. Обводного канала, д.118а, лит.Б",
+			"addressLocality": "Санкт-Петербург",
+			"postalCode": "190005",
+			"addressCountry": "RU"
+		},
+		"priceRange": "RUR"
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		"url": "https://<?php echo Url::current([], true); ?>",
+		"inLanguage": "ru-RU",
+		"name": "<?php echo Html::encode($this->title); ?>",
+		"description": "<?php echo $this->params['ogDescription']; ?>"
+	}
+</script>
   <script src="assets/js/manifest.js"></script>
   <script src="assets/js/vendor.min.js"></script>
   <script src="assets/js/main.min.js"></script>
 	<!-- Yandex.Metrika counter -->
-	<script type="text/javascript" >
+	<script>
 	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
 	   m[i].l=1*new Date();
 	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -464,7 +531,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
 			webvisor:true
 	   });
 	</script>
-	<noscript><div><img src="https://mc.yandex.ru/watch/99857885" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<noscript><div><img src="https://mc.yandex.ru/watch/99857885" style="position:absolute; left:-9999px;" alt="Метрика"></div></noscript>
 	<!-- /Yandex.Metrika counter -->
   <?php $this->endBody() ?>
 </body>
