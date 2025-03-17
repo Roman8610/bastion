@@ -10,14 +10,14 @@ use yii\helpers\Url;
               <div class="tr-block">Только с Юр.&nbsp;Лицами, <br>мелкий и крупный опт</div>
             </div>
 </section> -->
-<h1 class="h2 mt-20">Импорт ЭКБ для российских предприятий</h1>
-<section class="request mt-4 lg:mt-8">
-            <div class="h-[220px] relative rounded-md">
-              <img src="images/blocks/request/bg.jpg" alt="Не нашли нужный компонент?" class="w-full h-full object-cover rounded-md">
+
+          <section class="bn request mt-4 lg:mt-8">
+            <div class="bn__container h-[220px] relative rounded-md">
+              <img src="images/blocks/request/bg.jpg" alt="Не нашли нужный компонент?" class="w-full h-full object-cover rounded-md bn__img">
               <div
-                class="absolute w-full h-full top-0 left-0 z-10 bg-black bg-opacity-70 flex flex-col justify-center px-8 py-8 lg:py-0 rounded-md">
-                <div class="text-white font-bold text-xl lg:text-3xl">Не нашли нужный компонент?</div>
-                <div class="text-white text-sm lg:text-xl mt-4">Просто закажите его у нас!</div>
+                class="bn__content absolute w-full h-full top-0 left-0 z-10 bg-black bg-opacity-70 flex flex-col justify-center px-8 py-8 lg:py-0 rounded-md">
+                <h1 class="text-white text-xl lg:text-3xl font-bold mb-4">Импорт ЭКБ для российских предприятий</h1>
+                <div class="bn__descr text-white text-md lg:text-2xl">Не нашли нужный компонент? <span class="bn__descr-small text-white text-md lg:text-xl">Просто закажите его у нас!</span></div>
                 <div class="mt-8 self-start flex flex-col lg:flex-row items-start lg:items-center gap-4">
                   <button class="btn self-start" x-data="modalTrigger('request')" x-bind="trigger"
                     data-info='{"modalTitle":"Заказать компонент"}'>Нажмите сюда</button>

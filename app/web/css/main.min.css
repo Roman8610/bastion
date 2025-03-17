@@ -528,3 +528,36 @@ div.menu__a {
 		text-align: left;
 	}
 }
+
+
+@media (max-width: 767px) {
+	.bn__container {
+		height: unset;
+		position: relative;
+	}
+	.bn__content {
+		position: static;
+		padding: 25px;
+	}
+	.bn__img {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: -1;
+	}
+
+}
+@media (max-width: 480px) {
+	.bn__descr-small {
+		display: block;
+	}
+}
+
+@media (min-width: 1024px) {
+	.lg\:text-2xl {
+			font-size: 1.575rem;
+			line-height: 1.2;
+	}
+}

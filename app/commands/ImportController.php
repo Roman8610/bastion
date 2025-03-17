@@ -14,7 +14,7 @@ class ImportController extends Controller
 
     public $dir_image = null;
 
-    public $path_file = 'web/importfiles/import1.xml';
+    public $path_file = 'web/importfiles/import3.xml';
 
     public function actionIndex()
     {
@@ -482,8 +482,6 @@ class ImportController extends Controller
             return $this->dir_image;
         }
     }
-
-
 
     public function qtyDir($dir)
     {

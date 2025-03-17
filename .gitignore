@@ -1,6 +1,7 @@
 archive.tar.gz
 dumpbd/
 app/web/importfiles/
+app/web/exportfiles/
 app/config/
 log/
 html/
