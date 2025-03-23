@@ -21,6 +21,7 @@ class BastionAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         //'css/site.css',
+        'https://fonts.googleapis.com/css2?family=Manrope:wght@700&amp;family=Montserrat:wght@500;600;700&amp;display=swap',
         'css/main.min.css',
         //'css/main.css',
         //'css/manufacture.css',
