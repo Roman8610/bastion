@@ -5,118 +5,95 @@ use app\models\Product;
 use Exception;
 use Yii;
 use yii\console\Controller;
+use yii\db\Query;
 
 class ExportController extends Controller
 {
 
-    public $path;
-    public $size_file;
-    public $step_size;
+    public $path_log;
 
-    public $dir_name;
-
-
-    public function actionIndex($path = null, $size_file = null, $step_size = null)
+    public function actionIndex()
     {
 
-        $this->dir_name = Yii::getAlias('@app/web/exportfiles/');
+        $count = Product::find()->count();
 
-        if($path === null)
+        $pages = ceil($count/1000);
+
+        for($i = 0; $i < $pages; $i++)
         {
-            $path = $this->uniqueName('catalog');
+            $offset = $i * 1000;
+
+            $products  = Product::find()->select([
+                'id',
+                'title AS `Наименование`',
+                'description AS `Описание`',
+                'alias AS `Ссылка на карточку товара`',
+            ])->offset($offset)->limit(1000)->asArray()->all(); 
+
+            $path = $this->getPath();
+
+            $this->writeFile($products, $path);
+
+           // if($i == 5) break;
+           //echo "Идет запись файла $i";
         }
-
-        var_dump($path);
-        var_dump($size_file);
-        var_dump($step_size);
-
     }
 
-    public function getProd()
+    public function getPath()
     {
 
-    }
+        $base_name = 'catalog';
 
-    public function writeCsv()
-    {
+        $path = Yii::getAlias('@app/web/exportfiles/'.$base_name . '.csv');
 
-    }
+        $i = 0;
 
-    public function checkSizeCsv()
-    {
-
-    }
-
-    public function uniqueName($name, $i=0)
-    {
-        if($i==0)
+        while($this->checkFile($path))
         {
-            $path = $this->dir_name . '/' . $name . '.csv';
-        }
-        else
-        {
-            $path = $this->dir_name . '/' . $name . '-' . $i . '.csv';
-        }
-
-        if (file_exists($path)) {
             $i++;
-            $this->uniqueName($name, $i);
-        } else {
-           return $name;
+            $path = Yii::getAlias('@app/web/exportfiles/'.$base_name . (string)$i . '.csv');
         }
+
+        return $path;
+
+    }
+
+    public function checkFile($path)
+    {
+
+         if(!file_exists($path))
+         {
+            return false;
+         }
+
+         if(filesize($path) > 50000000)
+         {
+            return true;
+         }
+         return false;
+
+    }
+
+    public function writeFile($products, $path)
+    {
+
+        $fp = fopen($path, 'a');
+
+        if (filesize($path) === 0)
+        {
+            fwrite($fp, "\xEF\xBB\xBF");
+            fputcsv($fp, array_keys($products[0]), ';');
+        }
+
+        foreach ($products as $prod)
+        {
+            $prod['Ссылка на карточку товара'] = 'https://bastionit.ru/product/' . $prod['Ссылка на карточку товара'];
+            $prod['Описание'] = '"' . str_replace(array("\r\n", "\r", "\n"), '', $prod['Описание']). '"';
+            fputcsv($fp, $prod, ';');
+        }
+
+        fclose($fp);
+
     }
 
 }
-
-// class ExportController extends Controller
-// {
-//     public $id;
-
-//     public function actionIndex()
-//     {
-
-//         $this->idInit();
-
-//         $mark = $this->id;
-
-//         $step = 10;
-
-//         $path = Yii::getAlias('@app/web/exportfiles/catalog.csv');
-
-//         $sql = 'SELECT `title` AS `Наименование`, `description` AS `Описание`,  `alias` AS `Ссылка на карточку товара` FROM product WHERE `id` > :mark LIMIT :step';
-
-//         $command = Yii::$app->db->createCommand($sql);
-
-//         $command->bindValue(':mark', $mark);
-//         $command->bindValue(':step', $step);
-
-//         $data = $command->queryAll();
-
-//         $fp = fopen($path, 'w');
-
-//         fwrite($fp, "\xEF\xBB\xBF");
-
-//         fputcsv($fp, array_keys($data[0]), ';');
-
-//         foreach ($data as $row) {
-//             $row['Ссылка на карточку товара'] = 'https://bastionit.ru/product/' . $row['Ссылка на карточку товара'];
-//             fputcsv($fp, $row, ';');
-//         }
-
-//         fclose($fp);
-
-//     }
-
-//     public function idInit()
-//     {
-//         $path_mark = Yii::getAlias('@app/web/exportfiles/mark.txt');
-//         if((int) file_get_contents($path_mark))
-//         {
-//             $this->id = (int) file_get_contents($path_mark);
-//         }
-//         else
-//         {
-//             $this->id = 0;
-//         }
-//     }
-// }
