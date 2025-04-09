@@ -17,7 +17,7 @@ class ProductController extends AppController
 		
 		$description = "$product->title 📦 Поставка электронной компонентной базы (ЭКБ). Гарантируем контроль качества. ✅ Доставка по все России. 📞 Звоните 8 (812) 920 8520";
 
-        $this->view->title = "$product->title | Купить в интернет-магазине «Bastion» | Быстрая доставка в СПб";
+        $this->view->title = "$product->title | Купить мелким и крупным ортом | Быстрая доставка в СПб и по всей РФ";
         $this->view->registerMetaTag(['name' => 'keywords', 'content' => '']);
         $this->view->registerMetaTag(['name' => 'description', 'content' => $description]);
 		

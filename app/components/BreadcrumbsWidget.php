@@ -10,6 +10,7 @@ class BreadcrumbsWidget extends \yii\base\Widget
     public $category_id;
     private $breadcrumbs = '';
     private $position = 1;
+    
     public function init() 
     {
         parent::init();
@@ -31,7 +32,37 @@ class BreadcrumbsWidget extends \yii\base\Widget
             </li>';
         $this->position++;
 
-        $this->getBreadcrumbs($this->category_id);
+        $categoriesChain = $this->getCategoriesChain($this->category_id);
+        
+        // Добавляем категории в правильном порядке
+        foreach ($categoriesChain as $category) {
+            $this->breadcrumbs .= '
+                <li class="rtl:rotate-180">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </li>';
+
+            $is_last = ($category === end($categoriesChain));
+            
+            $this->breadcrumbs .= '
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">'
+                . ($is_last ? '
+                    <span itemprop="name">'.$category->title.'</span>
+                    <meta itemprop="url" content="'.Url::to(['catalog/index', 'alias'=>$category->alias], true).'" />
+                ' : '
+                    <a href="'.Url::to(['catalog/index', 'alias'=>$category->alias]).'" itemprop="item" class="block transition hover:text-sky-500">
+                        <span itemprop="name">'.$category->title.'</span>
+                        <meta itemprop="url" content="'.Url::to(['catalog/index', 'alias'=>$category->alias], true).'" />
+                    </a>
+                ') . '
+                    <meta itemprop="position" content="'.$this->position.'" />
+                </li>';
+                
+            $this->position++;
+        }
 
         return '<nav aria-label="Breadcrumb" class="mt-4" itemscope itemtype="https://schema.org/BreadcrumbList">
                     <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-600">'
@@ -40,39 +71,21 @@ class BreadcrumbsWidget extends \yii\base\Widget
                 </nav>';
     }
 
-    private function getBreadcrumbs($category_id)
+    private function getCategoriesChain($category_id)
     {
-        $category = Category::find()->where(['id_import' => $category_id])->one();
-
-        $this->breadcrumbs .= '
-            <li class="rtl:rotate-180">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clip-rule="evenodd" />
-                </svg>
-            </li>';
-
-        $is_last = !Category::find()->where(['id_import' => $category->parent_id])->exists();
-
-        $this->breadcrumbs .= '
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">'
-            . ($is_last ? '
-                <span itemprop="name">'.$category->title.'</span>
-                <meta itemprop="url" content="'.Url::to(['catalog/index', 'alias'=>$category->alias], true).'" />
-            ' : '
-                <a href="'.Url::to(['catalog/index', 'alias'=>$category->alias]).'" itemprop="item" class="block transition hover:text-sky-500">
-                    <span itemprop="name">'.$category->title.'</span>
-                    <meta itemprop="url" content="'.Url::to(['catalog/index', 'alias'=>$category->alias], true).'" />
-                </a>
-            ') . '
-                <meta itemprop="position" content="'.$this->position.'" />
-            </li>';
-
-        $this->position++;
-
-        if (!$is_last) {
-            $this->getBreadcrumbs($category->parent_id);
+        $chain = [];
+        $current_id = $category_id;
+        
+        while ($current_id) {
+            $category = Category::find()->where(['id_import' => $current_id])->one();
+            if ($category) {
+                array_unshift($chain, $category);
+                $current_id = $category->parent_id;
+            } else {
+                $current_id = null;
+            }
         }
+        
+        return $chain;
     }
 }

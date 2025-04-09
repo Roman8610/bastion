@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /*?page=*&per-page=*
 Disallow: /*?
 Disallow: /search/
 Disallow: /.*pdf

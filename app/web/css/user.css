@@ -28,3 +28,91 @@
     text-decoration: underline;
     color: #0056b3;
 }
+.up {
+    display: none;
+    position: fixed;
+    bottom: 112px;
+    right: 24px;
+    z-index: 100;
+    width: 64px;
+    height: 64px;
+    background: #0ea5e9;
+    border-radius: 50%;
+    transform: none;
+    cursor: pointer;
+    transition: 250ms ease-in;   
+}
+
+.up:before {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-left: 2px solid #fff;
+    border-top: 2px solid #fff;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    top: 24px;
+    right: 25px;
+}
+
+.up:after {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 2px;
+    background: #fff;
+    top: 24px;
+    right: 31px;
+}
+
+.cookie-notification {
+    display: none;
+    -webkit-box-shadow: 0 17px 40px hsl(0 8% 36% / 26%);
+    -moz-box-shadow: 0 17px 40px hsl(0 8% 36% / 26%);
+    box-shadow: 0 17px 40px hsl(0 8% 36% / 26%);
+    width: 200px;
+    padding: 25px 15px 15px;
+    position: fixed;
+    bottom: 24px;
+    left: 15px;
+    border-radius: 4px;
+    text-align: center;
+    transition: left .5s;
+    -moz-transition: left .5s;
+    -webkit-transition: left .5s;
+    -o-transition: left .5s;
+    background: #fff;
+    z-index: 105;
+    transition: all 250ms ease-in;
+}
+
+.cookie-notification img {
+    width: 44px;
+    height: 44px;
+}
+
+.cookie-notification p {
+    text-align: left;
+    padding: 15px 0 0;
+    margin: 0;
+    font-size: 11px;
+    line-height: 150%;
+}
+
+.cookie_accept {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 99;
+    transition: .2s all ease;
+}
+
+.cookie_accept img {
+    width: 20px;
+    height: 20px;
+}

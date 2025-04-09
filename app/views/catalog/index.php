@@ -67,9 +67,9 @@ use yii\helpers\Url;
                           <a href="<?=Url::to(['product/index', 'alias' => $product->alias])?>"
                             class="product-card__img-wrapper block text-center lg:text-left">
                             <?php if($product->img):?>
-                              <img src="<?='../'.$product->img?>" alt="<?=$categry_current->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
+                              <img class="lazyload" data-src="<?='../'.$product->img?>" src="/images/z.png" alt="<?=$categry_current->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
                             <?php else:?>
-                              <img src="/images/placeholder.jpg" alt="<?=$categry_current->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
+                              <img class="lazyload" data-src="/images/placeholder.jpg" src="/images/z.png" alt="<?=$categry_current->title?>" class="product-card__img inline-block rounded-md w-[224px] h-[224px] object-contain">
                             <?php endif;?>
                           </a>
                           <div class="mt-2">
@@ -111,6 +111,10 @@ use yii\helpers\Url;
               ])?>
                   
               </nav>
+			  
+			  <?php if (!empty($categry_current->text)): ?>
+				<div class="text"><?= $categry_current->text ?></div>
+			<?php endif; ?>
 
               <!-- <ol class="flex justify-center gap-1 text-xs font-medium mt-16">
 

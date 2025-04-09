@@ -52,7 +52,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
   <meta name="google-site-verification" content="_inKbAFSpHdTfR_UIN2c_TMtqokjp1IfwUAl6Y1LTVI" />
 </head>
 
-<body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0">
+<body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0" id="top">
 <?php $this->beginBody() ?>
 <?=InfoMenuHeadWidget::widget(['priority_news' => 6])?>
   <header class="header bg-white drop-shadow-lg md:drop-shadow-none fixed top-0 left-0 z-30 w-full md:relative"
@@ -242,7 +242,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
   <?=OrdersFormCallWidget::widget([
     
   ])?>
-
+<? /*
   <div
     class="fixed w-full h-full z-50 overflow-y-auto top-0 left-0 bg-black bg-opacity-70 flex items-start justify-center"
     data-modal="review" x-cloak x-data x-transition.opacity x-show="$store.modals.find('review').active">
@@ -300,6 +300,10 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
       </form>
     </div>
   </div>
+  */?>
+  <div id="cookie_notification" class="cookie-notification"><p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с
+ сайтом, Вы разрешаете использование cookie-файлов.</p> <a class="cookie_accept" id="cookie_accept"><img src="/images/close.png" alt="закрыть куки"></a> </div>
+  <a href="#top" id="back_to_top" class="scroll up"></a>
   <!--/noindex-->
 <script type="application/ld+json">
 	{

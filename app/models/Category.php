@@ -1,13 +1,25 @@
 <?php
-
-
 namespace app\models;
 
+use yii\db\ActiveRecord;
 
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord
 {
     public static function tableName(): string {
         return 'category';
+    }
+    
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['text']);
+    }
+    
+    public function rules()
+    {
+        return [
+            ['text', 'string'],
+            ['text', 'default', 'value' => null],
+        ];
     }
     
     public function getChildren()
@@ -15,14 +27,24 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(Category::class, ['parent_id' =>'id_import']);
     }
     
-     public function getProducts()
+    public function getProducts()
     {
         return $this->hasMany(Product::class, ['category_id' =>'id_import']);
     }
     
-    
-//    public function getChildServices(){
-//        return $this->hasMany(Services::class, ['parent_id' => 'id']);
-//    }
-    
+    public static function getAllDescendantIds($parentId)
+    {
+        $directChildren = self::find()->select('id_import')->where(['parent_id' => $parentId])->column();
+
+        $result = [];
+        
+        foreach ($directChildren as $childId) {
+            $result[] = $childId;
+
+            $descendantIds = self::getAllDescendantIds($childId);
+            $result = array_merge($result, $descendantIds);
+        }
+
+        return $result;
+    }
 }
