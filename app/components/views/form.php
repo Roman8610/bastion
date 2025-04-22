@@ -140,7 +140,9 @@
     ]
 )?>
 
-        <?//= $form->field($order, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>                
+        <?//= $form->field($order, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>  
+
+		
 
       </div>
       <footer class="popup__footer">

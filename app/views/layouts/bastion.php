@@ -520,9 +520,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 		"description": "<?php echo $this->params['ogDescription']; ?>"
 	}
 </script>
-  <script src="assets/js/manifest.js"></script>
-  <script src="assets/js/vendor.min.js"></script>
-  <script src="assets/js/main.min.js"></script>
 	<!-- Yandex.Metrika counter -->
 	<script>
 	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -540,7 +537,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 	</script>
 	<noscript><div><img src="https://mc.yandex.ru/watch/99857885" style="position:absolute; left:-9999px;" alt="Метрика"></div></noscript>
 	<!-- /Yandex.Metrika counter -->
-  <?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
