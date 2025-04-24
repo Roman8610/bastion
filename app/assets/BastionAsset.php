@@ -32,6 +32,8 @@ class BastionAsset extends AssetBundle
         'js/main.min.js',
         'js/manifest.js',
         'js/vendor.js',
+        //'https://www.google.com/recaptcha/api.js',
+        'https://www.google.com/recaptcha/api.js?render=6LehPsMqAAAAAIgE1kjRsjrCQFImNgMAUvV086KP',
     ];
     public $depends = [
         //'yii\web\YiiAsset',

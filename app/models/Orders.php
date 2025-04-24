@@ -38,7 +38,7 @@ class Orders extends \yii\db\ActiveRecord{
             [['created_at', 'updated_at'], 'safe'],
             [['prod_id'], 'number', 'min' => 0],
             [['file'], 'file'],
-            [['yandexSmartCaptcha'], \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaValidator::class],
+          //  [['yandexSmartCaptcha'], \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaValidator::class],
 //            [['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
         ];
     }

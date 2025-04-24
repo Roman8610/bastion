@@ -47,6 +47,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
   <?php $this->head() ?>
   <meta name="yandex-verification" content="37e3d1ea403dfa46">
   <meta name="google-site-verification" content="_inKbAFSpHdTfR_UIN2c_TMtqokjp1IfwUAl6Y1LTVI">
+
 </head>
 
 <body x-data :class="$store.modals.isOpen ? 'overflow-hidden' : ''" class="pt-[75px] md:pt-0" id="top">
@@ -488,7 +489,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 		"@context": "https://schema.org",
 		"@type": "WebSite",
 		"name": "BastionIT",
-		"alternateName": "Продажа и установка пластиковых окон Veka, Rehau, KBE",
+		"alternateName": "Импорт ЭКБ для российских предприятий",
 		"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>/"
 	}
 </script>
@@ -537,7 +538,39 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 	</script>
 	<noscript><div><img src="https://mc.yandex.ru/watch/99857885" style="position:absolute; left:-9999px;" alt="Метрика"></div></noscript>
 	<!-- /Yandex.Metrika counter -->
-    <?php $this->endBody() ?>
+
+  <script>
+  document.querySelectorAll('.form-button').forEach(button => {
+
+      button.addEventListener('click', async (event) => {
+        
+       event.preventDefault();
+          
+        const form = button.closest('form');
+
+        const actionName = form.dataset.action || 'defaultAction';
+
+          
+        await grecaptcha.ready(() => {
+              grecaptcha.execute('6LehPsMqAAAAAIgE1kjRsjrCQFImNgMAUvV086KP', { action: actionName }).then((token) => {
+
+                // Создаем скрытый input и добавляем туда токен
+                let hiddenInput = document.createElement("input");
+                hiddenInput.setAttribute("type", "hidden");
+                hiddenInput.setAttribute("name", "g-recaptcha-response");
+                hiddenInput.value = token;
+                form.appendChild(hiddenInput);
+
+                // Отправляем форму на сервер
+                form.submit(); // Здесь выполняется обычная отправка формы
+
+              });
+        });
+      });
+    });
+  </script>
+
+  <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

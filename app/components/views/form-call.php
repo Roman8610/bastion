@@ -14,50 +14,42 @@
         Заказать звонок</h3>
       <p class="mt-4 text-xs text-gray-500">Заполните форму и мы перезвоним вам в течение 10 минут</p>
 
-<?php $form = \yii\widgets\ActiveForm::begin([
-        'action' => ['order-call/send'],
-        'options' => [
-                    'class' => 'mt-8',
-                    'tabindex' => "-1",
-                   // 'accept-charset' => "windows-1251",
-                        ]
-    ])?>
-
-<label class="block mb-4">
-               <?=$form->field($order, 'name', ['template' => "{input}"])->textInput([
-            'class' => 'block w-full border-gray-400 rounded-lg p-4',
-           // 'tabindex' => '1',
-            'placeholder' => 'Как вас зовут? *',
+              <?php $form = \yii\widgets\ActiveForm::begin([
+                      'action' => ['order-call/send'],
+                      'options' => [
+                                  'class' => 'mt-8',
+                                  //'id' => 'formCall',
+                                  'data-action' => 'formcall',
+                                  'tabindex' => "-1",
+                                // 'accept-charset' => "windows-1251",
+                                      ]
                   ])?>
 
-</label>
+              <label class="block mb-4">
+                            <?=$form->field($order, 'name', ['template' => "{input}"])->textInput([
+                          'class' => 'block w-full border-gray-400 rounded-lg p-4',
+                        // 'tabindex' => '1',
+                          'placeholder' => 'Как вас зовут? *',
+                                ])?>
+
+              </label>
 
 
-<label class="block mb-4">
-              <?=$form->field($order, 'phone', ['template' => "{input}"])->textInput([
-            'class' => 'block w-full border-gray-400 rounded-lg p-4',
-          //  'tabindex' => '2',
-            'placeholder' => 'Номер вашего телефона *',
-                  ])?>
-</label>
+              <label class="block mb-4">
+                            <?=$form->field($order, 'phone', ['template' => "{input}"])->textInput([
+                          'class' => 'block w-full border-gray-400 rounded-lg p-4',
+                        //  'tabindex' => '2',
+                          'placeholder' => 'Номер вашего телефона *',
+                                ])?>
+              </label>
 
-<?= $form->field($order, 'yandexSmartCaptcha')->widget(
-    \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaWidget::class,
-    [
-        'options' => [
-            'id' => 'yandex-smart-captcha', // Идентификатор элемента каптчи
-        ],
-        'hl' => 'ru', // Установите нужный язык, например, 'ru'
-    ]
-)?>
+              <div class="mb-20">Нажимая кнопку, я даю согласие на <b>обработку персональных данных</b></div>
+                          <!-- <button type="submit" class="btn btn--size-lg btn--arrow" tabindex="4" data-popup-btn>Заказать звонок</button> -->
 
-<?//= $form->field($order, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>
-
-            <div class="mb-20">Нажимая кнопку, я даю согласие на <b>обработку персональных данных</b></div>
-            <button type="submit" class="btn btn--size-lg btn--arrow" tabindex="4" data-popup-btn>Заказать звонок</button>
-        
-    
-    <?php \yii\widgets\ActiveForm::end();?>
+              <button type="submit" class="btn btn--size-lg btn--arrow form-button">Заказать звонок</button>
+                      
+                  
+              <?php \yii\widgets\ActiveForm::end();?>
 
 
     </div>

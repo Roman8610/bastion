@@ -33,7 +33,7 @@ class OrdersCall extends \yii\db\ActiveRecord{
             [['name', 'phone'], 'required'],
             [['name', 'phone'], 'string', 'max' => 255],
             [['created_at', 'updated_at'], 'safe'],
-            [['yandexSmartCaptcha'], \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaValidator::class],
+           // [['yandexSmartCaptcha'], \matrozov\yii2yandexSmartCaptcha\YandexSmartCaptchaValidator::class],
             //[['reCaptcha'], \kekaadrenalin\recaptcha3\ReCaptchaValidator::class, 'acceptance_score' => 1]
         ];
     }
