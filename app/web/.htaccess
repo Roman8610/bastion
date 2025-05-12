@@ -1,3 +1,21 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+    RewriteRule ^(.*)\.(jpg|jpeg|png|bmp)$ $1.webp [T=image/webp,L]
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+    Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    Header set Cross-Origin-Opener-Policy "same-origin"
+    Header set X-Frame-Options "DENY"
+</IfModule>
+
 <ifmodule mod_deflate.c="">
     AddOutputFilterByType DEFLATE text/html text/css text/javascript font/ttf application/javascript
     DeflateCompressionLevel 7
@@ -77,6 +95,24 @@
     ExpiresByType text/x-cross-domain-policy            "access plus 1 week"
 
 </IfModule>
+
+RewriteCond %{HTTP_HOST} ^212\.67\.14\.19$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.212\.67\.14\.19$
+RewriteRule ^(.*)$ https://bastionit.ru/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+RewriteCond %{REQUEST_URI} [A-Z]
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule (.*) rewrite-strtolower.php?rewrite-strtolower-url=$1 [QSA,L]
+
+RewriteCond %{THE_REQUEST} //
+RewriteRule .* /$0 [R=301,L]
+
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_URI} (.*)/$
+RewriteRule ^(.*)/$ /$1 [L,R=301]
 
 RewriteEngine on
 RewriteRule ^main/?$ / [R=301,L]

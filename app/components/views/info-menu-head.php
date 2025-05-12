@@ -120,8 +120,8 @@
               <div class="text-sm font-light text-gray-500">многоканальный</div>
             </div>
 
-            <a href="mailto:Info@bastionit.ru"
-              class="block mt-4 font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+            <a href="mailto:sales@bastion24.ru"
+              class="block mt-4 font-bold text-lg hover:text-sky-500">sales@bastion24.ru</a>
 
             <a href="#" class="btn flex w-full mt-4" x-data @click.prevent="$store.modals.open('callback')">
               Заказать звонок

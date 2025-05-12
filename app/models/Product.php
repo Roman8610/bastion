@@ -14,5 +14,10 @@ class Product extends \yii\db\ActiveRecord{
     {
         return $this->hasMany(DocsProd::class, ['prod_id' => 'id']);
     }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id_import' => 'category_id']);
+    }
     
 }

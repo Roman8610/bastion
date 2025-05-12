@@ -13,7 +13,7 @@ use yii\helpers\Url;
 
           <section class="bn request mt-4 lg:mt-8">
             <div class="bn__container h-[220px] relative rounded-md">
-              <img src="images/blocks/request/bg.jpg" alt="Не нашли нужный компонент?" class="w-full h-full object-cover rounded-md bn__img">
+              <img src="/images/blocks/request/bg.jpg" alt="Не нашли нужный компонент?" class="w-full h-full object-cover rounded-md bn__img">
               <div
                 class="bn__content absolute w-full h-full top-0 left-0 z-10 bg-black bg-opacity-70 flex flex-col justify-center px-8 py-8 lg:py-0 rounded-md">
                 <h1 class="text-white text-xl lg:text-3xl font-bold mb-4">Импорт ЭКБ для российских предприятий</h1>
@@ -34,14 +34,14 @@ use yii\helpers\Url;
               <div class="basis-full mt-4 lg:mt-0">
                 <h2 class="font-bold text-2xl">Производители</h2>
                 <div class="mt-4 mb-4 grid lg:grid-cols-8 grid-cols-4 gap-4">
-                  <img src="images/65bcbf16f0bf4070174536.jpeg" alt="NXP">
-                  <img src="images/65bcbf171596f230957053.jpeg" alt="ALTERA">
-                  <img src="images/65bcbf1724638208731964.jpeg" alt="TRACO POWER">
-                  <img src="images/65bcbf1751c3e136479673.jpeg" alt="NVIDEA">
-                  <img src="images/65bcbf174fded912216643.jpeg" alt="TEXAS">
-                  <img src="images/65bcbf1772076102867343.jpeg" alt="VICOR">
-                  <img src="images/65bcbf177cae3359968256.jpeg" alt="HOLT">
-                  <img src="images/65bcbf17946ca246586464.jpeg" alt="AMD">
+                  <img src="/images/65bcbf16f0bf4070174536.jpeg" alt="NXP">
+                  <img src="/images/65bcbf171596f230957053.jpeg" alt="ALTERA">
+                  <img src="/images/65bcbf1724638208731964.jpeg" alt="TRACO POWER">
+                  <img src="/images/65bcbf1751c3e136479673.jpeg" alt="NVIDEA">
+                  <img src="/images/65bcbf174fded912216643.jpeg" alt="TEXAS">
+                  <img src="/images/65bcbf1772076102867343.jpeg" alt="VICOR">
+                  <img src="/images/65bcbf177cae3359968256.jpeg" alt="HOLT">
+                  <img src="/images/65bcbf17946ca246586464.jpeg" alt="AMD">
                 </div>
                 <a href="/pages/proizvoditeli" class="mt-4 link"> Все производители </a>
               </div>

@@ -61,7 +61,7 @@ class OrderCallController extends AppController{
                 
                 Yii::$app->mailer->compose()
                 ->setFrom('zakazbastionit@yandex.ru')
-                ->setTo(['roman8610@gmail.com', 'info@bastionit.ru']) // 'info@bastionit.ru'
+                ->setTo(['roman8610@gmail.com', 'info@bastionit.ru', 'mi@bastion24.ru']) // 'info@bastionit.ru'
                 ->setSubject('Обратный звонок')
                 ->setHtmlBody('<b>Имя: </b>'.$name.'<br><b>Телефон: </b>'.$phone)
                 ->send();

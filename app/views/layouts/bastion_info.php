@@ -38,8 +38,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?= Html::encode($this->title) ?></title>
   <!-- <link rel="stylesheet" href="assets/styles/main.min.css" /> -->
@@ -96,7 +95,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
           <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
             Заказать звонок
           </a>
-          <a href="mailto:info@bastionit.ru" class="font-bold text-lg hover:text-sky-500">info@bastionit.ru</a>
+          <a href="mailto:sales@bastion24.ru" class="font-bold text-lg hover:text-sky-500">sales@bastion24.ru</a>
         </div>
 
         <div class="flex lg:hidden gap-4">
@@ -130,7 +129,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
         </div>
         <div class="flex items-center gap-8">
           <div>
-            <a href="mailto:info@bastionit.ru" class="text-md hover:text-sky-500">info@bastionit.ru</a>
+            <a href="mailto:sales@bastion24.ru" class="text-md hover:text-sky-500">sales@bastion24.ru</a>
           </div>
           <div>
             <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
@@ -188,7 +187,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
           <div>
             <a href="tel:88129208520" class="font-bold text-lg text-gray-200">8 (812) 920 8520</a>
             <div class="mt-2">
-              <a href="mailto:info@bastionit.ru" class="font-bold text-sm text-gray-200">info@bastionit.ru</a>
+              <a href="mailto:sales@bastion24.ru" class="font-bold text-sm text-gray-200">sales@bastion24.ru</a>
             </div>
           </div>
 
@@ -320,7 +319,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 				"@type": "ContactPoint",
 				"telephone": "+78129208520",
 				"contactType": "sales",
-				"email": "info@bastionit.ru",
+				"email": "sales@bastion24.ru",
 				"areaServed": [
 					"RU"
 				],

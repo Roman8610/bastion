@@ -102,8 +102,8 @@
 }
 
 .cookie_accept {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     position: absolute;
     right: 10px;
     top: 10px;
@@ -115,4 +115,16 @@
 .cookie_accept img {
     width: 20px;
     height: 20px;
+}
+
+.grecaptcha-badge {
+	display: none;
+}
+
+.text {
+	margin-top: 30px;
+}
+
+.text p{
+	margin-bottom: 15px;
 }

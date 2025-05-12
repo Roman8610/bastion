@@ -10,7 +10,7 @@ use yii\helpers\Url;
                 <?php foreach($pages as $page):?>
                   <a href="<?=Url::to(['pages/view', 'alias' => $page->alias])?>"
                     class="base_featured_menu flex flex-col gap-4 rounded-md bg-gray-100 hover:drop-shadow-lg text-center justify-center items-center">
-                    <img src="<?=$page->img?>" alt="">
+                    <img src="/<?=$page->img?>" alt="">
                     <span class="font-light text-sm"><?=$page->title_menu?></span>
                   </a>
                 <?php endforeach;?>
