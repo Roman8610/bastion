@@ -102,7 +102,7 @@
         <div class="mb-20">Нажимая кнопку, я даю согласие на <b>обработку персональных данных</b></div>
         <!-- <button type="submit" class="btn btn--size-lg btn--arrow" tabindex="4" data-popup-btn>Отправить сообщение</button> -->
 
-        <button type="submit" class="btn btn--size-lg btn--arrow form-button" tabindex="4" data-popup-btn>Заказать звонок</button>
+        <button type="submit" class="btn btn--size-lg btn--arrow form-button" tabindex="4" data-popup-btn>Заказать</button>
   
         <?php \yii\widgets\ActiveForm::end();?>
       </footer>

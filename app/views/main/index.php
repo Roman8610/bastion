@@ -22,7 +22,7 @@ use yii\helpers\Url;
                   <button class="btn self-start" x-data="modalTrigger('request')" x-bind="trigger"
                     data-info='{"modalTitle":"Заказать компонент"}'>Нажмите сюда</button>
                   <span class="hidden lg:inline-flex text-white font-light">или напишите</span>
-                  <a href="mailto:info@bastionit.ru" class="hidden lg:inline-flex text-white hover:text-sky-500 text-xl font-bold">info@bastionit.ru</a>
+                  <a href="mailto:info@bastion24.ru" class="hidden lg:inline-flex text-white hover:text-sky-500 text-xl font-bold">info@bastion24.ru</a>
                 </div>
               </div>
             </div>

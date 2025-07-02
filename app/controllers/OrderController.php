@@ -12,7 +12,7 @@ class OrderController extends AppController{
     public function actionSend(){
 
         //var_dump($_POST["g-recaptcha-response"]); die;
-        
+       // dump($_POST); die;
         // Параметры запроса
         $secret = '6LehPsMqAAAAANk3gwCSw52nd0rG94tSi3GcUwUN';      // Ваш секретный ключ
         $response = $_POST["g-recaptcha-response"];      // Токен от клиента

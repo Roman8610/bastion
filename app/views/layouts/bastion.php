@@ -44,6 +44,11 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
   <!-- <link rel="stylesheet" href="assets/styles/main.min.css" /> -->
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.svg">
   <?php $this->head() ?>
+  <meta name="geo.placename" content="наб. Обводного канала, д.118а, лит.Б, Санкт-Петербург, Россия, 190005">
+  <meta name="geo.position" content="59.902912;30.305520">
+  <meta name="geo.region" content="RU-город Санкт-Петербург">
+  <meta name="ICBM" content="59.902912, 30.305520">
+  <link rel="manifest" href="/site.webmanifest">
   <meta name="yandex-verification" content="37e3d1ea403dfa46">
   <meta name="google-site-verification" content="_inKbAFSpHdTfR_UIN2c_TMtqokjp1IfwUAl6Y1LTVI">
 
@@ -77,12 +82,18 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 
     <div class="border-b py-2 lg:py-0">
       <div class="container mx-auto flex gap-4 items-center justify-between py-4">
-        <a href="/">
-          <img src="../images/logo/logo.svg" alt="">
+	    <? if($_SERVER['REQUEST_URI'] == '/'): ?>
+        <a href="/" aria-label="Логотип">
+          <img src="../images/logo/logo.svg" alt="«Bastion» - поставка электронной компонентной базы (ЭКБ)">
         </a>
+		<? else: ?>
+        <span>
+          <img src="../images/logo/logo.svg" alt="«Bastion» - поставка электронной компонентной базы (ЭКБ)">
+        </span>
+		<? endif; ?>
         <div class="hidden lg:flex gap-8 items-center">
           <div>
-            <div class="text-lg">с 09:00 до 19:00</div>
+            <div class="text-lg">с 09:00 до 18:00</div>
             <div class="text-sm font-light text-gray-500">без выходных</div>
           </div>
           <div>
@@ -92,7 +103,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
           <a href="#" class="btn" x-data @click.prevent="$store.modals.open('callback')">
             Заказать звонок
           </a>
-          <a href="mailto:sales@bastion24.ru" class="font-bold text-lg hover:text-sky-500">sales@bastion24.ru</a>
+          <a href="mailto:info@bastion24.ru" class="font-bold text-lg hover:text-sky-500">info@bastion24.ru</a>
         </div>
 
         <div class="flex lg:hidden gap-4">
@@ -126,7 +137,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
         </div>
         <div class="flex items-center gap-8">
           <div>
-            <a href="mailto:sales@bastion24.ru" class="text-md hover:text-sky-500">sales@bastion24.ru</a>
+            <a href="mailto:info@bastion24.ru" class="text-md hover:text-sky-500">info@bastion24.ru</a>
           </div>
           <div>
             <a href="tel:88129208520" class="font-bold text-lg hover:text-sky-500">8 (812) 920 8520</a>
@@ -148,7 +159,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
                 <input name="q" type="text" placeholder="Введите название товара"
                   class="input-text border-r-0 rounded-tr-none rounded-br-none" value="">
                 <button type="submit"
-                  class="text-white bg-sky-500 border-none w-[48px] h-[48px] rounded-tr-md rounded-br-md flex items-center justify-center">
+                  class="text-white bg-sky-500 border-none w-[48px] h-[48px] rounded-tr-md rounded-br-md flex items-center justify-center" aria-label="Поиск">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 400" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M65.0346 177.621C65.0346 147.761 76.8964 119.124 98.0104 98.0104C119.124 76.8963 147.761 65.0346 177.621 65.0346C207.481 65.0346 236.118 76.8963 257.232 98.0104C278.346 119.124 290.207 147.761 290.207 177.621C290.207 207.481 278.346 236.118 257.232 257.232C236.118 278.346 207.481 290.208 177.621 290.208C147.761 290.208 119.124 278.346 98.0104 257.232C76.8964 236.118 65.0346 207.481 65.0346 177.621ZM177.621 20C152.646 20 128.028 25.9349 105.796 37.3157C83.5646 48.6965 64.3556 65.1973 49.7522 85.4584C35.1489 105.719 25.5692 129.161 21.8027 153.85C18.0362 178.54 20.1907 203.772 28.0886 227.465C35.9865 251.159 49.4017 272.637 67.2288 290.129C85.0558 307.62 106.784 320.626 130.624 328.072C154.463 335.519 179.731 337.195 204.344 332.96C228.958 328.726 252.213 318.703 272.194 303.718C272.834 304.57 273.534 305.375 274.288 306.127L341.84 373.679C346.086 377.781 351.774 380.05 357.678 379.999C363.582 379.948 369.23 377.58 373.405 373.405C377.58 369.23 379.948 363.582 379.999 357.678C380.05 351.774 377.781 346.086 373.679 341.84L306.127 274.288C305.375 273.534 304.57 272.834 303.718 272.194C321.281 248.776 331.976 220.93 334.605 191.776C337.234 162.622 331.692 133.313 318.602 107.131C305.511 80.949 285.388 58.9298 260.487 43.5406C235.587 28.1513 206.893 20 177.621 20Z"
@@ -177,14 +188,20 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
     <div class="px-4 py-8 lg:py-16 bg-stone-700">
       <div class="container mx-auto flex flex-wrap gap-4 justify-between">
         <div class="footer__col">
-          <a href="/">
+		  <? if($_SERVER['REQUEST_URI'] == '/'): ?>
+          <a href="/" aria-label="Логотип">
             <img src="/images/logo/logo-light.svg" alt="«Bastion» - поставка электронной компонентной базы (ЭКБ)">
           </a>
+		  <? else: ?>
+          <span>
+            <img src="/images/logo/logo-light.svg" alt="«Bastion» - поставка электронной компонентной базы (ЭКБ)">
+          </span>
+		  <? endif; ?>
           <div class="mt-4 text-gray-200 text-sm">Контакты</div>
           <div>
             <a href="tel:88129208520" class="font-bold text-lg text-gray-200">8 (812) 920 8520</a>
             <div class="mt-2">
-              <a href="mailto:sales@bastion24.ru" class="font-bold text-sm text-gray-200">sales@bastion24.ru</a>
+              <a href="mailto:info@bastion24.ru" class="font-bold text-sm text-gray-200">info@bastion24.ru</a>
             </div>
           </div>
 
@@ -454,14 +471,15 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
   </div>
  */ ?>
     <div id="cookie_notification" class="cookie-notification"><p>Для улучшения работы сайта и его взаимодействия с пользователями мы используем файлы cookie. Продолжая работу с
- сайтом, Вы разрешаете использование cookie-файлов.</p> <a class="cookie_accept" id="cookie_accept"><img src="/images/close.png" alt="закрыть куки"></a> </div>
+ сайтом, Вы разрешаете использование cookie-файлов.</p> <span class="cookie_accept" id="cookie_accept"><img src="/images/close.png" alt="закрыть куки"></span> </div>
   <a href="#top" id="back_to_top" class="scroll up"></a>
   <!--/noindex-->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 	{
 		"@context": "https://schema.org",
 		"@type": "Organization",
-		"name": "BastionIT",
+		"name": "Бастион ИТ",
 		"url": "<?php echo $_SERVER['SERVER_NAME']; ?>/",
 		"sameAs": [
 			"https://wa.me/79119208520"
@@ -472,7 +490,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 				"@type": "ContactPoint",
 				"telephone": "+78129208520",
 				"contactType": "sales",
-				"email": "sales@bastion24.ru",
+				"email": "info@bastion24.ru",
 				"areaServed": [
 					"RU"
 				],
@@ -481,22 +499,18 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 				]
 			}
 		]
-	}
-</script>
-<script type="application/ld+json">
+	},
 	{
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		"name": "BastionIT",
+		"name": "Бастион ИТ",
 		"alternateName": "Импорт ЭКБ для российских предприятий",
 		"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>/"
-	}
-</script>
-<script type="application/ld+json">
+	},
 	{
 		"@context": "https://schema.org",
 		"@type": "LocalBusiness",
-		"name": "BastionIT",
+		"name": "Бастион ИТ",
 		"image": "<?php echo Url::to('@web/images/logo/logo-og.jpg'); ?>",
 		"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>",
 		"telephone": "+78129208520",
@@ -508,9 +522,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 			"addressCountry": "RU"
 		},
 		"priceRange": "RUR"
-	}
-	</script>
-	<script type="application/ld+json">
+	},
 	{
 		"@context": "https://schema.org",
 		"@type": "WebPage",
@@ -518,6 +530,19 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 		"inLanguage": "ru-RU",
 		"name": "<?php echo Html::encode($this->title); ?>",
 		"description": "<?php echo $this->params['ogDescription']; ?>"
+	},
+	{
+	"@context": "https://schema.org/",
+	"@type": "Brand",
+	"name": "Бастион ИТ",
+	"alternateName": "Bastion IT",
+	"logo": {
+	  "@context": "https://schema.org",
+	  "@type": "ImageObject",
+	  "url": "<?php echo Url::to('@web/images/logo/logo-og.jpg'); ?>",
+	  "name": "Bastion IT"
+	},
+	"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>/"
 	}
 </script>
 	<!-- Yandex.Metrika counter -->
