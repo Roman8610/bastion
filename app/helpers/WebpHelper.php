@@ -8,6 +8,11 @@ class WebpHelper
 {
     public static function replaceImagesWithWebp($content)
     {
+		
+		if ($content === null || !is_string($content)) {
+			return $content;
+        }
+		
         $pattern = '/(?:src|href|srcset|content|url)\s*=\s*["\']?([^"\'>]+?\.(?:jpg|jpeg|png|bmp))["\']?/i';
         
         $callback = function($matches) {

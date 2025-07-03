@@ -379,7 +379,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
 	"url": "https://<?php echo $_SERVER['SERVER_NAME']; ?>/"
 	}
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

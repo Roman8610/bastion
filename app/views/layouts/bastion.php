@@ -474,7 +474,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current([], true)])
  сайтом, Вы разрешаете использование cookie-файлов.</p> <span class="cookie_accept" id="cookie_accept"><img src="/images/close.png" alt="закрыть куки"></span> </div>
   <a href="#top" id="back_to_top" class="scroll up"></a>
   <!--/noindex-->
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 	{
 		"@context": "https://schema.org",
