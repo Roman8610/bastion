@@ -1,4 +1,0 @@
-AddDefaultCharset utf-8
-RewriteEngine On
-RewriteRule (.*) web/$1
-#Timeout -1

@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /*?page=*&per-page=*
-Disallow: /*?
-Disallow: /search/
-Disallow: /.*pdf
-Disallow: /catalog/bez-rubriki
-Disallow: /catalog/varikapy
-Host: https://bastionit.ru
-Sitemap: https://bastionit.ru/sitemap.xml
