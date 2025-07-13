@@ -1,0 +1,22 @@
+{
+    "name": "Bastion IT",
+    "short_name": "Bastion IT",
+    "icons": [
+        {
+            "src": "/images/logo/logo_192.jpg",
+            "sizes": "192x192",
+            "type": "image/jpg"
+        },
+        {
+            "src": "/images/logo/logo-og.jpg",
+            "sizes": "400x400",
+            "type": "image/jpg"
+        }
+    ],
+    "theme_color": "#003366",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/",
+    "description": "Поставки электронной компонентной базы и услуги по реверс-инжинирингу",
+    "scope": "/"
+}

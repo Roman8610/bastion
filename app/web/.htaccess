@@ -1,3 +1,10 @@
+<IfModule mod_headers.c>
+   #Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+   Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+   Header set Cross-Origin-Opener-Policy "same-origin"
+   Header set X-Frame-Options "DENY"
+</IfModule>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{HTTP_ACCEPT} image/webp
@@ -119,3 +126,7 @@ RewriteRule ^main/?$ / [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
+
+Redirect 301 /product/starter-s2-4-22w-220-240v-110-130-in-home-4690612032412-1 /product/starter-s2-4-22w-220-240v-110-130-in-home-4690612032412-1-2
+Redirect 301 /product/1n5819-diod-shottki-40v-1a-25a-do-41-1 /product/1n5819-diod-shottki-40v-1a-25a-do-41-1-2
+Redirect 301 /product/electric-soldering-iron-230v-150w-1-2 /product/electric-soldering-iron-230v-150w-1-2-3

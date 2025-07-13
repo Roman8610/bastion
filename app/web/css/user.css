@@ -97,7 +97,7 @@
     text-align: left;
     padding: 15px 0 0;
     margin: 0;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 150%;
 }
 
@@ -127,4 +127,11 @@
 
 .text p{
 	margin-bottom: 15px;
+}
+.basis-full {width: 100%;}
+#w1 a, #w0 a {
+	text-decoration: underline;
+}
+#w1 a:hover, #w0 a:hover {
+	text-decoration: none;
 }

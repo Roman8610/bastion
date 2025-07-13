@@ -94,13 +94,13 @@ use yii\helpers\Url;
 
               <?= \yii\widgets\LinkPager::widget([
                   'pagination' => $pages,
-                  'nextPageLabel' => 'Следующая',
-                  'prevPageLabel' => 'Предыдущая',
+                  'nextPageLabel' => '>>',
+                  'prevPageLabel' => '<<',
                   'pageCssClass' => 'page-item',
                   'disabledPageCssClass' => 'page-link',
-                  'maxButtonCount' => 10,
-                  'firstPageLabel' => 'К&nbsp;первой',
-                  'lastPageLabel' => 'К&nbsp;последней',
+                  'maxButtonCount' => 3,
+                  'firstPageLabel' => false,
+                  'lastPageLabel' => false,
                   'linkOptions' => [
                       'class' => 'page-link',
                   ],

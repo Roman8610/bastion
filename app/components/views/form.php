@@ -99,7 +99,7 @@
 
       </div>
       <footer class="popup__footer">
-        <div class="mb-20">Нажимая кнопку, я даю согласие на <b>обработку персональных данных</b></div>
+        <div class="mb-20">Нажимая кнопку, я даю согласие на <a href="/pages/pravovaya-informaciya" target="_blank"><b>обработку персональных данных</b></a></div>
         <!-- <button type="submit" class="btn btn--size-lg btn--arrow" tabindex="4" data-popup-btn>Отправить сообщение</button> -->
 
         <button type="submit" class="btn btn--size-lg btn--arrow form-button" tabindex="4" data-popup-btn>Заказать</button>
